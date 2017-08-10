@@ -1,0 +1,99 @@
+body {
+    background-color: #ADD8E6;
+    
+}
+
+#header {
+    background-color: #4682B4;
+    height:100px;
+    width: 100%;
+   
+}
+
+#footer {
+    background-color: #4682B4;
+    margin-bottom: 0px;
+    position: absolute;
+    bottom:0;
+    float:bottom;
+    height:100px;
+    width: 100%;
+    text-align: center;
+    border: solid;
+}
+
+#logo {
+	
+	border: solid;
+	align: left;
+	height: 100px;
+	width:	200px;
+    color: red;
+    margin-left: 20px; 
+    
+}
+
+
+#register_login {
+	
+	border: solid;
+	align: right;
+	height: 100px;
+	width:	150px;
+    color: red;   
+    float: right;
+    margin-right: 50px; 
+}
+
+
+
+.headerTable{
+	width: 100%;
+    
+}
+
+#footer a:link {
+    color: #5c6b7a;
+}
+
+/* visited link */
+#footer a:visited {
+    color: #2F4F4F;
+}
+
+/* mouse over link */
+#footer a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+#footer a:active {
+    color: #5c6b7a;
+}
+
+.links{
+	margin-top: 10px;
+	text-align:center;
+}
+
+
+#blurredbackground {
+    position: absolute;    /*matches #content position*/
+    bottom: 72px; left: 72px;    /*matches #content position*/
+    width: 300px;    /*matches #content width*/
+    height: 100px;    /*matches #content height*/
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    z-index: -1;
+}
+
+
+#input-search{
+	border:solid;
+	
+}
+
+
+
+
+

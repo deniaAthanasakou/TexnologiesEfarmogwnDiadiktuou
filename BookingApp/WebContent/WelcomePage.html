@@ -5,33 +5,53 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="./bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="./bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		
+		<link href="./css files/welcome.css" rel="stylesheet" />
+		
 		<title>Welcome page</title>
 	</head>
 	<body>
-		<h1>Hello World!</h1>
-		<div class="containe">
-		<form role="form">
-		<div class="form-group">
-		<label for="exampleInputEmail1">Email address</label>
-		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+	
+		<div id = "header">
+		<!-- register/login -->	
+			<table class="headerTable">
+				<tr>
+		    		<td ><div id ="logo">Logo</div></td>
+		    		<td><div id = "register_login">register/login</div></td>
+		  		</tr>
+	  		</table>		
+			
 		</div>
-		<div class="form-group">
-		<label for="exampleInputPassword1">Password</label>
-		<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		
+		<div id="input-search" class="container">
+			<!-- input form -->	
+			<form class="navbar-form navbar-left">
+			    <div class="form-group col-md-18" >
+			    	<div class="radio">
+						<label><input type="radio" name="optradio">Option 1</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="optradio">Option 2</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="optradio" disabled>Option 3</label>
+					</div>
+			    </div>
+			</form>
 		</div>
-		<div class="form-group">
-		<label for="exampleInputFile">File input</label>
-		<input type="file" id="exampleInputFile">
-		<p class="help-block">Example block-level help text here.</p>
+		
+		<div id = "footer">
+			<!-- footer -->
+			<div class="links">
+				<a href="">Welcome</a>
+				<br>	
+				<a href="">Sitemap</a>
+				<p style="margin-top:8px">Copyright</p>
+			</div>
 		</div>
-		<div class="checkbox">
-		<label>
-		<input type="checkbox"> Check me out
-		</label>
-		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
-		</form>
-		</div>
+	
+	
+		
 			
 		
 	</body>
