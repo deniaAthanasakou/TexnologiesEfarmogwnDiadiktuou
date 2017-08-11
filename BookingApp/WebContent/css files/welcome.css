@@ -1,36 +1,39 @@
 body {
     background-color: #ADD8E6;
     overflow-x: hidden;
-    height: 100%;
-}
-
-#header {
-    background-color: #4682B4;
-    height:200px;
+    overflow-y: auto;
+    height:100%;
     width: 100%;
 }
 
+#wrapper {
+   
+   height: inherit;
+   position: absolute;
+   border: solid;
+   border-color:yellow;
+   width: 100%;
+}
+
+
+#header {
+    background-color: #4682B4;
+}
+
 #container{
-	overflow-y: auto;
 	width: 100%;
-	background-image: url('../Images/background-image.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+	height: inherit;
+	background: red;
     border: solid;
-    position:absolute;
-    top: 200px;
-    bottom: 100px;
-    left:0px;
-    right:0px;
+    border-color: purple;
+    padding-bottom: 100px;   /* Height of the footer */
 }
 
 #footer {
+
     background-color: #4682B4;
-    margin-bottom: 0px;
     bottom:0;
-    position: absolute;
-    float:bottom;
+    position: static;
     height:100px;
     width: 100%;
     text-align: center;
@@ -40,8 +43,8 @@ body {
 #logo {
 	border: solid;
 	align: left;
-	height: 200px;
-	width:	200px;
+	height: 150px;
+	width:	150px;
     color: red;
     margin-left: 20px; 
     background-image: url('../Images/logos/logo.png');
@@ -100,16 +103,6 @@ body {
 }
 
 
-#blurredbackground {
-    position: absolute;    /*matches #content position*/
-    bottom: 72px; left: 72px;    /*matches #content position*/
-    width: 300px;    /*matches #content width*/
-    height: 100px;    /*matches #content height*/
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
-    z-index: -1;
-}
-
 
 #input-search{
 	margin:100px;
@@ -121,8 +114,6 @@ body {
 	background-color: white;
 	border:solid;
 }
-
-
 
 
 
