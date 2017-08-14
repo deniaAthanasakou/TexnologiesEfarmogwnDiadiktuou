@@ -4,6 +4,7 @@ body {
     overflow-y: auto;
     height: 100%;
     width: 100%;
+    font-family: sans-serif-light;
 }
 
 #wrapper {
@@ -11,14 +12,13 @@ body {
 	height: 100%;
 	overflow: auto;
 	position:  relative;
-	border: solid;
-	border-color:yellow;
 	width: 100%;
 }
 
 
 #header {
     background-color: #4682B4;
+    box-shadow: inset 0 0 30px black;
 }
 
 #container{
@@ -28,8 +28,7 @@ body {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-    border: solid;
-    border-color: purple;
+	overflow: auto;
     padding-bottom: 100px;   /* Height of the footer */
 }
 
@@ -38,17 +37,16 @@ body {
     bottom:0;
     position: static;
     height:100px;
+    overflow: auto;
     width: 100%;
     text-align: center;
-    border: solid;
+    box-shadow: inset 0 0 30px black;
 }
 
 #logo {
-	border: solid;
 	align: left;
 	height: 150px;
 	width:	150px;
-    color: red;
     margin-left: 20px; 
     background-image: url('../Images/logos/logo.png');
     background-position: center;
@@ -65,16 +63,40 @@ body {
 
 
 #register_login {
-	
 	border: solid;
 	align: right;
 	height: 100px;
 	width:	150px;
     color: red;   
+    text-size: auto;
     float: right;
     margin-right: 50px; 
 }
 
+#login{
+	float: left;
+}
+
+#register{
+	float: right;
+	
+}
+
+#register_login a:link{
+	color: #2F4F4F;
+}
+
+#register_login a:visited {
+    color: #2F4F4F;
+}
+
+#register_login a:hover {
+    background: white;
+}
+
+#register_login a:active {
+    color: #5c6b7a;
+}
 
 
 .headerTable{
@@ -83,7 +105,7 @@ body {
 }
 
 #footer a:link {
-    color: #5c6b7a;
+    color: #2F4F4F;
 }
 
 /* visited link */
@@ -108,16 +130,20 @@ body {
 
 
 #input-search{
-
-	margin:100px;
+	box-shadow: 0 0 30px black;
+	margin: 100px;
 	min-height: 300px;
 	min-width: 300px;
 	height: auto;
 	width: auto;
 	text-size: auto;
 	background-color: white;
-	border:solid;
 }
+
+.btn{
+	background: black;
+}
+
 
 
 
