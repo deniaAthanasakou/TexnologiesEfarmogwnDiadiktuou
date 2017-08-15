@@ -10,7 +10,7 @@ body {
 #wrapper {
 	margin: 0px auto;
 	height: 100%;
-	overflow-x: hidden;
+	overflow-x: auto;
 	overflow-y: auto;
 	position:  relative;
 	width: 100%;
@@ -32,6 +32,7 @@ body {
 	overflow-y: auto;
 	overflow-x: auto;
     padding-bottom: 100px;   /* Height of the footer */
+    z-index: 900;
 }
 
 #footer {
@@ -72,6 +73,13 @@ body {
     text-size: auto;
     float: right;
     margin-right: 50px; 
+    text-align:center;
+    margin-top:50px;
+    
+}
+
+#myPopup{
+	z-index:1000;
 }
 
 #register_login a:link{
