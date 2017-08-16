@@ -1,7 +1,5 @@
 body {
     background-color: #ADD8E6;
-    overflow-x: hidden;
-    overflow-y: auto;
     height: 100%;
     width: 100%;
     font-family: sans-serif;
@@ -14,25 +12,27 @@ body {
 	overflow-y: auto;
 	position:  relative;
 	width: 100%;
+	z-index: 900;
 }
 
 
 #header {
     background-color: #4682B4;
+    overflow-y: hidden;
     box-shadow: inset 0 0 30px black;
 }
 
-#container{
+#mainContainer{
 	width: 100%;
 	height: inherit;
 	background: url(../Images/background-image.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	overflow-y: auto;
-	overflow-x: auto;
+	overflow: hidden;
     padding-bottom: 100px;   /* Height of the footer */
-    z-index: 900;
+  
+   
 }
 
 #footer {
@@ -40,9 +40,8 @@ body {
     top:0;
     bottom:0;
     height:100px;
-    overflow-y: hidden;
-    overflow-x: hidden;
     width: 100%;
+    overflow-y: hidden;
     text-align: center;
     box-shadow: inset 0 0 30px black;
 }
@@ -78,9 +77,6 @@ body {
     
 }
 
-#myPopup{
-	z-index:1000;
-}
 
 #register_login a:link{
 	color: white;
@@ -131,14 +127,16 @@ body {
 
 
 #input-search{
+
 	box-shadow: 0 0 30px black;
 	margin: 100px;
 	min-height: 300px;
 	min-width: 300px;
-	height: auto;
 	width: auto;
+	height: auto;
 	text-size: auto;
 	background-color: white;
+	padding:50px;
 }
 
 .btn{
@@ -153,13 +151,15 @@ body {
     margin: 0;
     background: white;
     box-shadow: 0 0 30px black;
-    position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    padding: 30px;
+    padding: 50px;
+    z-index:1000;
+    min-width:500px;
 }
+
 
 
 
