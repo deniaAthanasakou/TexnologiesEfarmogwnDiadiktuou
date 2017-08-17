@@ -2,14 +2,14 @@ body {
     background-color: #ADD8E6;
     height: 100%;
     width: 100%;
+    min-width: 1024px;
     font-family: sans-serif;
 }
 
 #wrapper {
 	margin: 0px auto;
 	height: 100%;
-	overflow-x: auto;
-	overflow-y: auto;
+	overflow: auto;
 	position:  relative;
 	width: 100%;
 	z-index: 900;
@@ -18,7 +18,6 @@ body {
 
 #header {
     background-color: #4682B4;
-    overflow-y: hidden;
     box-shadow: inset 0 0 30px black;
 }
 
@@ -83,7 +82,7 @@ body {
 }
 
 #register_login a:visited {
-    color: #2F4F4F;
+    color: white;
 }
 
 #register_login a:hover {
@@ -159,6 +158,7 @@ body {
     z-index:1000;
     min-width:500px;
 }
+
 
 
 
