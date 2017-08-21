@@ -23,15 +23,13 @@ body {
 
 #mainContainer{
 	width: 100%;
-	height: inherit;
+	height: 100%;
 	background: url(../Images/background-image.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	overflow: hidden;
     padding-bottom: 100px;   /* Height of the footer */
-  
-   
 }
 
 #footer {
@@ -125,8 +123,7 @@ body {
 
 
 
-#input-search{
-
+#input-register{
 	box-shadow: 0 0 30px black;
 	margin: 100px;
 	min-height: 300px;
@@ -159,6 +156,31 @@ body {
     min-width:500px;
 }
 
+
+.btn-danger{
+	
+}
+
+.nomargin{
+	margin:0 !important;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+.popover-content {
+    font-size: 12px;
+}
+
+
+	
 
 
 

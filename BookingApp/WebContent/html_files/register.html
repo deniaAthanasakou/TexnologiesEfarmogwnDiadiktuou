@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../jQuery/jquery-3.2.1.min.js"></script>
+		<link href="../css files/register.css" rel="stylesheet" />
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/jquery.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/moment.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.css" />
+		<link href="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.css" rel="stylesheet" />
+		<script src="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.css"></script>
+		
+		<script language="JavaScript" type="text/javascript">
+			function login(showhide){
+				if(showhide == "show"){
+					document.getElementById('popup').style.display="block";
+				}
+				else if(showhide == "hide"){
+					document.getElementById('popup').style.display="none";
+				}
+			}
+		
+		</script>
+		
+		<script>
+		
+			$(document).on('click', '.browse', function(){
+					var file = $(this).parent().parent().parent().find('.file');
+					file.trigger('click');
+				});
+			$(document).on('change', '.file', function(){
+				$(this).parent().find('.input_path').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+				document.getElementById("currentImage").src= document.getElementById("imagePath").value;
+			});
+		
+		</script>
+		
+		<script type="text/javascript">
+			$(function () {
+				$('#birth').datetimepicker({
+                    format: 'DD/MM/YYYY',
+              	});
+				
+				$('#birth').datetimepicker({
+				viewMode: 'years'
+				});
+			});
+		</script>
+		
+		<script>
+		function openPopupPreviousPage() {
+		    var txt;
+		    if (confirm("Do you really want to discard all changes and return to previous page?") == true) {
+		    	window.history.back();
+		    }
+		}
+		</script>
+		
+		
+		
+		
+		<script>
+		$(document).ready(function(){
+		    $('[data-toggle="popover"]').popover();   
+		});
+		</script>
+		
+		<script>
+		$(document).ready(function(){
+			
+			
+			$("#passwordConfirmation").popover({
+			    content: "Passwords do not match!",
+			    trigger: "manual",
+			    placement: "right"
+			});
+			
+			$("#emailConfirmation").popover({
+			    content: "Emails do not match!",
+			    trigger: "manual",
+			    placement: "right"
+			});
+			
+
+			
+			$( "#passwordConfirmation" ).keyup(function() {
+				$('.popover').css('color','#ff0000');
+				if (document.getElementById('passwordInput').value ==
+				    document.getElementById('passwordConfirmation').value) {
+					$('#passwordConfirmation').popover('hide');
+				  } else {
+					$('#passwordConfirmation').popover('show');
+				  }
+				});
+			
+			$( "#emailConfirmation" ).keyup(function() {
+				$('.popover').css('color','#ff0000');
+				if (document.getElementById('emailInput').value ==
+				    document.getElementById('emailConfirmation').value) {
+					$('#emailConfirmation').popover('hide');
+				  } else {
+					$('#emailConfirmation').popover('show');
+				  }
+				});
+			
+			$('#passwordInput').password({
+				  enterPass: "",
+				  shortPass: 'Ο κωδικός είναι πολύ μικρός',
+				  badPass: 'Εύκολος, προσπάθησε να χρησιμοποιήσεις γράμματα και αριθμούς',
+				  goodPass: 'Κανονικός, χρησιμοποίησε σύμβολα',
+				  strongPass: 'Δυνατός κωδικός',
+				  showPercent: false,
+				  showText: true, // shows the text tips 
+				  animate: false, // whether or not to animate the progress bar on input blur/focus 
+				  animateSpeed: 'fast', // the above animation speed 
+				  minimumLength: 6 // minimum password length (below this threshold, the score is 0) 
+				});
+		});
+	
+		</script>
+		
+		
+		<script>
+		//for same username !!!
+			function checkValidityPopup() {
+				var inValid = new RegExp("[\\s]");		//whitespace
+				var numbersSymbols = new RegExp("[^A-Za-z]");
+				var onlyNumbers = new RegExp("[/^\d+$/]");
+				var username = document.getElementById("username").value;
+				var password = document.getElementById("passwordInput").value;
+				var name = document.getElementById("name").value;
+				var surname = document.getElementById("surname").value;
+				var birth = document.getElementById("birthInput").value.substr(6,10);
+				var currentYear = (new Date()).getFullYear();
+				var city = document.getElementById("city").value;
+				var streetAddress = document.getElementById("street_address").value;
+				var tel = document.getElementById("tel").value;
+				
+				//check for username
+				if (inValid.test(username)){
+					alert("Το Όνομα Χρήστη περιέχει κενά.");
+					return false;
+				}
+				if(username.length<5){
+					alert("Το Όνομα Χρήστη είναι μικρότερο των 5 χαρακτήρων.");
+					return false;
+				}
+				
+				//check for password
+				if (inValid.test(password)){
+					alert("Ο Κωδικός Πρόσβασης περιέχει κενά.");
+					return false;
+				}
+				if(password.length<6){
+					alert("Ο Κωδικός Πρόσβασης είναι μικρότερος των 6 χαρακτήρων.");
+					return false;
+				}
+				
+				//check for name
+				if (inValid.test(name)){
+					alert("Το Όνομα περιέχει κενά.");
+					return false;
+				}
+				if (numbersSymbols.test(name)){
+					alert("Το Όνομα περιέχει αριθμούς ή σύμβολα.");
+					return false;
+				}
+				
+				//check for surname
+				if (inValid.test(surname)){
+					alert("Το Επώνυμο περιέχει κενά.");
+					return false;
+				}
+				if (numbersSymbols.test(surname)){
+					alert("Το Επώνυμο περιέχει αριθμούς ή σύμβολα.");
+					return false;
+				}
+				
+				//check for birth year
+				if((parseInt(birth) + 18) > currentYear || (currentYear - parseInt(birth)) > 120){
+					alert("Πρέπει να είστε 18+ χρονών για να χρησιμοποιήσετε την εφαρμογή. Αν είστε, προσθέστε κατάλληλη χρονιά γέννησης.");
+					return false;
+				}
+				
+				//check for city
+				if (inValid.test(city)){
+					alert("Η Πόλη περιέχει κενά.");
+					return false;
+				}
+				if (numbersSymbols.test(city)){
+					alert("Η Πόλη περιέχει αριθμούς ή σύμβολα.");
+					return false;
+				}
+				
+				//check for street_address
+				if (!(/^[a-zA-Z\s]*$/.test(streetAddress))){
+					alert("Η Οδός περιέχει αριθμούς ή σύμβολα.");
+					return false;
+				}	 
+				
+				//check for passwords
+				if (document.getElementById('passwordInput').value !=document.getElementById('passwordConfirmation').value) {
+					alert("Ο Κωδικός Πρόσβασης και Επιβεβαίωσης δεν ταιριάζουν.");
+					return false;
+				} 
+			
+				//check for emails
+				if (document.getElementById('emailInput').value != document.getElementById('emailConfirmation').value) {
+					alert("Το Email και το Email Επιβεβαίωσης δεν ταιριάζουν.");
+					return false;
+				}
+					
+				
+			}
+		</script>
+		
+      
+        
+        <title>Register page</title>
+		
+
+	</head>
+	<body>
+	
+		<div id ="wrapper">
+	
+			<div id = "header">
+				<!-- register/login -->	
+				<table class="headerTable">
+					<tr>
+			    		<td ><a href="../WelcomePage.html"><div id ="logo"></div></a></td>
+			    		<td>
+			    			<div id = "register_login">
+			    				<a class="btn" href="javascript:login('show'); "><i class="glyphicon glyphicon-log-in"></i> Είσοδος ή Εγγραφή</a>
+			    			</div>
+			    		</td>
+			  		</tr>
+			 	</table>		
+			</div>
+			
+			
+			
+		
+			
+			<div id= "mainContainer">
+			
+			<div class="container">
+			
+				<div  id="input-register" class="container-fluid">
+					<center><h2 style="margin-bottom:20px;">Εγγραφή Χρήστη</h1></center>
+					<form action="register_done.html" method="post" onsubmit="return checkValidityPopup();" autocomplete="on">
+						<div class="row">
+							<div class="col-md-12">
+								<left><label for="username">Όνομα Χρήστη*</label></left>
+								<center><input type="text" data-toggle="popover" data-content="Δεν επιτρέπονται κενά. Από 5 έως 45 χαρακτήρες." data-trigger="focus" class="form-control" id="username" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" required /></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="passwordInput">Κωδικός Πρόσβασης*</label></left>
+								<center><input type="password" data-toggle="popover" data-content="Ο κωδικός πρέπει να έχει μήκος 6-45 χαρακτήρες, χωρίς κενά." data-trigger="focus" id="passwordInput" class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" required /></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="password_confirm">Επιβεβαίωση Κωδικού Πρόσβασης*</label></left>
+								<center>
+									<input type="password" rel="popover" id="passwordConfirmation" class="form-control" placeholder="Εισαγωγή Επιβεβαίωσης Κωδικού Πρόσβασης" name="password_confirm" size="45" maxlength="45" required />
+								</center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="email">E-mail*</label></left>
+								<center><input type="email" id="emailInput" class="form-control" placeholder="Εισαγωγή E-mail" name="email" size="100" maxlength="100" required/></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="email_confirm">Επιβεβαίωση E-mail*</label></left>
+								<center><input type="email" id="emailConfirmation" class="form-control" placeholder="Εισαγωγή Επιβεβαίωσης E-mail" name="email_confirm" size="100" maxlength="100" required/></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="name">Όνομα*</label></left>
+								<center><input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" required /></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="surname">Επώνυμο*</label></left>
+								<center><input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" required /></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="tel">Τηλέφωνο*</label></left>
+								<center><input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Τηλεφώνου" name="tel" size="10" maxlength="10" required/></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="role">Ρόλος στην εφαρμογή*</label></left>
+							</div>
+						</div>
+						
+						<div class="row nomargin" >
+							<div class="col-md-12 well well-sm">
+								<left>
+									<label class="checkbox-inline"><input type="checkbox" value="tenant"  checked>Ενοικιαστής</label>
+									<label class="checkbox-inline"><input type="checkbox" value="host">Οικοδεσπότης</label>
+									<label class="checkbox-inline"><input type="checkbox" value="admin" disabled>Διαχειριστής</label>	
+								</left>
+							</div>
+						</div>
+						
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="birth">Ημερομηνία Γέννησης*</label></left>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+            						<div class='input-group date' id='birth'>
+                						<input type='text' id="birthInput" class="form-control" required/>
+                						<span class="input-group-addon">
+                    						<span class="glyphicon glyphicon-calendar"></span>
+                						</span>
+            						</div>
+	        					</div>
+							</div>
+						</div>
+						
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="thumbnail" class="control-label">Επιλογή Εικόνας Χρήστη</label></left>
+							</div>
+						</div>
+						
+						<div class="row well well-sm nomargin vertical-align" style="margin-top:20px;">
+							<div class="col-md-2">
+								<img class="img-responsive" id="currentImage" src="../Images/insert_photo.png"></img>
+							</div>
+							
+							<div class="col-md-10">
+								<input type="file" name="img[]" class="file"/>
+    							<div class="input-group col-xs-12">
+      								<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+      								<input type="text" class="form-control input-lg input_path" id="imagePath" placeholder="Upload Image"/>
+      								<span class="input-group-btn">
+        								<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+      								</span>
+   								</div>							
+							</div>
+						</div>
+						
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<left><label for="country">Χώρα</label></left>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								<select class="form-control bfh-countries" data-country="GR"></select>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-8">
+								<left><label for="city">Πόλη</label></left>
+							</div>
+							<div class="col-md-4">
+								<left><label for="postal_code">Ταχυδρομικώς Κώδικας</label></left>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-8">
+								<center><input type="text" id="city" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" placeholder="Εισαγωγή Πόλης" name="city" size="45" maxlength="45"/></center>
+							</div>
+							<div class="col-md-4">
+								<center><input type="number" id="postal_code" class="form-control"  name="postal_code" size="10" maxlength="10"/></center>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-8">
+								<left><label for="street_address">Οδός</label></left>
+							</div>
+							<div class="col-md-4">
+								<left><label for="address_number">Αριθμός</label></left>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-8">
+								<center><input type="text" id="street_address" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" placeholder="Εισαγωγή Οδού" name="street_address" size="45" maxlength="45"/></center>
+							</div>
+							<div class="col-md-4">
+								<center><input type="number" id="address_number" data-toggle="popover" data-content="Αριθμός οδού κατοικίας." data-trigger="focus" class="form-control" name="address_number" size="10" min="1" maxlength="10"/></center>
+							</div>
+						</div>
+						
+						
+						
+						
+						<div class="row" style="margin-top:50px;">
+							<div class="col-md-6 "><left><button class="btn btn-danger btn-md input-lg" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</button></left></div>
+							<div class="col-md-6 text-right"><right><button class="btn btn-success btn-lg input-lg" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Ολοκλήρωση Εγγραφής</button></right></div>
+						</div>
+						
+					</form>
+				</div>
+			
+				
+			</div>
+			
+		
+			<div id = "footer">
+				<!-- footer -->
+				<div class="links">
+					<a href="">Welcome</a>
+					<br>	
+					<a href="">Sitemap</a>
+					<p style="margin-top:8px">Copyright &copy; 2017-2018 <a href="../WelcomePage.html">Book A Room</a></p>
+				</div>
+			</div>
+		
+		
+		</div>
+		
+		
+		<div id="popup" style="display:none;text-align:center">
+			<form name="login" action="" method="post">
+				<center>Όνομα Χρήστη</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="14" style="margin-top:10px;"/></center>
+				<center style="margin-top:10px;">Κωδικός Πρόσβασης</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="14" style="margin-top:10px;"/></center>
+				<center><input class="btn btn-primary" type="submit" name="login" value="Είσοδος" style="margin-top:10px;"/></center>
+				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
+				<center style="margin-top:10px;"><a href="./register.html" class="btn btn-info">Εγγραφή</a></center>
+				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" >Ακύρωση</a></center>
+			</form>
+		</div>
+	
+	</body>
+</html>
