@@ -57,7 +57,12 @@
 			function checkValiditySearchPopup() {
 				var inValid = new RegExp("[\\s]");		//whitespace
 				var numbersSymbols = new RegExp("[^A-Za-z]");
+				var onlyNumbers = new RegExp("[/^\d+$/]");
+				var letters = new RegExp("A-Za-z");
 				var location = document.getElementById("location").value;
+				var people = document.getElementById("people").value;
+				var from = document.getElementById("from").value;
+				var to = document.getElementById("to").value;
 				
 				//check for name
 				if (inValid.test(location)){
@@ -66,6 +71,11 @@
 				}
 				if (numbersSymbols.test(location)){
 					alert("Η Τοποθεσία περιέχει αριθμούς ή σύμβολα.");
+					return false;
+				}
+				
+				if (letters.test(people)){
+					alert("Πρέπει να εισάγετε αριθμό ατόμων.");
 					return false;
 				}
 			   
