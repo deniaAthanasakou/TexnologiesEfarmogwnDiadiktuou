@@ -27,6 +27,13 @@
 		
 		</script>
         
+        <script>
+		 $(document).ready( function(){
+			document.getElementById("focus").focus(); 
+		 });
+		
+		</script>
+        
         <title>Host page</title>
 		
 
@@ -55,25 +62,31 @@
 			
 			<div id= "mainContainer">
 			
-			<div class="container">
 			
-				<div id="navigation_bar">
-					<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="150" data-offset-bottom="200">
-					  <li role="presentation" class="active"><a href="#"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
-					  <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
-					  <li role="presentation"><a href="#"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Οικειών</a></li>
-					  <li role="presentation"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα</a></li>
-					  <li role="presentation"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
-					</ul>
-				</div>
+				<div class="container">
+					
+					<h2 id="accountTitle"><strong>Ο λογαριασμός μου</strong></h2>
 				
-			
-				<div  id="input-profile" class="container-fluid">
+					<div id="navigation_bar">
+						<ul class="nav nav-tabs" data-spy="affix" data-offset-top="150" data-offset-bottom="200">
+						  <li class="nav-item" class="active"><a href="#" id="focus"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Οικειών</a></li>						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα</a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+						</ul>
+					</div>
+					
+				
+					<div  id="input-profile" class="container-fluid">
+						
+					</div>
+				
 					
 				</div>
-			
-				
 			</div>
+			
+								  
+			
 			
 		
 			<div id = "footer">
@@ -98,7 +111,7 @@
 				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
 				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
 				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
-				<center style="margin-top:10px;"><a href="./html files/register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center style="margin-top:10px;"><a href="./register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
 				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
 			</form>
 		</div>

@@ -7,30 +7,45 @@
 	height: auto;
 	text-size: auto;
 	background-color: #e6e6e6;
-	padding:50px;
-	border-radius: 4px;
+	padding: 50px;
+	border: solid 3px #4682B4;
+	border-radius: 3px;
 }
 
 #navigation_bar{
 	position: absolute;
-	margin-top: 100px;
-	background-color: white;
-	border-radius: 4px;
-	min-width: 150px;
+	margin-left: 100px;
+	margin-top: 52px;
 }
 
-.affix{
-	top: 0;
-	margin-top: 100px;
-	background-color: white;
-	border-radius: 4px;
-	min-width: 150px;
+.nav-tabs > li > a:hover{
+  background-color: #4682B4 !important;
+  border: medium none;
+  color: #fff;
 }
 
-.affix-bottom{
-	position: absolute;
-	background-color: white;
-	border-radius: 4px;
-	min-width: 150px;
-	
+.nav-tabs > li > a {
+  background-color: #ADD8E6 !important;
+  border: medium none;
+  color: #fff;
+}
+
+.nav-tabs > li > a:focus {
+  background-color: #4682B4 !important;
+  border: medium none;
+  color: #fff;
+}
+
+.nav-tabs > li > a:active {
+  background-color: #4682B4 !important;
+  border: medium none;
+  color: #fff;
+}
+
+#accountTitle{
+	margin-left: 100px;
+	margin-top: 30px;
+	color: white;
+	text-shadow: #000 0px 0px 4px,   #000 0px 0px 4px,   #000 0px 0px 4px,
+             #000 0px 0px 4px,   #000 0px 0px 4px,   #000 0px 0px 4px;
 }
