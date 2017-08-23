@@ -13,6 +13,8 @@
 		<script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 		
 		
 		<link href="../css files/welcome.css" rel="stylesheet" />
@@ -56,41 +58,41 @@
 			<div id= "mainContainer">
 				<div class="container" id="cont">
 					<div id="filters">
-					<p><strong>Περισσότερα Φίλτρα Αναζήτησης</strong></p>
-					<form method="post" >
-						
-						<div class="checkbox">
-						
-						  <label><input type="checkbox" id="roomType" value="">Τύπος Δωματίου</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="maxCost" value="">Μέγιστο Κόστος</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="wifi" value="" >Ασύρματο Ίντερνετ</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="aircondition" value="" >Ψύξη</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="heating" value="" >Θέρμανση</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="kitchen" value="" >Κουζίνα</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="tv" value="" >Τηλεόραση</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="parking" value="" >Χώρος Στάθμευσης</label>
-						</div>
-						<div class="checkbox">
-						  <label><input type="checkbox" id="elevator" value="" >Ανελκυστήρας</label>
-						</div>
-						<div class="form-group" style="margin-top:30px; margin-left:10px;"> <!-- Submit button -->
-				        	<button class="btn btn-primary " name="submit" type="submit">Αναζήτηση</button>
-				      	</div>
-			      	</form>
+						<p><strong>Περισσότερα Φίλτρα Αναζήτησης</strong></p>
+						<form method="post" >
+							
+							<div class="checkbox">
+							
+							  <label><input type="checkbox" id="roomType" value="">Τύπος Δωματίου</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="maxCost" value="">Μέγιστο Κόστος</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="wifi" value="" >Ασύρματο Ίντερνετ</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="aircondition" value="" >Ψύξη</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="heating" value="" >Θέρμανση</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="kitchen" value="" >Κουζίνα</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="tv" value="" >Τηλεόραση</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="parking" value="" >Χώρος Στάθμευσης</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="elevator" value="" >Ανελκυστήρας</label>
+							</div>
+							<div class="form-group" style="margin-top:30px; margin-left:10px;"> <!-- Submit button -->
+					        	<button class="btn btn-primary " name="submit" type="submit">Αναζήτηση</button>
+					      	</div>
+				      	</form>
 			      	</div>
 			      	<div id="results">
 						<h1 style="text-align:center">Αποτελέσματα αναζήτησης</h1> 
@@ -108,40 +110,43 @@
 						</div>
 						<div class="container-fluid" id="ContainerList">
 							
+							<div id="containerItem">
+							
+							</div>
 								<script language="JavaScript" type="text/javascript">
-									var container = document.getElementById("ContainerList");
-									var myHtmlCode = ["<div class=\"row">\",
-					                   " <div class=\"col-sm-6 myList\" " >,
-				                   " <img src=\"../Images/apartment-room.jpg\" class=\"img-thumbnail\" width=\"200\" height=\"200\">",
-				                      
-				                      "<table class=\"table table-condensed\">",
-				                      "<tr>",
-				                        "<td>Κόστος ενοικίασης ανά ημέρα</td>",
-				                        "<td>50</td>",
-				                      "</tr>",
-				                     " <tr>",
-				                       " <td>Τύπος Ενοικιαζόμενου Χώρου</td>",
-				                        "<td>Ιδιωτικό Δωμάτιο</td>",
-				                      "</tr>",
-				                      "<tr>",
-				                        "<td>Αριθμός Κρεβατιών</td>",
-				                        "<td>3</td>",
-				                     "</tr>",
-				                      "<tr>",
-				                       " <td>Αριθμός Κριτικών</td>",
-				                        "<td>17</td>",
-				                     " </tr>",
-				                      "<tr>",
-				                        "<td>Κριτική</td>",
-				                        "<td>3/5</td>",
-				                      "</tr>",
-				                      
-				                    "</table>",   
-				                    "</div>"]
-									for (var i = 0; i < 10; i++) {
-										for(var j =0; j<myHtmlCode.length; j++){
-											container.innerHTML+=myHtmlCode[j];
-										}
+									var container = document.getElementById('ContainerList');
+									
+									var myHtmlCode = 
+		                                 " <img src=\"../Images/apartment-room.jpg\" class=\"img-thumbnail\" width=\"200\" height=\"200\">"+
+		                                    "<table class=\"table table-hover\">"+
+		                                    "<tr>"+
+		                                      "<td>Κόστος ενοικίασης ανά ημέρα</td>"+
+		                                      "<td>50</td>"+
+		                                    "</tr>"+
+		                                   " <tr>"+
+		                                     " <td>Τύπος Ενοικιαζόμενου Χώρου</td>"+
+		                                      "<td>Ιδιωτικό Δωμάτιο</td>"+
+		                                    "</tr>"+
+		                                    "<tr>"+
+		                                      "<td>Αριθμός Κρεβατιών</td>"+
+		                                      "<td>3</td>"+
+		                                   "</tr>"+
+		                                    "<tr>"+
+		                                     " <td>Αριθμός Κριτικών</td>"+
+		                                      "<td>17</td>"+
+		                                   " </tr>"+
+		                                    "<tr>"+
+		                                      "<td>Κριτική</td>"+
+		                                      "<td>3/5</td>"+
+		                                    "</tr>"+
+		                                  "</table>"+
+		                                  "<div id=\"aptLink\">"+
+		                                  "<a href = \"./apartmentWithDetails.html\">Περισσότερες πληροφορίες<a>"+
+		                                  "</div>";
+									
+									
+									for (var i = 0; i < 10; i++) {								
+										container.innerHTML+=myHtmlCode;
 									}
 								
 								</script>
