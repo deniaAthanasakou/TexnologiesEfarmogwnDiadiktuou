@@ -46,7 +46,7 @@
 			    		<td ><a href="WelcomePage.html"><div id ="logo"></div></a></td>
 			    		<td>
 			    			<div id = "register_login">
-			    				<a class="btn" href="javascript:login('show'); ">Είσοδος ή Εγγραφή</a>
+			    				<a class="btn" href="javascript:login('show'); "><i class="glyphicon glyphicon-log-in"></i> Είσοδος ή Εγγραφή</a>
 			    			</div>
 			    		</td>
 			  		</tr>
@@ -90,7 +90,7 @@
 							  <label><input type="checkbox" id="elevator" value="" >Ανελκυστήρας</label>
 							</div>
 							<div class="form-group" style="margin-top:30px; margin-left:10px;"> <!-- Submit button -->
-					        	<button class="btn btn-primary " name="submit" type="submit">Αναζήτηση</button>
+					        	<button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-search"></i> Αναζήτηση</button>
 					      	</div>
 				      	</form>
 			      	</div>
@@ -175,13 +175,13 @@
 		<div id="popup" style="display:none;text-align:center">
 			<form name="login" action="" method="post">
 				<center>Όνομα Χρήστη</center>
-				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="14" style="margin-top:10px;"/></center>
+				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" style="margin-top:10px;"/></center>
 				<center style="margin-top:10px;">Κωδικός Πρόσβασης</center>
-				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="14" style="margin-top:10px;"/></center>
-				<center><input class="btn btn-primary" type="submit" name="login" value="Είσοδος" style="margin-top:10px;"/></center>
+				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
 				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
-				<center style="margin-top:10px;"><a class="btn btn-info">Εγγραφή</a></center>
-				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" >Ακύρωση</a></center>
+				<center style="margin-top:10px;"><a href="./html files/register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
 			</form>
 		</div>
 	
