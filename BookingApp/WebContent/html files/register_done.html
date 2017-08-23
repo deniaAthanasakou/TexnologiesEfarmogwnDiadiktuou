@@ -34,6 +34,7 @@
 			setTimeout('Redirect()', 5000);   
 		</script>
 		
+		
       
         
         <title>Register Successful page</title>
@@ -114,6 +115,17 @@
 				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
 			</form>
 		</div>
+		
+		<script>
+			$("document").ready( function (){ 
+				if( localStorage.getItem("host"))
+				{
+					alert("Η έγκριση της αίτησης εγγραφής σου στην εφαρμογή με το ρόλο του οικοδεσπότη εκκρεμεί.");
+					localStorage.removeItem("host");
+				}
+				
+			}); 
+		</script>
 	
 	</body>
 </html>
