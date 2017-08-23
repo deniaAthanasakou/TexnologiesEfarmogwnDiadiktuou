@@ -98,10 +98,41 @@
 }
 
 
+#rules{
+	margin-top:5%;
+}
 
+#transport{
+	margin-top:7%;
+	margin-bottom:5%;
+}
 
+#map{
+	margin-top:5%;
+	margin-bottom:5%;
+}
 
+#gallery{
+	margin-top:5%;
+	margin-bottom:7%;
+}
 
+#photosHost td{
+	margin-left:5%;
+}
+
+#photosHost tr{
+	margin-top:5%;
+	
+}
+
+#photosHost{
+	margin-bottom:10%;
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
 
 
 
