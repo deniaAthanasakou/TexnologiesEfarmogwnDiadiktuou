@@ -1,0 +1,47 @@
+#addButton{
+	text-align:center;
+	color:green;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+    background-color: #006600 !important;
+}
+
+#inputRules{
+	margin-top:0%;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#imgBut{
+	margin-top: 5%;
+	margin-bottom: 7%;
+}
+
+#check{
+	margin-bottom:10%;
+}
+
+.nopadding{
+	padding: 0 !important;
+}
+}

@@ -31,12 +31,15 @@
             $(function () {
             	$('#from').datetimepicker({
                     format: 'DD/MM/YYYY',
-                   	defaultDate: new Date()
+                   	defaultDate: new Date(),
+                   	minDate: moment()
               	});
             	
             	$('#to').datetimepicker({
-                    format: 'DD/MM/YYYY',
-                    defaultDate: moment().add('d', 1).toDate()
+                    
+                    defaultDate: moment().add('d', 1).toDate(),
+                    minDate: moment().add('d', 1).toDate(),
+                    format: 'DD/MM/YYYY'
               	});
             	
                 $('#from').datetimepicker();
@@ -58,24 +61,21 @@
 				var inValid = new RegExp("[\\s]");		//whitespace
 				var numbersSymbols = new RegExp("[^A-Za-z]");
 				var onlyNumbers = new RegExp("[/^\d+$/]");
-				var letters = new RegExp("A-Za-z");
 				var location = document.getElementById("location").value;
 				var people = document.getElementById("people").value;
 				var from = document.getElementById("from").value;
 				var to = document.getElementById("to").value;
 				
-				//check for name
-				if (inValid.test(location)){
-					alert("Η Τοποθεσία περιέχει κενά.");
-					return false;
-				}
+				//check for location
 				if (numbersSymbols.test(location)){
 					alert("Η Τοποθεσία περιέχει αριθμούς ή σύμβολα.");
 					return false;
 				}
 				
-				if (letters.test(people)){
-					alert("Πρέπει να εισάγετε αριθμό ατόμων.");
+				
+				//check for people
+				if (inValid.test(people)){
+					alert("Ο αριθμός ατόμων περιέχει κενά.");
 					return false;
 				}
 			   
@@ -121,7 +121,7 @@
 					<form method="post" action="" onsubmit="return checkValiditySearchPopup();">
 					    <div class="form-group" >
 					    	<label for="location">Τοποθεσία*:</label>
-  							<input type="text" class="form-control" id="location" placeholder="Εισαγωγή Τοποθεσίας" data-placement="top" data-toggle="popover" data-content="Δεν επιτρέπονται κενά, αριθμοί ή σύμβολα." data-trigger="focus" size="45" maxlength="45" />
+  							<input type="text" class="form-control" id="location" placeholder="Εισαγωγή Τοποθεσίας" data-placement="top" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" size="45" maxlength="45" />
 					    </div>
 					    
 					   <div class="container-fluid">

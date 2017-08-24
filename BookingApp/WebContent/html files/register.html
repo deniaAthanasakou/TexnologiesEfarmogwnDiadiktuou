@@ -184,6 +184,17 @@
 					return false;
 				}
 				
+				//check for telephone
+				if(tel.length < 10){
+					alert("Το τηλέφωνο που δώσατε δεν έχει 10 ψηφία.");
+					return false;
+				}
+				if (inValid.test(tel)){
+					alert("Το τηλέφωνο περιέχει κενά.");
+					return false;
+				}
+				
+				
 				//check for birth year
 				if((parseInt(birth) + 18) > currentYear || (currentYear - parseInt(birth)) > 120){
 					alert("Πρέπει να είστε 18+ χρονών για να χρησιμοποιήσετε την εφαρμογή. Αν είστε, προσθέστε κατάλληλη χρονιά γέννησης.");
@@ -316,7 +327,7 @@
 						
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
-								<left><label for="tel">Τηλέφωνο*</label></left>
+								<left><label for="tel">Τηλέφωνο</label></left>
 								<center><input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Τηλεφώνου" name="tel" size="10" maxlength="10" required/></center>
 							</div>
 						</div>

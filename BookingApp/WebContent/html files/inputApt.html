@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../jQuery/jquery-3.2.1.min.js"></script>
+		<link href="../css files/register.css" rel="stylesheet" />
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/jquery.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/moment.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.css" />
+		<link href="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.css" rel="stylesheet" />
+		<script src="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.css"></script>
+		
+		
+		<link href="../css files/welcome.css" rel="stylesheet" />
+		<link href="../css files/apartmentsList.css" rel="stylesheet" />
+		<link href="../css files/hostApt.css" rel="stylesheet" />
+		
+		
+		<script language="JavaScript" type="text/javascript">
+			function login(showhide){
+				if(showhide == "show"){
+					document.getElementById('popup').style.display="block";
+				}
+				else if(showhide == "hide"){
+					document.getElementById('popup').style.display="none";
+				}
+			}
+			
+		</script>
+		
+		<script type="text/javascript">
+            $(function () {
+            	$('#from').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                   	defaultDate: new Date(),
+                   	minDate: moment()
+              	});
+            	
+            	$('#to').datetimepicker({
+                    
+                    defaultDate: moment().add('d', 1).toDate(),
+                    minDate: moment().add('d', 1).toDate(),
+                    format: 'DD/MM/YYYY'
+              	});
+            	
+                $('#from').datetimepicker();
+                $('#to').datetimepicker({
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#from").on("dp.change", function (e) {
+                    $('#to').data("DateTimePicker").minDate(e.date);
+                });
+                $("#to").on("dp.change", function (e) {
+                    $('#from').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+        
+        
+		
+		
+		  
+		<title>Apartment Input</title>
+	</head>
+	<body>
+		<div id ="wrapper">
+	
+			<div id = "header">
+			<!-- register/login -->	
+				<table class="headerTable">
+					<tr>
+			    		<td ><a href="WelcomePage.html"><div id ="logo"></div></a></td>
+			    		<td>
+			    			<div id = "register_login">
+			    				<a class="btn" href="javascript:login('show'); "><i class="glyphicon glyphicon-log-in"></i> Είσοδος ή Εγγραφή</a>
+			    			</div>
+			    		</td>
+			  		</tr>
+		  		</table>		
+			
+			</div>
+		
+			
+			<div id= "mainContainer">
+				<div class="container" id="cont">
+					<div id="image">
+						<img src="../Images/big-map.jpg" class="img-thumbnail" width="800" height="800">
+					</div>
+					<div id="details">
+					
+						<form method="post" >
+							<div class="form-group">
+							  <label for="address">Διέυθυνση:</label>
+							  <textarea class="form-control" rows="1" id="address" style= "margin-top:1%; margin-bottom:5%;"></textarea>
+							</div>
+							
+							<div class="form-group">
+							  <label for="transport" >Πρόσβαση:</label>
+							  <textarea class="form-control" rows="4" id="transport" style= "margin-top:1%; margin-bottom:5%;"></textarea>
+							</div>
+						
+						
+						    <label for="cal" >Διαθέσιμες Ημερομηνίες</label>    
+						    <div class="container-fluid" id="cal">
+							   <div class="row" style="width:100%;" >
+							   		<div class="col-md-4">
+							   				  <label for="from">Από:</label>
+							   		
+							   		</div>
+							   		
+							   		<div class="col-md-4">
+							   				  <label for="to">Μέχρι:</label>
+							   		
+							   		</div>
+							   		<div class="col-md-4">
+							   		
+							   		</div>
+							   		
+							   	</div>
+							   	<div class="row">
+							   		
+		   	 						<div class="col-md-4">
+		        						<div class="form-group">
+		            						<div class='input-group date' id='from'>
+		                						<input type='text' class="form-control" />
+		                						<span class="input-group-addon">
+		                    						<span class="glyphicon glyphicon-calendar"></span>
+		                						</span>
+		            						</div>
+		        						</div>
+		    						</div>
+		    						<div class="col-md-4 nopadding" >
+		        						<div class="form-group">
+		            						<div class='input-group date' id='to'>
+		                						<input type='text' class="form-control" />
+		                						<span class="input-group-addon">
+		                    						<span class="glyphicon glyphicon-calendar"></span>
+		                						</span>
+		            						</div>
+		       	 						</div>
+		    						</div>
+		    						<div class="col-md-4">
+		        						<div id="addButton">
+							 				<button type="addCal" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>    
+										 </div>
+		    						</div>
+								</div>
+							</div>
+							
+							 
+							 <label for="aptDet">Λεπτομέριες Δωματίου</label>
+							 <div id="aptDet">
+								 <table class="table table-hover">
+						         <tr>
+						           <td>Αριθμός Κρεβατιών</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number" min="1" value="1" id="beds" name="beds">
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Αριθμός Μπάνιων</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number" min="1" value="1" id="bathrooms" name="bathrooms">
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Αριθμός Υπνοδωματιών</td>
+						            <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number" min="1" value="1" id="rooms" name="rooms">
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Τύπος Ενοικιαζόμενου Χώρου</td>
+						           <td>
+						           		<textarea class="form-control" rows="1" id="type" ></textarea>
+						           	</td>
+						         </tr>
+						         
+						         <tr>
+						           <td>Ύπαρξη Καθιστικού</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="livingroom">
+										    <option>Ναι</option>
+										    <option>Όχι</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Εμβαδό Χώρου</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number" min="1"  id="space" name="space">
+										</div>
+									</td>
+						         </tr>
+						         
+						         <tr>
+						           <td>Μέγιστος αριθμός ατόμων</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number" min="1" value="1" id="maxPeople" name="maxPeople">
+										</div>
+									</td>
+						         </tr>
+						         
+						         <tr>
+						           <td>Ελάχιστη τιμή ενοικίασης (σε €)</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number"  id="minValue" name="minValue"> 
+										</div>
+									</td>
+						         </tr>
+						         
+						         <tr>
+						           <td>Επιπλέον κόστος ανά άτομο (σε €)</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number"  id="costperpers" name="costperpers">
+										</div>
+									</td>
+						         </tr>
+						          
+						        </table>
+					        
+							 
+								<label for="rules">Κανόνες Ενοικίασης</label>
+								 <div id="inputRules">
+								        <table class="table table-hover">
+				
+								         <tr>
+								           <td>Επιτρέπετεται το Κάπνισμα</td>
+								           <td>
+								           		<div class="form-group">
+												  <select class="form-control" id="smoking">
+												    <option>Ναι</option>
+												    <option>Όχι</option>
+												  </select>
+												</div>
+											</td>
+								         </tr>
+								         <tr>
+								           <td>Επιτρέπονται τα κατοικίδια</td>
+								           <td>
+								           		<div class="form-group">
+												  <select class="form-control" id="pets">
+												    <option>Ναι</option>
+												    <option>Όχι</option>
+												  </select>
+												</div>
+											</td>
+								         </tr>
+								         <tr>
+								           <td>Επιτρέπονται οι εκδηλώσεις</td>
+								           <td>
+								           		<div class="form-group">
+												  <select class="form-control" id="events">
+												    <option>Ναι</option>
+												    <option>Όχι</option>
+												  </select>
+												</div>
+											</td>
+								         </tr>
+								         <tr>
+								           <td>Ελάχιστος αριθμός ημερών ενοικίασης</td>
+								           <td>
+								           		<div class="form-group">
+										      		<input class="form-control" type="number" min="1" value="1" id="minDays" name="minDays">
+											  </div>		      
+						     				</td>
+								         </tr> 
+							       		</table>
+						      	 </div>
+							        
+						         <div class="form-group">
+								  <label for="transport" >Περιγραφή του Χώρου</label>
+								  <textarea class="form-control" rows="5" id="transport" style= "margin-top:1%; margin-bottom:5%;"></textarea>
+								</div>
+								
+								<span class="btn btn-default btn-file" id="imgBut">
+								    Προσθήκη Φωτογραφιών <input type="file">
+								</span>
+								
+								<div id="check">
+									<label class="checkbox-inline"><input type="checkbox" value="">Είστε σίγουρος ότι θέλετε να υποβάλετε το δωμάτιο με τα παραπάνω χαρακτηριστικά για ενοικίαση;</label>
+								</div>	
+							
+								<div class="form-group" style="text-align:center; "> <!-- Submit button -->
+									<a href="#" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
+								      <button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-check"></i> Υποβολή</button>
+								</div>	
+							
+						</form>
+					</div> 
+							
+				</div>
+					
+					
+					
+			</div>
+			
+		
+		
+			<div id = "footer">
+				<!-- footer -->
+				<div class="links">
+					<a href="">Welcome</a>
+					<br>	
+					<a href="">Sitemap</a>
+					<p style="margin-top:8px">Copyright &copy; 2017-2018 <a href="WelcomePage.html">Book A Room</a></p>
+				</div>
+			</div>	
+		
+		</div>
+
+
+		<div id="popup" style="display:none;text-align:center">
+			<form name="login" action="" method="post">
+				<center>Όνομα Χρήστη</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center style="margin-top:10px;">Κωδικός Πρόσβασης</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
+				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
+				<center style="margin-top:10px;"><a href="./html files/register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
+			</form>
+		</div>
+	
+	
+	</body>
+</html>
