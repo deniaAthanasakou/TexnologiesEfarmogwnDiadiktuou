@@ -89,7 +89,8 @@
 	text-size: auto;
 	background-color: #e6e6e6;
 	padding:50px;
-	border-radius: 10px;
+	border: solid 3px #4682B4;
+	border-radius: 5px;
 }
 
 #aptLink{
@@ -134,11 +135,48 @@
      vertical-align: middle;
 }
 
+#accountTitle{
+	margin-left: 100px;
+	margin-top: 30px;
+	color: white;
+	font-family: Garamond;
+	text-shadow: #000 0px 0px 4px,   #000 0px 0px 4px,   #000 0px 0px 4px,
+             #000 0px 0px 4px,   #000 0px 0px 4px,   #000 0px 0px 4px;
+}
 
+#navigation_bar{
+	position: absolute;
+	margin-left: 100px;
+	margin-top: 52px;
+}
 
+.nav-tabs > li > a:hover{
+  background-color: #4682B4 !important;
+  border: medium none;
+  color: #fff;
+}
 
+.nav-tabs > li > a {
+  background-color: #ADD8E6 !important;
+  border: medium none;
+  color: #fff;
+}
 
+.nav-tabs > li > a:focus {
+  background-color: #4682B4 !important;
+  border: medium none;
+  color: #fff;
+}
 
+.nav-tabs > li > a:active {
+  background-color: #4682B4 !important;
+  border: medium none;
+  color: #fff;
+}
+
+.nav-tabs > li > #active {
+  background-color: #4682B4 !important;
+}
 
 
 

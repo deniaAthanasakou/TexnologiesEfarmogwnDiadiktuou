@@ -28,10 +28,9 @@
 		</script>
 		
 		<script>
-		 $(document).ready( function(){
-			document.getElementById("focus").focus(); 
-		 });
-		
+		$(document).ready(function(){
+		    $('[data-toggle="popover"]').popover();   
+		});
 		</script>
         
         <title>Admin page</title>
@@ -65,21 +64,288 @@
 			
 				<div class="container">
 				
-					<h2 id="accountTitle"><strong>Ο λογαριασμός μου</strong></h2>
+					<h1 id="accountTitle"><strong>Ο λογαριασμός μου</strong></h1>
 					
 					<div id="navigation_bar">
 						<ul class="nav nav-tabs">
-						  <li class="nav-item" class="active"><a href="#" id="focus"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
+						  <li class="nav-item"><a href="admin_page.html" id="active"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
 						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
-						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Χρηστών</a></li>
-						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα</a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Χρηστών <span class="badge">4</span></a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
 						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
 						</ul>
 					</div>
 					
 				
 					<div  id="input-profile" class="container-fluid">
-						
+						<div class="sectionDiv">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="row">
+										<div class="col-md-12">
+											<img class="img-responsive" id="currentImage" src="../Images/insert_photo.png"></img>
+											<button class="btn btn-primary" data-toggle="popover" data-content="Αλλαγή εικόνας" data-trigger="hover" id="btn_image"><i class="glyphicon glyphicon-camera"></i></button>
+										</div>
+									</div>
+									<div class="row" style="margin-top:10px;">
+										<div class="col-md-6">
+											<label for="status">Κατάσταση:</label>
+										</div>
+										<div class="col-md-6">
+											<p>STATUS</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="row">
+										<div class="col-md-12">
+											<h2><strong>Στοιχεία λογαριασμού</strong> <a href="#" style="text-decoration:none;font-size: medium;">[change]</a></h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="username">Όνομα Χρήστη:</label>
+										</div>
+										<div class="col-md-6">
+											<p>USERNAME</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="name">Όνομα:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NAME</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="surname">Επώνυμο:</label>
+										</div>
+										<div class="col-md-6">
+											<p>SURNAME</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="email">Email:</label>
+										</div>
+										<div class="col-md-6" style="">
+											<p>EMAIL <a href="#">[change email]</a></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-md-offset-6">
+											<a href="#">[change password]</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<div class="sectionDiv">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-12">
+											<h2><strong>Λοιπά Στοιχεία</strong> <a href="#" style="text-decoration:none;font-size: medium;">[change]</a></h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="tel">Τηλέφωνο:</label>
+										</div>
+										<div class="col-md-6">
+											<p>TEL</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="birth">Ημερομηνία Γέννησης:</label>
+										</div>
+										<div class="col-md-6">
+											<p>BIRTHDAY</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="role">Ρόλος:</label>
+										</div>
+										<div class="col-md-6">
+											<p>HOST/TENANT</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<div class="sectionDiv">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-12">
+											<h2><strong>Στοιχεία Διαμονής</strong> <a href="#" style="text-decoration:none;font-size: medium;">[change]</a></h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="country">Χώρα:</label>
+										</div>
+										<div class="col-md-6">
+											<p>COUNTRY</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="city">Πόλη:</label>
+										</div>
+										<div class="col-md-6">
+											<p>CITY</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="address">Διεύθυνση Οικίας:</label>
+										</div>
+										<div class="col-md-6">
+											<p>WHOLE ADDRESS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="postal_code">Ταχυδρομικώς Κώδικας:</label>
+										</div>
+										<div class="col-md-6">
+											<p>POSTAL CODE</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<div class="sectionDiv">
+							<div class="row">
+								<div class="col-md-12">
+									<h2><strong>Στατιστικά</strong></h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6" style="border-right: 1px solid #e6e6e6;">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_comments">Αριθμός σχολίων:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NUMBER COMMENTS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_critics">Αριθμός κριτικών:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NUMBER CRITICS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_messages">Αριθμός μηνυμάτων:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NUMBER MESSAGES</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="avg_critics">Μέσος όρος κριτικών:</label>
+										</div>
+										<div class="col-md-6">
+											<p>AVERAGE CRITICS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="min_critic">Ελάχιστη κριτική:</label>
+										</div>
+										<div class="col-md-6">
+											<p>MIN CRITIC</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="max_critix">Μέγιστη κριτική:</label>
+										</div>
+										<div class="col-md-6">
+											<p>MAX CRITIC</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="sectionDiv">
+							<div class="row">
+								<div class="col-md-12">
+									<h2><strong>Στατιστικά Ιστοσελίδας</strong></h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6" style="border-right: 1px solid #e6e6e6;">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_tenants">Αριθμός ενοικιαστών:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NUMBER TENANTS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_hosts">Αριθμός οικοδεσποτών:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NUMBER HOSTS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_apartments">Αριθμός καταλυμάτων:</label>
+										</div>
+										<div class="col-md-6">
+											<p>AVERAGE APARTMENTS</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									
+									<div class="row">
+										<div class="col-md-6">
+											<label for="no_users">Αριθμός χρηστών:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NUMBER USERS</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="not_yet_approved">Μη Εγκρινόμενοι χρήστες:</label>
+										</div>
+										<div class="col-md-6">
+											<p>NO YET APPROVED</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="approved">Εγκρινόμενοι χρήστες:</label>
+										</div>
+										<div class="col-md-6">
+											<p>APPROVED</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				
 					
@@ -109,7 +375,7 @@
 				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
 				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
 				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
-				<center style="margin-top:10px;"><a href="./register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center style="margin-top:10px;"><a href="register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
 				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
 			</form>
 		</div>
