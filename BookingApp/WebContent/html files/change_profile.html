@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../jQuery/jquery-3.2.1.min.js"></script>
+		<link href="../css files/register.css" rel="stylesheet" />
+		<link href="../css files/user_page.css" rel="stylesheet" />
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/moment.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/jquery.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.css" />
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<link href="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.css" rel="stylesheet" />
+		<script src="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.js"></script>
+		
+		
+		<script language="JavaScript" type="text/javascript">
+			function login(showhide){
+				if(showhide == "show"){
+					document.getElementById('popup').style.display="block";
+				}
+				else if(showhide == "hide"){
+					document.getElementById('popup').style.display="none";
+				}
+			}
+		
+		</script>
+		
+		
+		<script>
+		$(document).ready(function(){
+		    $('[data-toggle="popover"]').popover();   
+		});
+		</script>
+		
+		<title>User's/Host's/Admin's Edit Profile</title>
+
+	</head>
+	<body>
+	
+		<div id ="wrapper">
+	
+			<div id = "header">
+				<!-- register/login -->	
+				<table class="headerTable">
+					<tr>
+			    		<td><a href="../WelcomePage.html"><div id ="logo"></div></a></td>
+			    		<td>
+			    			<div id = "register_login">
+			    				<a class="btn" href="javascript:login('show'); "><i class="glyphicon glyphicon-log-in"></i> Είσοδος ή Εγγραφή</a>
+			    			</div>
+			    		</td>
+			  		</tr>
+			 	</table>		
+			</div>
+			
+			
+			
+		
+			
+			<div id= "mainContainer">
+			
+			
+				<div class="container">
+				
+					<h1 id="accountTitle"><strong>Διαχείριση Προφίλ</strong></h1>
+				
+					<div id="navigation_bar">
+						<ul class="nav nav-tabs">
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
+						  <li class="nav-item"><a href="#"  id="active"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
+						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+						</ul>
+					</div>
+					
+				
+					<div  id="input-profile" class="container-fluid">
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Εικόνας Προφίλ</h3>
+									</div>
+								</div>
+								<div class="row nomargin vertical-align">
+									<div class="col-md-3" style="margin-bottom:20px;">
+										<img class="img-responsive" id="currentImage" src="../Images/insert_photo.png"></img>
+									</div>
+									
+									<div class="col-md-9">
+										<input type="file" name="img[]" class="file"/>
+		    							<div class="input-group col-xs-12">
+		      								<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+		      								<input type="text" class="form-control input-lg input_path" id="imagePath" placeholder="Upload Image"/>
+		      								<span class="input-group-btn">
+		        								<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+		      								</span>
+		   								</div>							
+									</div>
+								</div>
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Προσωπικών Πληροφοριών</h3>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="username">Όνομα Χρήστη:</label>
+									</div>
+									<div class="col-md-6">
+										<input class="form-control" type="text" value="USERNAME" disabled></input>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="name">Όνομα*:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" value="NAME" required />
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="surname">Επώνυμο:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" value="SURNAME" required />
+									</div>
+								</div>
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Email</h3>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="email">Email:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="email" id="emailInput" class="form-control" placeholder="Εισαγωγή E-mail" name="email" size="100" maxlength="100" value="EMAIL" required/>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="email_confirmation">Επιβεβαίωση Email:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="email" id="emailConfirmation" class="form-control" placeholder="Εισαγωγή Επιβεβαίωσης E-mail" name="email_confirm" size="100" maxlength="100" required/>
+									</div>
+								</div>
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Κωδικού Πρόσβασης</h3>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="old_password">Κωδικός Πρόσβασης*:</label>
+									</div>
+									<div class="col-md-6">
+										<input class="form-control" type="password" required></input>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="new_password">Νέος Κωδικός Πρόσβασης*:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="password" data-toggle="popover" data-content="Ο κωδικός πρέπει να έχει μήκος 6-45 χαρακτήρες, χωρίς κενά." data-trigger="focus" id="passwordInput" class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" required />
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="new_pass_confirmation">Επιβεβαίωση Νέου Κωδικού Πρόσβασης*:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="password" rel="popover" id="passwordConfirmation" class="form-control" placeholder="Εισαγωγή Επιβεβαίωσης Κωδικού Πρόσβασης" name="password_confirm" size="45" maxlength="45" required />
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Ρόλου</h3>
+									</div>
+								</div>
+								<div class="row nomargin" >
+									<div class="col-md-12 well well-sm">
+										<label class="checkbox-inline"><input type="checkbox" value="tenant"  checked>Ενοικιαστής</label>
+										<label class="checkbox-inline"><input type="checkbox" value="host" id="host">Οικοδεσπότης</label>
+										</div>
+									</div>
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Στοιχείων Διαμονής</h3>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="country">Χώρα:</label>
+									</div>
+									<div class="col-md-6">
+										<select class="form-control bfh-countries" data-country="GR"></select>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="city">Πόλη:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="text" id="city" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" placeholder="Εισαγωγή Πόλης" name="city" size="45" maxlength="45" value="CITY"/>
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="postal_code">Ταχυδρομικώς Κώδικας:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="number" id="postal_code" class="form-control"  name="postal_code" size="10" maxlength="10" value="18547"/>
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="address">Οδός:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="text" id="street_address" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" placeholder="Εισαγωγή Οδού" name="street_address" size="45" maxlength="45" value="ADDRESS"/>
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="address_num">Αριθμός:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="number" id="address_number" data-toggle="popover" data-content="Αριθμός οδού κατοικίας." data-trigger="focus" class="form-control" name="address_number" size="10" min="1" maxlength="10" value="145"/>
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="sectionDiv">
+							<form method="post">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<h3>Αλλαγή Λοιπών Στοιχείων</h3>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="city">Τηλέφωνο:</label>
+									</div>
+									<div class="col-md-6">
+										<input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" value="TEL" name="tel" size="10" maxlength="10"/>
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-md-6">
+										<label for="postal_code">Ημερομηνία Γέννησης:</label>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+		            						<div class='input-group date' id='birth'>
+		                						<input type='text' id="birthInput" class="form-control" required/>
+		                						<span class="input-group-addon">
+		                    						<span class="glyphicon glyphicon-calendar"></span>
+		                						</span>
+		            						</div>
+			        					</div>
+									</div>
+								</div>
+								
+								<div class="row" style="margin-top:20px;">
+									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+								</div>
+							</form>
+						</div>
+					</div>
+						
+				</div>
+				
+					
+			</div>			
+		
+			<div id = "footer">
+				<!-- footer -->
+				<div class="links">
+					<a href="">Welcome</a>
+					<br>	
+					<a href="">Sitemap</a>
+					<p style="margin-top:8px">Copyright &copy; 2017-2018 <a href="../WelcomePage.html">Book A Room</a></p>
+				</div>
+			</div>
+		
+		
+		</div>
+		
+		
+		<div id="popup" style="display:none;text-align:center">
+			<form name="login" action="" method="post">
+				<center>Όνομα Χρήστη</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center style="margin-top:10px;">Κωδικός Πρόσβασης</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
+				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
+				<center style="margin-top:10px;"><a href="register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
+			</form>
+		</div>
+	
+	</body>
+</html>
