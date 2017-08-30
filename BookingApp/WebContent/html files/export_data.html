@@ -8,16 +8,12 @@
 		<script type="text/javascript" src="../jQuery/jquery-3.2.1.min.js"></script>
 		<link href="../css files/register.css" rel="stylesheet" />
 		<link href="../css files/user_page.css" rel="stylesheet" />
+		<link href="../css files/exportData.css" rel="stylesheet" />
 		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/moment.min.js"></script>
 		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/jquery.min.js"></script>
 		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
 		<link rel="stylesheet" href="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.css" />
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		
-  		<script type="text/javascript" src="../dataTables/media/js/dataTables.bootstrap.min.js"></script>
-		<script type="text/javascript" src="../dataTables/media/js/jquery.dataTables.min.js"></script>
-		<link href="../dataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-		
 		
 		
 		<script language="JavaScript" type="text/javascript">
@@ -37,23 +33,8 @@
 		    $('[data-toggle="popover"]').popover();   
 		});
 		</script>
-		
-		<script>
-		$(document).ready(function() {
-			$('#users').dataTable();
-		});
-		</script>
-		
-		<script>
-		$(document).ready(function() {
-			$("#users tr").click(function() {
-				window.location.href="approve_user.html"
-			});
-		});
-		
-		</script>
         
-        <title>Admin Handle Users page</title>
+        <title>Export Data page</title>
 		
 
 	</head>
@@ -84,7 +65,7 @@
 			
 				<div class="container">
 				
-					<h1 id="accountTitle"><strong>Διαχείριση Χρηστών</strong></h1>
+					<h1 id="accountTitle"><strong>Εξαγωγή Δεδομένων</strong></h1>
 					
 					<div id="navigation_bar">
 						<ul class="nav nav-tabs">
@@ -105,54 +86,62 @@
 				
 					<div  id="input-profile" class="container-fluid">
 						<div class="sectionDiv">
-							<div class="row" style="margin-bottom:20px;">
-								<div class="col-md-12 text-center">
-									<h3>Λίστα Χρηστών στο Σύστημα</h3>
+							<div class="row text-center">
+								<div class="col-md-12">
+									<h3>Επιλογή Αρχείου Εξαγωγής</h3>
 								</div>
 							</div>
 							<div class="row">
-							
-								<table class="table table-responsive table-hover display" id="users" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Όνομα Χρήστη</th>
-											<th>Όνομα</th>
-											<th>Επώνυμο</th>
-											<th>Ρόλοι</th>
-											<th>Έγκριση</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td id="username">darkstar</td>
-											<td>Στεφανία</td>
-											<td>Πατ</td>
-											<td>Ενοικιαστής</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td id="username">gchanya</td>
-											<td>Ντένια</td>
-											<td>Αθαν</td>
-											<td>Ενοικιαστής/Οικοδεσπότης</td>
-											<td><button class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Έγκριση</button></td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td id="username">Putheia9</td>
-											<td>Πικο</td>
-											<td>ΑΧ</td>
-											<td>Οικοδεσπότης</td>
-											<td><button class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Έγκριση</button></td>
-										</tr>
-									</tbody>
-								</table>
+								<div class="col-md-12">
+									<table class="table table-responsive table-hover">
+										<thead>
+											<tr>
+												<th>Τύπος Αρχείου</th>
+												<th>Όνομα</th>
+												<th>Περιγραφή</th>
+												<th>Ενημερώθηκε</th>
+												<th>Μέγεθος</th>
+												<th>Κατέβασμα</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><img class="imgStyle" src="../Images/xml_icon.png"></img></td>
+												<td>Χώροι Ενοικίασης</td>
+												<td>Χώροι που διατίθενται προς ενοικίαση από τους οικοδεσπότες μαζί με όλα τα σχετικά στοιχεία.</td>
+												<td>19/7/2017</td>
+												<td>10.5ΚΒ</td>
+												<td><button class="btn btn-md btn-info"><i class="glyphicon glyphicon-download-alt"></i> Κατέβασμα</button></td>
+											</tr>
+											<tr>
+												<td><img class="imgStyle" src="../Images/xml_icon.png"></img></td>
+												<td>Κρατήσεις</td>
+												<td>Οι κρατήσεις των ενοικιαστών.</td>
+												<td>19/7/2017</td>
+												<td>10.5ΚΒ</td>
+												<td><button class="btn btn-md btn-info"><i class="glyphicon glyphicon-download-alt"></i> Κατέβασμα</button></td>
+											</tr>
+											<tr>
+												<td><img class="imgStyle" src="../Images/xml_icon.png"></img></td>
+												<td>Κριτικές Δωματίου</td>
+												<td>Οι κριτικές που έχουν υποβάλλει οι ενοικιαστές μετά την ενοικίαση.</td>
+												<td>19/7/2017</td>
+												<td>10.5ΚΒ</td>
+												<td><button class="btn btn-md btn-info"><i class="glyphicon glyphicon-download-alt"></i> Κατέβασμα</button></td>
+											</tr>
+											<tr>
+												<td><img class="imgStyle" src="../Images/xml_icon.png"></img></td>
+												<td>Κριτικές Οικοδεσποτών</td>
+												<td>Οι κριτικές που έχουν υποβληθεί και σχετίζονται με τον κάθε οικοδεσπότη.</td>
+												<td>19/7/2017</td>
+												<td>10.5ΚΒ</td>
+												<td><button class="btn btn-md btn-info"><i class="glyphicon glyphicon-download-alt"></i> Κατέβασμα</button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
-					
 					</div>
 				</div>
 			</div>

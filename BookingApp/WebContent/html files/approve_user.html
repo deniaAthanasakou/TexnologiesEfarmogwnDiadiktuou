@@ -33,7 +33,7 @@
 		});
 		</script>
         
-        <title>Admin page</title>
+        <title>Approve Host page</title>
 		
 
 	</head>
@@ -63,23 +63,25 @@
 			
 			
 				<div class="container">
-				
-					<h1 id="accountTitle"><strong>Ο λογαριασμός μου</strong></h1>
 					
+					<h1 id="accountTitle"><strong>Ο λογαριασμός μου</strong></h1>
+				
 					<div id="navigation_bar">
+						
 						<ul class="nav nav-tabs">
-						  <li class="nav-item"><a href="admin_page.html" id="active"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
-						  <li class="nav-item"><a href="change_profile_admin.html"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
-						  <li class="nav-item dropdown">
-							    <a class="nav-item dropdown-toggle" type="button" data-toggle="dropdown" style="cursor: pointer;"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Χρηστών <span class="badge">4</span><span class="caret"></span></a>
+							<li class="nav-item"><a href="host_page.html"  id="active"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
+							<li class="nav-item"><a href="change_profile_host.html"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
+							<li class="nav-item dropdown">
+							    <a class="nav-item dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="cursor: pointer;"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Οικειών<span class="caret"></span></a>
 							    <ul class="dropdown-menu">
-							    	<li><a class="nav-item" href="admin_handle.html"><i class="glyphicon glyphicon-list-alt"></i> Λίστα Χρηστών</a></li>
-						        	<li><a class="nav-item" href="export_data.html"><i class="glyphicon glyphicon-download-alt"></i> Εξαγωγή Δεδομένων</a></li>
+							    	<li><a class="nav-item" href="#"><i class="glyphicon glyphicon-list-alt"></i> Λίστα Οικειών</a></li>
+						        	<li><a class="nav-item" href="inputApt.html"><i class="glyphicon glyphicon-plus"></i> Προσθήκη Οικείας</a></li>
 						        </ul>
 							</li>
-						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
-						  <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
+							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
 						</ul>
+						
 					</div>
 					
 				
@@ -290,65 +292,19 @@
 								</div>
 							</div>
 						</div>
-						<div class="sectionDiv">
-							<div class="row">
-								<div class="col-md-12">
-									<h2><strong>Στατιστικά Ιστοσελίδας</strong></h2>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6" style="border-right: 1px solid #e6e6e6;">
-									<div class="row">
-										<div class="col-md-6">
-											<label for="no_tenants">Αριθμός ενοικιαστών:</label>
-										</div>
-										<div class="col-md-6">
-											<p>NUMBER TENANTS</p>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<label for="no_hosts">Αριθμός οικοδεσποτών:</label>
-										</div>
-										<div class="col-md-6">
-											<p>NUMBER HOSTS</p>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<label for="no_apartments">Αριθμός καταλυμάτων:</label>
-										</div>
-										<div class="col-md-6">
-											<p>AVERAGE APARTMENTS</p>
-										</div>
-									</div>
+						
+						<div class="sectionDiv text-center">
+							<div class="row" style="padding-top:20px;">
+								<div class="col-md-6">
+									<button class="btn btn-md btn-danger"><i class="glyphicon glyphicon-remove"></i> Μη Έγκριση</button>
 								</div>
 								<div class="col-md-6">
-									
-									<div class="row">
-										<div class="col-md-6">
-											<label for="no_users">Αριθμός χρηστών:</label>
-										</div>
-										<div class="col-md-6">
-											<p>NUMBER USERS</p>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<label for="not_yet_approved">Μη Εγκρινόμενοι χρήστες:</label>
-										</div>
-										<div class="col-md-6">
-											<p>NO YET APPROVED</p>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<label for="approved">Εγκρινόμενοι χρήστες:</label>
-										</div>
-										<div class="col-md-6">
-											<p>APPROVED</p>
-										</div>
-									</div>
+									<button class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Έγκριση</button>
+								</div>
+							</div>
+							<div class="row" style="padding-top:20px;">
+								<div class="col-md-12">
+									<button class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-chevron-left"></i> Επιστροφή</button>
 								</div>
 							</div>
 						</div>
@@ -357,6 +313,9 @@
 					
 				</div>
 			</div>
+			
+								  
+			
 			
 		
 			<div id = "footer">
