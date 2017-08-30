@@ -36,6 +36,215 @@
 		});
 		</script>
 		
+		
+		<script>
+		
+			$(document).on('click', '.browse', function(){
+					var file = $(this).parent().parent().parent().find('.file');
+					file.trigger('click');
+				});
+			$(document).on('change', '.file', function(){
+				$(this).parent().find('.input_path').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+				document.getElementById("currentImage").src= document.getElementById("imagePath").value;
+			});
+		
+		</script>
+		
+		<script type="text/javascript">
+			$(function () {
+				$('#birth').datetimepicker({
+                    format: 'DD/MM/YYYY',
+              	});
+				
+				$('#birth').datetimepicker({
+				viewMode: 'years'
+				});
+			});
+		</script>
+		
+		<script>
+		function openPopupPreviousPage() {
+		    var txt;
+		    if (confirm("Do you really want to discard all changes and return to previous page?") == true) {
+		    	window.history.back();
+		    }
+		}
+		</script>
+		
+		<script>
+		$(document).ready(function(){
+			
+			
+			$("#passwordConfirmation").popover({
+			    content: "Passwords do not match!",
+			    trigger: "manual",
+			    placement: "right"
+			});
+			
+			$("#emailConfirmation").popover({
+			    content: "Emails do not match!",
+			    trigger: "manual",
+			    placement: "right"
+			});
+			
+
+			
+			$( "#passwordConfirmation" ).keyup(function() {
+				$('.popover').css('color','#ff0000');
+				if (document.getElementById('passwordInput').value ==
+				    document.getElementById('passwordConfirmation').value) {
+					$('#passwordConfirmation').popover('hide');
+				  } else {
+					$('#passwordConfirmation').popover('show');
+				  }
+				});
+			
+			$( "#emailConfirmation" ).keyup(function() {
+				$('.popover').css('color','#ff0000');
+				if (document.getElementById('emailInput').value ==
+				    document.getElementById('emailConfirmation').value) {
+					$('#emailConfirmation').popover('hide');
+				  } else {
+					$('#emailConfirmation').popover('show');
+				  }
+				});
+			
+			$('#passwordInput').password({
+				  enterPass: "",
+				  shortPass: 'Ο κωδικός είναι πολύ μικρός',
+				  badPass: 'Εύκολος, προσπάθησε να χρησιμοποιήσεις γράμματα και αριθμούς',
+				  goodPass: 'Κανονικός, χρησιμοποίησε σύμβολα',
+				  strongPass: 'Δυνατός κωδικός',
+				  showPercent: false,
+				  showText: true, // shows the text tips 
+				  animate: false, // whether or not to animate the progress bar on input blur/focus 
+				  animateSpeed: 'fast', // the above animation speed 
+				  minimumLength: 6 // minimum password length (below this threshold, the score is 0) 
+				});
+		});
+	
+		</script>
+		
+		<script>
+		
+		function checkValidityPersonalInfo(){
+			var inValid = new RegExp("[\\s]");		//whitespace
+			var numbersSymbols = new RegExp("[^A-Za-z]");
+			var onlyNumbers = new RegExp("[/^\d+$/]");
+			var name = document.getElementById("name").value;
+			var surname = document.getElementById("surname").value;
+			
+			//check for name
+			if (inValid.test(name)){
+				alert("Το Όνομα περιέχει κενά.");
+				return false;
+			}
+			if (numbersSymbols.test(name)){
+				alert("Το Όνομα περιέχει αριθμούς ή σύμβολα.");
+				return false;
+			}
+			
+			//check for surname
+			if (inValid.test(surname)){
+				alert("Το Επώνυμο περιέχει κενά.");
+				return false;
+			}
+			if (numbersSymbols.test(surname)){
+				alert("Το Επώνυμο περιέχει αριθμούς ή σύμβολα.");
+				return false;
+			}
+		}
+		
+		function checkValidityEmail(){
+			//check for emails
+			if (document.getElementById('emailInput').value != document.getElementById('emailConfirmation').value) {
+				alert("Το Email και το Email Επιβεβαίωσης δεν ταιριάζουν.");
+				return false;
+			}
+		}
+		
+		function checkValidityPasswords(){
+			var inValid = new RegExp("[\\s]");		//whitespace
+			var numbersSymbols = new RegExp("[^A-Za-z]");
+			var onlyNumbers = new RegExp("[/^\d+$/]");
+			var password = document.getElementById("passwordInput").value;
+			
+			//check for password
+			if (inValid.test(password)){
+				alert("Ο Κωδικός Πρόσβασης περιέχει κενά.");
+				return false;
+			}
+			if(password.length<6){
+				alert("Ο Κωδικός Πρόσβασης είναι μικρότερος των 6 χαρακτήρων.");
+				return false;
+			}
+			
+			//check for passwords match
+			if (document.getElementById('passwordInput').value !=document.getElementById('passwordConfirmation').value) {
+				alert("Ο Κωδικός Πρόσβασης και Επιβεβαίωσης δεν ταιριάζουν.");
+				return false;
+			} 
+
+		}
+		
+		function popupApprove(){
+			var hostChecked = document.getElementById("host").checked;
+			if(hostChecked){
+				alert("Η έγκριση της αίτησης εγγραφής σου στην εφαρμογή με το ρόλο του οικοδεσπότη εκκρεμεί.");
+			}
+		}
+		
+		function checkValidityResidence(){
+			var inValid = new RegExp("[\\s]");		//whitespace
+			var numbersSymbols = new RegExp("[^A-Za-z]");
+			var onlyNumbers = new RegExp("[/^\d+$/]");
+			var city = document.getElementById("city").value;
+			var streetAddress = document.getElementById("street_address").value;
+			
+			//check for city
+			if (inValid.test(city)){
+				alert("Η Πόλη περιέχει κενά.");
+				return false;
+			}
+			if (numbersSymbols.test(city)){
+				alert("Η Πόλη περιέχει αριθμούς ή σύμβολα.");
+				return false;
+			}
+			
+			//check for street_address
+			if (!(/^[a-zA-Z\s]*$/.test(streetAddress))){
+				alert("Η Οδός περιέχει αριθμούς ή σύμβολα.");
+				return false;
+			}	
+		}
+		
+		function checkValidityAdditionalInfo(){
+			var inValid = new RegExp("[\\s]");		//whitespace
+			var numbersSymbols = new RegExp("[^A-Za-z]");
+			var onlyNumbers = new RegExp("[/^\d+$/]");
+			var birth = document.getElementById("birthInput").value.substr(6,10);
+			var currentYear = (new Date()).getFullYear();
+			var tel = document.getElementById("tel").value;
+		
+			//check for telephone
+			if(tel.length < 10){
+				alert("Το τηλέφωνο που δώσατε δεν έχει 10 ψηφία.");
+				return false;
+			}
+			if (inValid.test(tel)){
+				alert("Το τηλέφωνο περιέχει κενά.");
+				return false;
+			}
+			
+			
+			//check for birth year
+			if((parseInt(birth) + 18) > currentYear || (currentYear - parseInt(birth)) > 120){
+				alert("Πρέπει να είστε 18+ χρονών για να χρησιμοποιήσετε την εφαρμογή. Αν είστε, προσθέστε κατάλληλη χρονιά γέννησης.");
+				return false;
+			}
+		}
+		</script>
+		
 		<title>User's/Host's/Admin's Edit Profile</title>
 
 	</head>
@@ -110,7 +319,7 @@
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" onsubmit="return checkValidityPersonalInfo();">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Προσωπικών Πληροφοριών</h3>
@@ -148,7 +357,7 @@
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" onsubmit="return checkValidityEmail();">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Email</h3>
@@ -177,7 +386,7 @@
 							</form>
 						</div>
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" onsubmit="return checkValidityPasswords();">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Κωδικού Πρόσβασης</h3>
@@ -188,7 +397,7 @@
 										<label for="old_password">Κωδικός Πρόσβασης*:</label>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" type="password" required></input>
+										<input class="form-control" type="password" id="old_password" required></input>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -230,13 +439,13 @@
 									</div>
 								<div class="row" style="margin-top:20px;">
 									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
-									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit" onclick="return popupApprove()"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" onsubmit="return checkValidityResidence();">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Στοιχείων Διαμονής</h3>
@@ -294,7 +503,7 @@
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" onsubmit="return checkValidityAdditionalInfo();">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Λοιπών Στοιχείων</h3>
