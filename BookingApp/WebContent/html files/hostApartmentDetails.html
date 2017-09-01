@@ -3,21 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../jQuery/jquery-3.2.1.min.js"></script>
-		
-		<script type="text/javascript" src="../bower_components/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
-		<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+		<link href="../css files/register.css" rel="stylesheet" />
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/jquery.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/moment.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.css" />
+		<link href="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.css" rel="stylesheet" />
+		<script src="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.css"></script>
 		
 		
 		<link href="../css files/welcome.css" rel="stylesheet" />
 		<link href="../css files/apartmentsList.css" rel="stylesheet" />
+		<link href="../css files/hostApt.css" rel="stylesheet" />
 		
 		
 		<script language="JavaScript" type="text/javascript">
@@ -31,7 +34,7 @@
 			}
 			
 		</script>  
-		<title>Apartment Info</title>
+		<title>Host's Apartment Details</title>
 	</head>
 	<body>
 		<div id ="wrapper">
@@ -50,10 +53,32 @@
 		  		</table>		
 			
 			</div>
+			
+			<div id="navigation_bar">
+						
+						<ul class="nav nav-tabs">
+							<li class="nav-item"><a href="host_page.html"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
+							<li class="nav-item"><a href="change_profile_host.html"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
+							<li class="nav-item dropdown">
+							    <a class="nav-item dropdown-toggle" type="button" id="active" data-toggle="dropdown" style="cursor: pointer;"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Οικειών<span class="caret"></span></a>
+							    <ul class="dropdown-menu">
+							    	<li><a class="nav-item" href="listOfApartments.html"><i class="glyphicon glyphicon-list-alt"></i> Λίστα Οικειών</a></li>
+						        	<li><a class="nav-item" href="inputApt.html"><i class="glyphicon glyphicon-plus"></i> Προσθήκη Οικείας</a></li>
+						        </ul>
+							</li>
+							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
+							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+						</ul>
+						
+				</div>
 		
 			
 			<div id= "mainContainer">
 				<div class="container" id="cont">
+					<div id="change">
+						<h2> <a href="./aptWithChange.html" style="text-decoration:none;font-size: medium;">[Επεξεργασία]</a></h2>
+					</div>
+				
 					<div id="image">
 						<img src="../Images/apartment-room.jpg" class="img-thumbnail" width="500" height="500">
 					</div>
@@ -114,7 +139,7 @@
 					       		</table>
 				      		 </div>
 				      		 
-				      		
+				      		 
 				       		<div id= "map">
 				       			<h4><strong>Βρείτε μας στο χάρτη</strong></h4> 
 						       <div class="container">
@@ -154,19 +179,7 @@
 							       	<td style="margin-left:5%">   <img src="../Images/host.jpg" class="img-thumbnail" width="300" height="300" margin-left:20%></td> 
 						      	</tr>		
 							</table> 
-							
-							<div id="submit">
-						<p >Επιθυμείτε να κλείσετε το δωμάτιο αυτό για τις ημερομηνίες <strong>TADE</strong> μέχρι <strong>TADE</strong>?</p>
-						<form method="post" >
-							<div class="form-group" style="text-align:center; "> <!-- Submit button -->
-								<a href="#" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
-							      <button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-check"></i> Υποβολή Κράτησης</button>
-							      
-					      
-							</div>
-							
-	
-						</form>
+
 					</div> 
 							
 					</div>

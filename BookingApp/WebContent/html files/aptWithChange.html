@@ -18,6 +18,7 @@
 		<script src="../bower_components/password-strength-meter/password.min.css"></script>
 		
 		
+		
 		<link href="../css files/welcome.css" rel="stylesheet" />
 		<link href="../css files/apartmentsList.css" rel="stylesheet" />
 		<link href="../css files/hostApt.css" rel="stylesheet" />
@@ -129,7 +130,7 @@
 		
 		
 		  
-		<title>Add Apartment</title>
+		<title>Change Apartment</title>
 	</head>
 	<body>
 		<div id ="wrapper">
@@ -173,6 +174,8 @@
 					</div>
 				
 				<div class="container" id="cont">
+				
+					<!--map-->
 					<div id="image">
 						<div id="map" style="width:350px;height:350px;background:yellow"></div>
 
@@ -436,20 +439,37 @@
 							        
 						         <div class="form-group">
 								  <label for="transport" >Περιγραφή του Χώρου</label>
-								  <textarea class="form-control" rows="5" id="description" style= "margin-top:1%; margin-bottom:5%;" size="200" maxlength="200" data-toggle="popover"  data-trigger="focus" class="form-control"  placeholder="Περιγράψτε το διαμέρισμα σε ένα κείμενο των πολύ 200 χαρακτήρων."></textarea>
+								  <textarea class="form-control" rows="5" id="description" style= "margin-top:1%; margin-bottom:5%;" size="200" maxlength="200" data-toggle="popover"  data-trigger="focus" class="form-control" placeholder="Περιγράψτε το διαμέρισμα σε ένα κείμενο των πολύ 200 χαρακτήρων."></textarea>
 								</div>
-
 								
-								<span class="btn btn-default btn-file" id="imgBut">
+								
+								<div id="apt-images">
+								
+									<table class="imgtable">
+										<tr>
+											<td><img src="../Images/apartment-room.jpg" class="img-thumbnail" width="200" height="200"></td>
+											<td><img src="../Images/room.jpg" class="img-thumbnail" width="200" height="200"></td>
+										</tr>
+										<tr>
+											<td style="text-align:center" ><button type="button" id="delete1" class="btn">Διαγραφή</button></td>
+											<td style="text-align:center"><button type="button" id="delete2" class="btn">Διαγραφή</button></td>
+										</tr>
+									</table>
+								
+									
+								</div>
+								
+								<span class="btn btn-default btn-file" id="imgBut" >
 								    Προσθήκη Φωτογραφιών <input type="file">
 								</span>
 								
 								<div id="check">
-									<label class="checkbox-inline"><input type="checkbox" value=""  required >Είστε σίγουρος ότι θέλετε να υποβάλετε το δωμάτιο με τα παραπάνω χαρακτηριστικά για ενοικίαση;</label>
-								</div>	
+									<label class="checkbox-inline"><input type="checkbox" value="" required>Είστε σίγουρος ότι θέλετε να πραγματοποιηθούν οι αλλαγές;</label>
+								</div>
+								
 							
 								<div class="form-group" style="text-align:center; "> <!-- Submit button -->
-									<a href="#" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
+									<a href="./listOfApartments.html" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
 								      <button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-check"></i> Υποβολή</button>
 								</div>	
 							

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../jQuery/jquery-3.2.1.min.js"></script>
+		<link href="../css files/register.css" rel="stylesheet" />
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/jquery.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/moment.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap-datepicker/bootstrap-datetimepicker.min.css" />
+		<link href="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.css" rel="stylesheet" />
+		<script src="../bootstrap/bootstrap-formhelpers/bootstrap-formhelpers.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.js"></script>
+		<script src="../bower_components/password-strength-meter/password.min.css"></script>
+		
+		
+		<link href="../css files/welcome.css" rel="stylesheet" />
+		<link href="../css files/apartmentsList.css" rel="stylesheet" />
+		<link href="../css files/hostApt.css" rel="stylesheet" />
+		
+		
+		<script language="JavaScript" type="text/javascript">
+			function login(showhide){
+				if(showhide == "show"){
+					document.getElementById('popup').style.display="block";
+				}
+				else if(showhide == "hide"){
+					document.getElementById('popup').style.display="none";
+				}
+			}
+			
+		</script>
+		
+		<script type="text/javascript">
+            $(function () {
+            	$('#from').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                   	defaultDate: new Date(),
+                   	minDate: moment()
+              	});
+            	
+            	$('#to').datetimepicker({
+                    
+                    defaultDate: moment().add('d', 1).toDate(),
+                    minDate: moment().add('d', 1).toDate(),
+                    format: 'DD/MM/YYYY'
+              	});
+            	
+                $('#from').datetimepicker();
+                $('#to').datetimepicker({
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#from").on("dp.change", function (e) {
+                    $('#to').data("DateTimePicker").minDate(e.date);
+                });
+                $("#to").on("dp.change", function (e) {
+                    $('#from').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+       
+        
+		
+		
+		  
+		<title>Host's Apartments</title>
+	</head>
+	<body>
+		<div id ="wrapper">
+	
+			<div id = "header">
+			<!-- register/login -->	
+				<table class="headerTable">
+					<tr>
+			    		<td ><a href="../WelcomePage.html"><div id ="logo"></div></a></td>
+			    		<td>
+			    			<div id = "register_login">
+			    				<a class="btn" href="javascript:login('show'); "><i class="glyphicon glyphicon-log-in"></i> Είσοδος ή Εγγραφή</a>
+			    			</div>
+			    		</td>
+			  		</tr>
+		  		</table>		
+			
+			</div>
+		
+			
+			<div id= "mainContainer">
+			
+				<h1 id="accountTitle"><strong>Προσθήκη Οικείας</strong></h1>
+				
+				<div id="navigation_bar">
+						
+						<ul class="nav nav-tabs">
+							<li class="nav-item"><a href="host_page.html"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
+							<li class="nav-item"><a href="change_profile_host.html"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
+							<li class="nav-item dropdown">
+							    <a class="nav-item dropdown-toggle" type="button" id="active" data-toggle="dropdown" style="cursor: pointer;"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Οικειών<span class="caret"></span></a>
+							    <ul class="dropdown-menu">
+							    	<li><a class="nav-item" href="listOfApartments.html"><i class="glyphicon glyphicon-list-alt"></i> Λίστα Οικειών</a></li>
+						        	<li><a class="nav-item" href="inputApt.html"><i class="glyphicon glyphicon-plus"></i> Προσθήκη Οικείας</a></li>
+						        </ul>
+							</li>
+							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
+							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+						</ul>
+						
+				</div>
+				
+				<div id= "mainContainer">
+				<div class="container" id="cont">
+					
+			      
+					<h1 style="text-align:center">Αποτελέσματα αναζήτησης</h1> 
+					<div class= "text-center">
+						<div class="pagination">
+						  <a href="#">&laquo;</a>
+						  <a href="#"  class="active">1</a>
+						  <a href="#" >2</a>
+						  <a href="#">3</a>
+						  <a href="#">&raquo;</a>
+						</div>
+					</div>
+					<div class="container-fluid" id="ContainerList">
+						
+						<div id="containerItem">
+						
+						</div>
+							<script language="JavaScript" type="text/javascript">
+								var container = document.getElementById('ContainerList');
+								
+								var myHtmlCode = 
+	                                 " <img src=\"../Images/apartment-room.jpg\" class=\"img-thumbnail\" width=\"200\" height=\"200\">"+
+	                                    "<table class=\"table table-hover\">"+
+	                                    "<tr>"+
+	                                      "<td>Διαμέρισμα Νο</td>"+
+	                                      "<td>1</td>"+
+	                                    "</tr>"+
+	                                   " <tr>"+
+	                                     " <td>Διέυθυνση</td>"+
+	                                      "<td>Ευστρατίου 26, Άγιος Νικόλαος, Θεσσαλονίκη</td>"+
+	                                    "</tr>"+
+	                                    "<tr>"+
+	                                     " <td>Αριθμός Κριτικών</td>"+
+	                                      "<td>17</td>"+
+	                                   " </tr>"+
+	                                    "<tr>"+
+	                                      "<td>Κριτική</td>"+
+	                                      "<td>3/5</td>"+
+	                                    "</tr>"+
+	                                  "</table>"+
+	                                  "<div id=\"aptLink\">"+
+	                                  "<a href = \"hostApartmentDetails.html\">Περισσότερες πληροφορίες<a>"+
+	                                  "</div>";
+								
+								
+								for (var i = 0; i < 10; i++) {								
+									container.innerHTML+=myHtmlCode;
+								}
+							
+							</script>
+		
+						</div> 
+						<div class= "text-center">
+						<div class="pagination">
+						  <a href="#" >&laquo;</a>
+						  <a href="#" class="active">1</a>
+						  <a href="#" >2</a>
+						  <a href="#">3</a>
+						  <a href="#">&raquo;</a>
+						</div>
+					</div> 
+				</div>
+
+			</div>
+			
+					
+					
+					
+			</div>
+			
+		
+		
+			<div id = "footer">
+				<!-- footer -->
+				<div class="links">
+					<a href="">Welcome</a>
+					<br>	
+					<a href="">Sitemap</a>
+					<p style="margin-top:8px">Copyright &copy; 2017-2018 <a href="../WelcomePage.html">Book A Room</a></p>
+				</div>
+			</div>	
+		
+		</div>
+
+
+		<div id="popup" style="display:none;text-align:center">
+			<form name="login" action="" method="post">
+				<center>Όνομα Χρήστη</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center style="margin-top:10px;">Κωδικός Πρόσβασης</center>
+				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
+				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
+				<center style="margin-top:10px;"><a href="register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
+			</form>
+		</div>
+	
+	
+	</body>
+</html>

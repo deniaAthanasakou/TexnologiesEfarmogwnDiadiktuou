@@ -31,8 +31,30 @@
 				}
 			}
 		
-		</script>  
-			<title>List of Apartments</title>
+		</script> 
+
+		 <script>
+			function checkValiditySearchPopup() {
+				var inValid = new RegExp("[\\s]");		//whitespace
+				var numbersSymbols = new RegExp("[^A-Za-z]");
+				var onlyNumbers = new RegExp("[/^\d+$/]");
+				
+				var roomType = document.getElementById("roomType").value;
+				var maxCost = document.getElementById("maxCost").value;
+				var wifi = document.getElementById("wifi").value;
+				var aircondition = document.getElementById("aircondition").value;
+				var heating = document.getElementById("heating").value;
+				var kitchen = document.getElementById("kitchen").value;
+				var tv = document.getElementById("tv").value;
+				var parking = document.getElementById("parking").value;
+				var elevator = document.getElementById("elevator").value;
+				
+			   
+			}
+		</script>
+		
+		 
+		<title>List of Apartments</title>
 		
 	</head>
 	<body>
@@ -99,8 +121,8 @@
 						<div class= "text-center">
 							<div class="pagination">
 							  <a href="#">&laquo;</a>
-							  <a href="#">1</a>
-							  <a href="#" class="active">2</a>
+							  <a href="#"  class="active" >1</a>
+							  <a href="#"">2</a>
 							  <a href="#">3</a>
 							  <a href="#">4</a>
 							  <a href="#">5</a>
@@ -152,6 +174,19 @@
 								</script>
 		
 						</div>  
+						
+						<div class= "text-center">
+							<div class="pagination">
+							  <a href="#">&laquo;</a>
+							  <a href="#" class="active">1</a>
+							  <a href="#" >2</a>
+							  <a href="#">3</a>
+							  <a href="#">4</a>
+							  <a href="#">5</a>
+							  <a href="#">6</a>
+							  <a href="#">&raquo;</a>
+							</div>
+						</div>
 					</div>
 				</div>
 
