@@ -125,6 +125,46 @@
 				
 			}
 		</script>
+		
+		<script language="JavaScript" type="text/javascript">
+			function addCal() {
+			    var myHtmlCode = 
+				   	"<div class=\"row\">" +
+					"<div class=\"col-md-4\">"+
+					"<div class=\"form-group\">"+
+						"<div class='input-group date' id='from'>"+
+    						"<input type='text' class=\"form-control\" data-toggle=\"popover\"  data-trigger=\"focus\" class=\"form-control\"  required />"+
+    						"<span class=\"input-group-addon\">"+
+        						"<span class=\"glyphicon glyphicon-calendar\"></span>"+
+    						"</span>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+				"<div class=\"col-md-4 nopadding\" >"+
+					"<div class=\"form-group\">"+
+						"<div class='input-group date' id='to'>"+
+    						"<input type='text' class=\"form-control\"  data-toggle=\"popover\"  data-trigger=\"focus\" class=\"form-control\"  required />"+
+    						"<span class=\"input-group-addon\">"+
+        						"<span class=\"glyphicon glyphicon-calendar\"></span>"+
+    						"</span>"+
+						"</div>"+
+						"</div>"+
+				"</div>"+
+				"<div class=\"col-md-4\">"+
+					"<div id=\"addButton\">"+
+		 				"<button type=\"button\" class=\"btn btn-info\" onclick=\"addCal()\"><i class=\"glyphicon glyphicon-plus\"></i> Προσθήκη</button> " +		  
+					" </div>"+
+				"</div>"+
+			"</div>"
+			"<div id=\"addIt\">"+
+			"</div>";
+                     
+				document.getElementById("addIt").innerHTML+=myHtmlCode;
+			}
+			
+		
+		
+		</script>
        
         
 		
@@ -189,7 +229,7 @@
 							}
 							</script>
 							
-							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv3bA71tCCZtb67ABy68TLLTzjAwxshEY&callback=myMap"></script>
 					</div>
 					<div id="details">
 					
@@ -298,7 +338,7 @@
 		    						</div>
 		    						<div class="col-md-4">
 		        						<div id="addButton">
-							 				<button type="addCal" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>    
+							 				<button type="addCal" class="btn btn-info" onclick="addCal()"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>    
 										 </div>
 		    						</div>
 								</div>

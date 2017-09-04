@@ -61,7 +61,10 @@
                     $('#from').data("DateTimePicker").maxDate(e.date);
                 });
             });
+            
+            
         </script>
+          
         
         <script>
 			function checkValidityPopup() {
@@ -123,6 +126,76 @@
 							
 				
 			}
+		</script>
+		
+		
+		<script language="JavaScript" type="text/javascript">
+			function addCal(counter) {
+			    var myHtmlCode = 
+				   	"<div class=\"row\">" +
+					"<div class=\"col-md-4\">"+
+					"<div class=\"form-group\">"+
+						"<div class='input-group date' id='from'"+counter+ ">"+
+    						"<input type='text' class=\"form-control\" data-toggle=\"popover\"  data-trigger=\"focus\" class=\"form-control\"  required />"+
+    						"<span class=\"input-group-addon\">"+
+        						"<span class=\"glyphicon glyphicon-calendar\"></span>"+
+    						"</span>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+				"<div class=\"col-md-4 nopadding\" >"+
+					"<div class=\"form-group\">"+
+						"<div class='input-group date' id='to'"+counter+ ">"+
+    						"<input type='text' class=\"form-control\"  data-toggle=\"popover\"  data-trigger=\"focus\" class=\"form-control\"  required />"+
+    						"<span class=\"input-group-addon\">"+
+        						"<span class=\"glyphicon glyphicon-calendar\"></span>"+
+    						"</span>"+
+						"</div>"+
+						"</div>"+
+				"</div>"+
+				"<div class=\"col-md-4\">"+
+					"<div id=\"addButton\">"+
+		 				"<button type=\"button\" class=\"btn btn-info\" onclick=\"addCal("+(counter+1)+")\"><i class=\"glyphicon glyphicon-plus\"></i> Προσθήκη</button> " +		  
+					" </div>"+
+				"</div>"+
+			"</div>"
+			"<div id=\"addIt\">"+
+			"</div>";
+                     
+				document.getElementById("addIt").innerHTML+=myHtmlCode;
+				
+            	$('#from'+counter).datetimepicker({
+                    format: 'DD/MM/YYYY',
+                   	defaultDate: new Date(),
+                   	minDate: moment()
+              	});
+            	
+            	$('#to'+counter).datetimepicker({
+                    
+                    defaultDate: moment().add('d', 1).toDate(),
+                    minDate: moment().add('d', 1).toDate(),
+                    format: 'DD/MM/YYYY'
+              	});
+            	
+                $('#from'+counter).datetimepicker();
+                $('#to'+counter).datetimepicker({
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#from"+counter).on("dp.change", function (e) {
+                    $('#to'+counter).data("DateTimePicker").minDate(e.date);
+                });
+                $("#to"+counter).on("dp.change", function (e) {
+                    $('#from'+counter).data("DateTimePicker").maxDate(e.date);
+                });
+			}
+			
+			
+  
+            
+            
+			
+		
+		
 		</script>
        
         
@@ -186,13 +259,13 @@
 							}
 							</script>
 							
-							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv3bA71tCCZtb67ABy68TLLTzjAwxshEY&callback=myMap"></script>
 					</div>
 					<div id="details">
 					
 						<form method="post" >
 							<div class="form-group">
-							  <label for="address">Διέυθυνση:</label>
+							  <label for="address">Διεύθυνση:</label>
 							  	<div id="address">
 								   <table class="table table-hover">
 							         <tr>
@@ -295,9 +368,12 @@
 		    						</div>
 		    						<div class="col-md-4">
 		        						<div id="addButton">
-							 				<button type="addCal" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>    
+							 				<button type="button" class="btn btn-info" onclick="addCal(1)"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>  	 				
+							 				  
 										 </div>
 		    						</div>
+								</div>
+								<div id= "addIt">
 								</div>
 							</div>
 							
