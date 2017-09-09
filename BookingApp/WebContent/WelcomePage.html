@@ -117,7 +117,7 @@
 			
 				<div  id="input-search" class="container-fluid">
 					<!-- input form -->	
-					<form method="post" action="" onsubmit="return checkValiditySearchPopup();">
+					<form action="MyServlet" method="post" onsubmit="return checkValiditySearchPopup();">
 					    <div class="form-group" >
 					    	<label for="location">Τοποθεσία*:</label>
   							<input type="text" class="form-control" id="location" placeholder="Εισαγωγή Τοποθεσίας" data-placement="top" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" size="45" maxlength="45" />
@@ -159,7 +159,7 @@
 					      
 					      
 					      <div class="form-group" style="text-align:center;"> <!-- Submit button -->
-					        <button class="btn btn-primary btn-lg input-lg" name="submit" type="submit"><i class="glyphicon glyphicon-search"></i> Αναζήτηση</button>
+					        <button class="btn btn-primary btn-lg input-lg" id="welcome" name="submit" type="submit"><i class="glyphicon glyphicon-search"></i> Αναζήτηση</button>
 					      </div>
 			    	 </form>
 				</div>
