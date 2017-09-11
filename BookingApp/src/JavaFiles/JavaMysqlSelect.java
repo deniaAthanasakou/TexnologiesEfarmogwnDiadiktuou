@@ -27,20 +27,26 @@ public class JavaMysqlSelect
       
       // our SQL SELECT query. 
       // if you only need a few columns, specify them by name instead of using "*"
-     // String query = "SELECT * FROM User";
+      
       
       //String query = "INSERT INTO User VALUES (00000000, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1, , 12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098, , 06/07/1975)";
-      String query = "INSERT INTO User (user_id, username, password, name, surname, email, tel, role_host, role_tenant, role_admin,address_number,city, country, postal_code,birthday)"+
-      "VALUES (00000009, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1,  12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098,  06/07/1975)";
+     // String query = "INSERT INTO User (user_id, username, password, name, surname, email, tel, role_host, role_tenant, role_admin,address_number,city, country, postal_code,birthday)"+
+      //"VALUES (00000009, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1,  12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098,  06/07/1975)";
 
-      System.out.println(query);
+     // String query1 ="INSERT INTO User (user_id, username, password, name, surname, email, tel, role_host, role_tenant, role_admin,address_number,street_address,city, country, postal_code,birthday,comment_id) "+
+      //"VALUES (4, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1,  12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098,  06/07/1975,112)";
 
-      // create the java statement
       Statement stmt = conn.createStatement();
+       //stmt.executeUpdate(query1);
+      
+     // System.out.println(query1);
+      String query = "SELECT * FROM User";
+      // create the java statement
+      // stmt = conn.createStatement();
 
       
       // execute the query, and get a java resultset
-      ResultSet rs = stmt.executeQuery(query);
+       ResultSet rs = stmt.executeQuery(query);
       
       //query = "SELECT * FROM User";
       //stmt = conn.createStatement();
@@ -49,8 +55,21 @@ public class JavaMysqlSelect
       if (rs.next() == false) { 
     	  System.out.println("ResultSet is empty in Java"); 
       }
+      else if (rs.next() == true) {
+    	  System.out.println("ResultSet is NOT empty"); 
+      }
+      
+      if (rs.next())
+      {
+    	  System.out.println("NOT NULL"); 
+      }
+      else {
+    	  System.out.println(" NULL"); 
+      }
 
       // iterate through the java resultset
+      
+      rs.beforeFirst();
       while (rs.next())
       {
           System.out.println("STMT ");
