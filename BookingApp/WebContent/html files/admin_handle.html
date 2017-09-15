@@ -46,7 +46,7 @@
 		
 		<script>
 		$(document).ready(function() {
-			$("#users tr").click(function() {
+			$("#users tbody tr").click(function() {
 				window.location.href="approve_user.html"
 			});
 		});
@@ -123,7 +123,7 @@
 											<th>Έγκριση</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody style="cursor:pointer">
 										<tr>
 											<th scope="row">1</th>
 											<td id="username">darkstar</td>
@@ -160,9 +160,7 @@
 		
 			<div id = "footer">
 				<!-- footer -->
-				<div class="links">
-					<a href="">Welcome</a>
-					<br>	
+				<div class="links">	
 					<a href="">Sitemap</a>
 					<p style="margin-top:8px">Copyright &copy; 2017-2018 <a href="../WelcomePage.html">Book A Room</a></p>
 				</div>
