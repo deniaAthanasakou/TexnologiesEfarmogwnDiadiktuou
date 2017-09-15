@@ -185,7 +185,7 @@
 				}
 				
 				//check for telephone
-				if(tel.length < 10){
+				if(tel.length < 10 && tel.length!=0){
 					alert("Το τηλέφωνο που δώσατε δεν έχει 10 ψηφία.");
 					return false;
 				}
@@ -273,7 +273,7 @@
 			
 				<div  id="input-register" class="container-fluid">
 					<center><h2 style="margin-bottom:20px;">Εγγραφή Χρήστη</h1></center>
-					<form action="register_done.html" method="post" onsubmit="return checkValidityPopup();" autocomplete="on">
+					<form action = "../RegisterUser" method="post" onsubmit="return checkValidityPopup();" autocomplete="on">
 						<div class="row">
 							<div class="col-md-12">
 								<left><label for="username">Όνομα Χρήστη*</label></left>
@@ -328,7 +328,7 @@
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
 								<left><label for="tel">Τηλέφωνο</label></left>
-								<center><input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Τηλεφώνου" name="tel" size="10" maxlength="10" required/></center>
+								<center><input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Τηλεφώνου" name="tel" size="10" maxlength="10"/></center>
 							</div>
 						</div>
 						
