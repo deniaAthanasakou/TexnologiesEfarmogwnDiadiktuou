@@ -19,6 +19,7 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>MyServlet</servlet-name>
     <servlet-class>ServLets.MyServlet</servlet-class>
@@ -26,5 +27,14 @@
   <servlet-mapping>
     <servlet-name>MyServlet</servlet-name>
     <url-pattern>/MyServlet/</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>InputAptServlet</servlet-name>
+    <servlet-class>ServLets.InputAptServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InputAptServlet</servlet-name>
+    <url-pattern>/InputAptServlet/</url-pattern>
   </servlet-mapping>
 </web-app>
