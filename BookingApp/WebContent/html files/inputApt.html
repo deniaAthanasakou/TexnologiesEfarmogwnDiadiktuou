@@ -80,7 +80,7 @@
 				var city = document.getElementById("city").value;
 				var country = document.getElementById("country").value;
 				
-				
+				document.write(postal);
 				
 				var transport = document.getElementById("transport").value;
 				
@@ -269,7 +269,7 @@
 					</div>
 					<div id="details">
 					
-						<form  action="../InputAptServlet" method="post" onsubmit="return checkValidityPopup();">
+						<form action="../InputAptServlet" method="post" onsubmit="return checkValidityPopup();">
 							<div class="form-group">
 							  <label for="address">Διεύθυνση:</label>
 							  	<div id="address">
@@ -278,7 +278,7 @@
 							           <td>Οδός</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="street" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" class="form-control" required></textarea>
+								  				<textarea class="form-control" rows="1" name="street" id="street" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" class="form-control" required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -294,7 +294,7 @@
 							           <td>Ταχυδρομικός Κώδικας</td>
 							           <td>
 								           <div class="form-group">
-								           		<textarea class="form-control" rows="1" id="street" size="5" maxlength="5" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται χαρακτήρες." data-trigger="focus" class="form-control" required></textarea>   
+								           		<textarea class="form-control" rows="1" id="postal" name="postal" size="5" maxlength="5" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται χαρακτήρες." data-trigger="focus" class="form-control" required></textarea>   
 											</div>
 										</td>
 							         </tr>
@@ -302,7 +302,7 @@
 							           <td>Δήμος</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="neighborhood" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-toggle="popover"  data-trigger="focus" class="form-control"  required></textarea>
+								  				<textarea class="form-control" rows="1" id="neighborhood" name="neighborhood" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-toggle="popover"  data-trigger="focus" class="form-control"  required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -310,7 +310,7 @@
 							           <td>Πόλη</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="city" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-toggle="popover"  data-trigger="focus" class="form-control"   required></textarea>
+								  				<textarea class="form-control" rows="1" id="city"  name="city" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-toggle="popover"  data-trigger="focus" class="form-control"   required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -318,7 +318,7 @@
 							           <td>Χώρα</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="country" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-trigger="focus" class="form-control"   required></textarea>
+								  				<textarea class="form-control" rows="1" id="country" name="country" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-trigger="focus" class="form-control"   required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -329,7 +329,7 @@
 							
 							<div class="form-group">
 							  <label for="transport" >Πρόσβαση:</label>
-							  <textarea class="form-control" rows="4" id="transport" size="200" maxlength="200" style= "margin-top:1%; margin-bottom:5%; data-toggle="popover"  data-trigger="focus" class="form-control" placeholder="Εισαγωγή Πρόσβασης στο Διαμέρισμα" ></textarea>
+							  <textarea class="form-control" rows="4" id="transport" name="transport" size="200" maxlength="200" style= "margin-top:1%; margin-bottom:5%; data-toggle="popover"  data-trigger="focus" class="form-control" placeholder="Εισαγωγή Πρόσβασης στο Διαμέρισμα" ></textarea>
 							</div>
 						
 						
@@ -354,7 +354,7 @@
 							   		
 		   	 						<div class="col-md-4">
 		        						<div class="form-group">
-		            						<div class='input-group date' id='from'>
+		            						<div class='input-group date' id='from' name='from'>
 		                						<input type='text' class="form-control" data-toggle="popover"  data-trigger="focus" class="form-control"  required />
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
@@ -364,7 +364,7 @@
 		    						</div>
 		    						<div class="col-md-4 nopadding" >
 		        						<div class="form-group">
-		            						<div class='input-group date' id='to'>
+		            						<div class='input-group date' id='to' name='to' > 
 		                						<input type='text' class="form-control"  data-toggle="popover"  data-trigger="focus" class="form-control"  required />
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
@@ -414,7 +414,7 @@
 						         <tr>
 						           <td>Τύπος Ενοικιαζόμενου Χώρου</td>
 						           <td>
-						           		<textarea class="form-control" rows="1" id="type" size="60" maxlength="60" data-toggle="popover"  data-trigger="focus" class="form-control"  required  ></textarea>
+						           		<textarea class="form-control" rows="1" id="type" name="type" size="60" maxlength="60" data-toggle="popover"  data-trigger="focus" class="form-control"  required  ></textarea>
 						           	</td>
 						         </tr>
 						         
@@ -422,7 +422,7 @@
 						           <td>Ύπαρξη Καθιστικού</td>
 						           <td>
 						           		<div class="form-group">
-										  <select class="form-control" id="livingroom">
+										  <select class="form-control" id="livingroom" name="livingroom">
 										    <option>Ναι</option>
 										    <option>Όχι</option>
 										  </select>
@@ -478,7 +478,7 @@
 								           <td>Επιτρέπετεται το Κάπνισμα</td>
 								           <td>
 								           		<div class="form-group">
-												  <select class="form-control" id="smoking">
+												  <select class="form-control" id="smoking" name="smoking">
 												    <option>Ναι</option>
 												    <option>Όχι</option>
 												  </select>
@@ -489,7 +489,7 @@
 								           <td>Επιτρέπονται τα κατοικίδια</td>
 								           <td>
 								           		<div class="form-group">
-												  <select class="form-control" id="pets">
+												  <select class="form-control" id="pets" name="pets">
 												    <option>Ναι</option>
 												    <option>Όχι</option>
 												  </select>
@@ -500,7 +500,7 @@
 								           <td>Επιτρέπονται οι εκδηλώσεις</td>
 								           <td>
 								           		<div class="form-group">
-												  <select class="form-control" id="events">
+												  <select class="form-control" id="events" name="events">
 												    <option>Ναι</option>
 												    <option>Όχι</option>
 												  </select>
@@ -520,11 +520,11 @@
 							        
 						         <div class="form-group">
 								  <label for="transport" >Περιγραφή του Χώρου</label>
-								  <textarea class="form-control" rows="5" id="description" style= "margin-top:1%; margin-bottom:5%;" size="200" maxlength="200" data-toggle="popover"  data-trigger="focus" class="form-control"  placeholder="Περιγράψτε το διαμέρισμα σε ένα κείμενο των πολύ 200 χαρακτήρων."></textarea>
+								  <textarea class="form-control" rows="5" id="description"  name="description" style= "margin-top:1%; margin-bottom:5%;" size="200" maxlength="200" data-toggle="popover"  data-trigger="focus" class="form-control"  placeholder="Περιγράψτε το διαμέρισμα σε ένα κείμενο των πολύ 200 χαρακτήρων."></textarea>
 								</div>
 
 								
-								<span class="btn btn-default btn-file" id="imgBut">
+								<span class="btn btn-default btn-file" id="imgBut" name="imgBut">
 								    Προσθήκη Φωτογραφιών <input type="file">
 								</span>
 								
