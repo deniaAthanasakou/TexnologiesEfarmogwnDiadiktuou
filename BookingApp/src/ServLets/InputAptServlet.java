@@ -38,6 +38,13 @@ public class InputAptServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 			System.out.println("INSIDE SERVLETt");
+			
+			
+			String postal = request.getParameter("postal");
+			System.out.println("THE APARTMENT'S postal IS "+ postal);
+			
+			
+			
 	    	
 			InputAptSql myClass = new InputAptSql();
 	    	
@@ -52,7 +59,7 @@ public class InputAptServlet extends HttpServlet {
 	        }
 
 	        //request.getRequestDispatcher("/WEB-INF/some-result.jsp").forward(request, response);
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

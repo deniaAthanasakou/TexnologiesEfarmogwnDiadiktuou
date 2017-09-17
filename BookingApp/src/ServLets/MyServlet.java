@@ -39,6 +39,12 @@ public class MyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("INSIDE SERVLET");
+		
+		
+		String location= request.getParameter("location");
+		System.out.println("THE APARTMENT'S location IS "+ location);
+		
+		
     	
     	JavaMysqlSelect myClass = new JavaMysqlSelect();
     	

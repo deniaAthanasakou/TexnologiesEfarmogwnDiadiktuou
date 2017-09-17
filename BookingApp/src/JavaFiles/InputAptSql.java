@@ -25,11 +25,12 @@ public class InputAptSql {
 
 	      Statement stmt = conn.createStatement();
 	      
-	      String query = "INSERT INTO Apartment (room_id, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity,description, max_tenants, min_cost_booking,cost_per_person)"+
-	      "VALUES (0000000, 60, Domatio, 1, 17, 4, 2, 1, 1, 0, 20, Polu wraio kai aneto, 2, 30, 30)";
+	     // String query = "INSERT INTO Apartment (room_id, room_photo, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity,description, max_tenants, min_cost_booking,cost_per_person, host_id)"+
+	     // "VALUES ('12432',3, 60, 'Domatio', 1, 17, 4, 2, 1, 1, 0, 20, 'Polu wraio kai aneto', 2, 30, 30,'0')";
 
+	    //  stmt.executeUpdate(query);
 	      
-	      System.out.println(query);
+	    //  System.out.println(query);
 	      String query1 = "SELECT * FROM Apartment";
 
 	      
@@ -44,14 +45,6 @@ public class InputAptSql {
 	    	  System.out.println("ResultSet is NOT empty"); 
 	      }
 	      
-	      if (rs.next())
-	      {
-	    	  System.out.println("NOT NULL"); 
-	      }
-	      else {
-	    	  System.out.println(" NULL"); 
-	      }
-
 	      // iterate through the java resultset
 	      
 	      rs.beforeFirst();
@@ -62,7 +55,7 @@ public class InputAptSql {
 	          String id = rs.getString("room_id");
 	        
 	        // print the results
-	        System.out.println(id);
+	        System.out.println("room id = "+ id);
 	      }
 	      stmt.close();
 	    }
