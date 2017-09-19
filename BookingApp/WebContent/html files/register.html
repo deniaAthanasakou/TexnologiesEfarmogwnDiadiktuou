@@ -132,7 +132,7 @@
 			function checkValidityPopup() {
 				var inValid = new RegExp("[\\s]");		//whitespace
 				var numbersSymbols = new RegExp("[^A-Za-z]");
-				var onlyNumbers = new RegExp("^[0-9]*$");
+				var onlyNumbers = new RegExp("^\\d+$");
 				var username = document.getElementById("username").value;
 				var password = document.getElementById("passwordInput").value;
 				var name = document.getElementById("name").value;
@@ -143,8 +143,8 @@
 				var streetAddress = document.getElementById("street_address").value;
 				var tel = document.getElementById("tel").value;
 				var hostChecked = document.getElementById("host").checked;
-				var postalCode = document.getElementById("postal_code");
-				var streetAddressNumber = document.getElementById("address_number");
+				var postalCode = document.getElementById("postal_code").value;
+				var streetAddressNumber = document.getElementById("address_number").value;
 				
 				//check for username
 				if (inValid.test(username)){
@@ -191,7 +191,7 @@
 					alert("Το τηλέφωνο που δώσατε δεν έχει 10 ψηφία.");
 					return false;
 				}
-				if (inValid.test(tel)){
+				if (tel.length!=0 && inValid.test(tel)){
 					alert("Το τηλέφωνο περιέχει κενά.");
 					return false;
 				}
@@ -204,17 +204,17 @@
 				}
 				
 				//check for city
-				if (inValid.test(city)){
+				if (city.length!=0 && inValid.test(city)){
 					alert("Η Πόλη περιέχει κενά.");
 					return false;
 				}
-				if (numbersSymbols.test(city)){
+				if (city.length!=0 && numbersSymbols.test(city)){
 					alert("Η Πόλη περιέχει αριθμούς ή σύμβολα.");
 					return false;
 				}
 				
 				//check for street_address
-				if (!(/^[a-zA-Z\s]*$/.test(streetAddress))){
+				if (streetAddress.lentgh!=0 && !(/^[a-zA-Z\s]*$/.test(streetAddress))){
 					alert("Η Οδός περιέχει αριθμούς ή σύμβολα.");
 					return false;
 				}	 
@@ -237,7 +237,7 @@
 				
 				//check postal code
 				if(postalCode.length!=0 && !onlyNumbers.test(postalCode)){
-					alert("Ο Ταχυδρομικώς Κώδικας περιέχει μη αρθμητικούς χαρακτήρες ή κενά.");
+					alert("Ο Ταχυδρομικώς Κώδικας περιέχει μη αρθμητικούς χαρακτήρες ή κενά." + postalCode.length);
 					return false;
 				}
 				
@@ -353,8 +353,8 @@
 						<div class="row nomargin" >
 							<div class="col-md-12 well well-sm">
 								<left>
-									<label class="checkbox-inline"><input type="checkbox" value="tenant"  checked>Ενοικιαστής</label>
-									<label class="checkbox-inline"><input type="checkbox" value="host" id="host">Οικοδεσπότης</label>
+									<label class="checkbox-inline"><input type="checkbox" value="tenant"  name="tenant" checked>Ενοικιαστής</label>
+									<label class="checkbox-inline"><input type="checkbox" value="host" name="host" id="host">Οικοδεσπότης</label>
 								</left>
 							</div>
 						</div>
@@ -370,7 +370,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
             						<div class='input-group date' id='birth'>
-                						<input type='text' id="birthInput" class="form-control" required/>
+                						<input type='text' id="birthInput" class="form-control" name="birthday" required/>
                 						<span class="input-group-addon">
                     						<span class="glyphicon glyphicon-calendar"></span>
                 						</span>
@@ -395,7 +395,7 @@
 								<input type="file" name="img[]" class="file"/>
     							<div class="input-group col-xs-12">
       								<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-      								<input type="text" class="form-control input-lg input_path" id="imagePath" placeholder="Upload Image"/>
+      								<input type="text" class="form-control input-lg input_path" id="imagePath" name="imagePath" placeholder="Upload Image"/>
       								<span class="input-group-btn">
         								<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
       								</span>
@@ -412,7 +412,7 @@
 						
 						<div class="row">
 							<div class="col-md-12">
-								<select class="form-control bfh-countries" data-country="GR"></select>
+								<select class="form-control bfh-countries" name="country" data-country="GR"></select>
 							</div>
 						</div>
 						
