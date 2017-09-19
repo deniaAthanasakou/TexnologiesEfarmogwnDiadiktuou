@@ -132,7 +132,7 @@
 			function checkValidityPopup() {
 				var inValid = new RegExp("[\\s]");		//whitespace
 				var numbersSymbols = new RegExp("[^A-Za-z]");
-				var onlyNumbers = new RegExp("[/^\d+$/]");
+				var onlyNumbers = new RegExp("^[0-9]*$");
 				var username = document.getElementById("username").value;
 				var password = document.getElementById("passwordInput").value;
 				var name = document.getElementById("name").value;
@@ -143,6 +143,8 @@
 				var streetAddress = document.getElementById("street_address").value;
 				var tel = document.getElementById("tel").value;
 				var hostChecked = document.getElementById("host").checked;
+				var postalCode = document.getElementById("postal_code");
+				var streetAddressNumber = document.getElementById("address_number");
 				
 				//check for username
 				if (inValid.test(username)){
@@ -233,7 +235,17 @@
 					localStorage.setItem("host", hostChecked);
 				}
 				
+				//check postal code
+				if(postalCode.length!=0 && !onlyNumbers.test(postalCode)){
+					alert("Ο Ταχυδρομικώς Κώδικας περιέχει μη αρθμητικούς χαρακτήρες ή κενά.");
+					return false;
+				}
 				
+				//check street address number
+				if(streetAddressNumber.length!=0 && !onlyNumbers.test(streetAddressNumber)){
+					alert("Ο Αριθμός Οδού περιέχει μη αρθμητικούς χαρακτήρες ή κενά.");
+					return false;
+				}
 					
 				
 			}
