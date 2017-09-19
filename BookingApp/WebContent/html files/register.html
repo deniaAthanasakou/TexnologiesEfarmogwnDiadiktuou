@@ -285,11 +285,11 @@
 			
 				<div  id="input-register" class="container-fluid">
 					<center><h2 style="margin-bottom:20px;">Εγγραφή Χρήστη</h1></center>
-					<form action = "../RegisterUser" method="post" onsubmit="return checkValidityPopup();" autocomplete="on">
+					<form action = "../RegisterUser" method="post" onsubmit="return checkValidityPopup();">
 						<div class="row">
 							<div class="col-md-12">
 								<left><label for="username">Όνομα Χρήστη*</label></left>
-								<center><input type="text" data-toggle="popover" data-content="Δεν επιτρέπονται κενά. Από 5 έως 45 χαρακτήρες." data-trigger="focus" class="form-control" id="username" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" required /></center>
+								<center><input type="text" data-toggle="popover" data-content="Δεν επιτρέπονται κενά. Από 5 έως 45 χαρακτήρες." data-trigger="focus" class="form-control" id="username" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" autocomplete="on" required /></center>
 							</div>
 						</div>
 						
