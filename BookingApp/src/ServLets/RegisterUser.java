@@ -1,6 +1,7 @@
 package ServLets;
 
 
+import JavaFiles.HandleUser;
 import JavaFiles.JavaMysqlSelect;
 
 import java.io.IOException;
@@ -39,14 +40,16 @@ public class RegisterUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("INSIDE RegisterUser");
-    	
-    	
+    	HandleUser handleUser = new HandleUser();
+		
     	//System.out.println(request.getParameter("submit"));
         if (request.getParameter("submit") != null) {
-        	
+        	handleUser.insertUser();
         } else {
-        	System.out.println("GUFTOS");
+        	System.out.println("Submit was unsuccessfull!!");
         }
+        
+        response.sendRedirect("./html files/register_done.html");
 
         //request.getRequestDispatcher("/WEB-INF/some-result.jsp").forward(request, response);
 	}
