@@ -19,6 +19,17 @@
 	padding:5%;
 }
 
+#image{
+	width:35%;
+	float:left;
+	margin-right:5%;
+}
+
+#details{
+	width:60%;
+	float:right;
+}
+
 
 #filters{
 	width:25%;
@@ -54,16 +65,9 @@
     border-radius: 5px;
 }
 
-#image{
-	width:35%;
-	float:left;
-	margin-right:5%;
-}
 
-#details{
-	width:60%;
-	float:right;
-}
+
+
 
 .table-hover tbody tr:hover td {
     background: #4682B4;
@@ -177,6 +181,13 @@
 .nav-tabs > li > #active {
   background-color: #4682B4 !important;
 }
+
+
+#cal{
+	margin-bottom:5%;
+
+}
+
 
 
 
