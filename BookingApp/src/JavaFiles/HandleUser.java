@@ -21,12 +21,8 @@ public class HandleUser {
 
 	public static int insertUser(Users newUser)
 	{
-		System.out.println("INSIDE insertUser");
-
 		try
 		{
-			System.out.println("INSIDE TRYYYY");
-
 			// create our mysql database connection
 			String myDriver = "com.mysql.jdbc.Driver";
 			String myUrl = "jdbc:mysql://localhost:3306/mydb";
@@ -56,33 +52,51 @@ public class HandleUser {
 			rs.beforeFirst();
 			int rowCount = rs.last() ? rs.getRow() : 0;
 
-			
 			if(rowCount==0) {
 				//insert query
-				System.out.println("BYTE ARRAY: " + convertImageToBArray(newUser.getImagePath()) );
+				String insertQuery;
+				if(newUser.getImagePath() != null) {
+					insertQuery = "INSERT INTO User (username, password, name, surname, email, tel, role_host, role_tenant, photo, address_number, street_address, city, country, postal_code, birthday, comment_id) "
+							+ "VALUES ("
+							+ "'" + newUser.getUsername() + "'" +  ","
+							+ "'" + newUser.getPassword() + "'" +  ","
+							+ "'" + newUser.getName() + "'" +  ","
+							+ "'" + newUser.getSurname() + "'" +  ","
+							+ "'" + newUser.getEmail() + "'" +  ","
+							+ newUser.getTel() +  ","
+							+ hostBoolean +  ","
+							+ tenantBoolean +  ","
+							+ "'" + convertImageToBArray(newUser.getImagePath()) + "'" +  ","
+							+ newUser.getAddressNumber() +  ","
+							+ "'" + newUser.getStreetAddress() + "'" +  ","
+							+ "'" + newUser.getCity() + "'" +  ","
+							+ "'" + newUser.getCountry() + "'" +  ","
+							+ newUser.getPostalCode() +  ","
+							+ "STR_TO_DATE( '" + newUser.getBirthday() +  "'," + " '%d/%m/%Y'),"
+							+ 112 + ")";
+
+				}
+				else {
+					insertQuery = "INSERT INTO User (username, password, name, surname, email, tel, role_host, role_tenant, address_number, street_address, city, country, postal_code, birthday, comment_id) "
+							+ "VALUES ("
+							+ "'" + newUser.getUsername() + "'" +  ","
+							+ "'" + newUser.getPassword() + "'" +  ","
+							+ "'" + newUser.getName() + "'" +  ","
+							+ "'" + newUser.getSurname() + "'" +  ","
+							+ "'" + newUser.getEmail() + "'" +  ","
+							+ newUser.getTel() +  ","
+							+ hostBoolean +  ","
+							+ tenantBoolean +  ","
+							+ newUser.getAddressNumber() +  ","
+							+ "'" + newUser.getStreetAddress() + "'" +  ","
+							+ "'" + newUser.getCity() + "'" +  ","
+							+ "'" + newUser.getCountry() + "'" +  ","
+							+ newUser.getPostalCode() +  ","
+							+ "STR_TO_DATE( '" + newUser.getBirthday() +  "'," + " '%d/%m/%Y'),"
+							+ 112 + ")";
+				}
 				
-				String insertQuery = "INSERT INTO User (username, password, name, surname, email, tel, role_host, role_tenant, photo, address_number, street_address, city, country, postal_code, birthday, comment_id) "
-						+ "VALUES ("
-						+ "'" + newUser.getUsername() + "'" +  ","
-						+ "'" + newUser.getPassword() + "'" +  ","
-						+ "'" + newUser.getName() + "'" +  ","
-						+ "'" + newUser.getSurname() + "'" +  ","
-						+ "'" + newUser.getEmail() + "'" +  ","
-						+ newUser.getTel() +  ","
-						+ hostBoolean +  ","
-						+ tenantBoolean +  ","
-						+ "'" + convertImageToBArray(newUser.getImagePath()) + "'" +  ","
-						+ newUser.getAddressNumber() +  ","
-						+ "'" + newUser.getStreetAddress() + "'" +  ","
-						+ "'" + newUser.getCity() + "'" +  ","
-						+ "'" + newUser.getCountry() + "'" +  ","
-						+ newUser.getPostalCode() +  ","
-						+ "STR_TO_DATE( '" + newUser.getBirthday() +  "'," + " '%d/%m/%Y'),"
-						+ 112 + ")";
-
 				int colCount = stmt.executeUpdate(insertQuery);
-
-
 				if(colCount==-1) {
 					System.out.println("An error has occured.");
 				}
