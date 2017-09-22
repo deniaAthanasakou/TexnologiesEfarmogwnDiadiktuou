@@ -86,11 +86,12 @@ public class RegisterUser extends HttpServlet {
 				System.out.println("Submit was successfull!!");
 				response.sendRedirect("./html files/register_done.html");
 			}else {
+				response.setContentType("text/html; charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
 				PrintWriter out = response.getWriter();
-				response.setContentType("text/html;charset=UTF-8");
 				out.println("<script type=text/javascript>");
-				out.println("alert('Username already exists. ΒΣΣΣ');");
-				out.println("location.href='html files/register.html';");
+				out.println("alert('Το Όνομα Χρήστη χρησιμοποιείται ήδη.');");
+				out.println("window.history.back();");
 				out.println("</script>");
 			}
 		}
