@@ -57,7 +57,7 @@
 		<script>
 		function openPopupPreviousPage() {
 		    var txt;
-		    if (confirm("Do you really want to discard all changes and return to previous page?") == true) {
+		    if (confirm("Είστε σίγουρος/η ότι θέλετε να ακυρώσετε την εγγραφή (Οι αλλαγές θα διαγραφούν);") == true) {
 		    	window.history.back();
 		    }
 		}
@@ -312,7 +312,7 @@
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
 								<left><label for="email">E-mail*</label></left>
-								<center><input type="email" id="emailInput" class="form-control" placeholder="Εισαγωγή E-mail" name="email" size="100" maxlength="100" required/></center>
+								<center><input type="email" id="emailInput" class="form-control" placeholder="Εισαγωγή E-mail" name="email" size="100" maxlength="100" autocomplete="on" required/></center>
 							</div>
 						</div>
 						
@@ -326,21 +326,21 @@
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
 								<left><label for="name">Όνομα*</label></left>
-								<center><input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" required /></center>
+								<center><input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" autocomplete="on" required /></center>
 							</div>
 						</div>
 						
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
 								<left><label for="surname">Επώνυμο*</label></left>
-								<center><input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" required /></center>
+								<center><input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" autocomplete="on" required /></center>
 							</div>
 						</div>
 						
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
 								<left><label for="tel">Τηλέφωνο</label></left>
-								<center><input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Τηλεφώνου" name="tel" size="10" maxlength="10"/></center>
+								<center><input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Τηλεφώνου" name="tel" size="10" maxlength="10" autocomplete="on"/></center>
 							</div>
 						</div>
 						
@@ -362,7 +362,7 @@
 						
 						<div class="row" style="margin-top:20px;">
 							<div class="col-md-12">
-								<left><label for="birth">Ημερομηνία Γέννησης*</label></left>
+								<left><label for="birth">Ημερομηνία Γέννησης</label></left>
 							</div>
 						</div>
 						
@@ -370,7 +370,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
             						<div class='input-group date' id='birth'>
-                						<input type='text' id="birthInput" class="form-control" name="birthday" required/>
+                						<input type='text' id="birthInput" class="form-control" name="birthday"/>
                 						<span class="input-group-addon">
                     						<span class="glyphicon glyphicon-calendar"></span>
                 						</span>
@@ -395,7 +395,7 @@
 								<input type="file" name="img[]" class="file"/>
     							<div class="input-group col-xs-12">
       								<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-      								<input type="text" class="form-control input-lg input_path" id="imagePath" name="imagePath" placeholder="Upload Image"/>
+      								<input type="text" class="form-control input-lg input_path" id="imagePath" name="imagePath" placeholder="Upload Image" disabled/>
       								<span class="input-group-btn">
         								<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
       								</span>
@@ -427,10 +427,10 @@
 						
 						<div class="row">
 							<div class="col-md-8">
-								<center><input type="text" id="city" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" placeholder="Εισαγωγή Πόλης" name="city" size="45" maxlength="45"/></center>
+								<center><input type="text" id="city" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" placeholder="Εισαγωγή Πόλης" name="city" size="45" maxlength="45" autocomplete="on"/></center>
 							</div>
 							<div class="col-md-4">
-								<center><input type="number" id="postal_code" class="form-control"  name="postal_code" size="10" maxlength="10"/></center>
+								<center><input type="number" id="postal_code" class="form-control"  name="postal_code" size="10" maxlength="10" autocomplete="on"/></center>
 							</div>
 						</div>
 						
@@ -445,15 +445,18 @@
 						
 						<div class="row">
 							<div class="col-md-8">
-								<center><input type="text" id="street_address" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" placeholder="Εισαγωγή Οδού" name="street_address" size="45" maxlength="45"/></center>
+								<center><input type="text" id="street_address" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" placeholder="Εισαγωγή Οδού" name="street_address" size="45" maxlength="45" autocomplete="on"/></center>
 							</div>
 							<div class="col-md-4">
-								<center><input type="number" id="address_number" data-toggle="popover" data-content="Αριθμός οδού κατοικίας." data-trigger="focus" class="form-control" name="address_number" size="10" min="1" maxlength="10"/></center>
+								<center><input type="number" id="address_number" data-toggle="popover" data-content="Αριθμός οδού κατοικίας." data-trigger="focus" class="form-control" name="address_number" size="10" min="1" maxlength="10" autocomplete="on"/></center>
 							</div>
 						</div>
 						
-						
-						
+						<div class="row" style="margin-top:20px;">
+							<div class="col-md-12">
+								<center><input type="checkbox" required> Συμφωνώ με τους Όρους Χρήσης.</center>
+							</div>
+						</div>
 						
 						<div class="row" style="margin-top:50px;">
 							<div class="col-md-6 "><left><button class="btn btn-danger btn-md input-lg" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</button></left></div>
