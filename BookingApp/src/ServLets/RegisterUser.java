@@ -2,18 +2,25 @@ package ServLets;
 
 
 import JavaFiles.HandleUser;
-import JavaFiles.JavaMysqlSelect;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entities.Users;
+import Entities.User;
 
 /**
  * Servlet implementation class MyServlet
@@ -41,9 +48,8 @@ public class RegisterUser extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	@SuppressWarnings("static-access")
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		HandleUser handleUser = new HandleUser();
 
 		//get fields
@@ -53,22 +59,42 @@ public class RegisterUser extends HttpServlet {
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String tel = request.getParameter("tel");
-		int telNumber = 0;
-		if(tel.length()!=0) {
-			telNumber = Integer.parseInt(tel);
-		}
 		String tenant = request.getParameter("tenant");
+		
+		byte roleTenant = 0;
+		if(tenant!=null) {
+			roleTenant = 1;
+		}
 		String host = request.getParameter("host");
-		String birthday = request.getParameter("birthday");
+		byte roleHost = 0;
+		if(host!=null) {
+			roleHost = 1;
+		}
+		
+		String birthday = request.getParameter("birthday").replaceAll("/", "-");
+		Date date = null;
+		if(birthday.length()!=0) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			try {
+				date = sdf.parse(birthday);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+		
+		
+		
 		String imagePath = request.getParameter("imagePath");
+		byte[] photo = null;
+		if(imagePath.length() != 0) {
+			photo = convertImageToBArray(imagePath);
+		}
+		
 		String country = request.getParameter("country");
 		String city = request.getParameter("city");
 
 		String postalCode = request.getParameter("postal_code");
-		int postalCodeNumber = 0;
-		if(postalCode.length()!=0) {
-			postalCodeNumber = Integer.parseInt(postalCode);
-		}
 
 		String streetAddress = request.getParameter("street_address");
 
@@ -78,9 +104,8 @@ public class RegisterUser extends HttpServlet {
 			addressNumberContent = Integer.parseInt(addressNumber);
 		}
 
-		Users newUser = new Users(username,password,email,name,surname,telNumber,birthday,imagePath,country,city,postalCodeNumber,streetAddress,addressNumberContent,host,tenant);
+		User newUser = new User(username,password,email,name,surname,tel,date,photo,country,city,postalCode,streetAddress,addressNumberContent,roleHost,roleTenant);
 
-		//System.out.println(request.getParameter("submit"));
 		if (request.getParameter("submit") != null) {
 			if((handleUser.insertUser(newUser))==0) {
 				System.out.println("Submit was successfull!!");
@@ -99,6 +124,19 @@ public class RegisterUser extends HttpServlet {
 			System.out.println("Submit was unsuccessfull!!");
 		}
 
+	}
+	
+	private static byte[] convertImageToBArray(String ImageName) throws IOException {
+
+		// open image
+		File imgPath = new File(ImageName);
+		BufferedImage bufferedImage = ImageIO.read(imgPath);
+
+		// get DataBufferBytes from Raster
+		WritableRaster raster = bufferedImage .getRaster();
+		DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+
+		return ( data.getData() );
 	}
 
 }
