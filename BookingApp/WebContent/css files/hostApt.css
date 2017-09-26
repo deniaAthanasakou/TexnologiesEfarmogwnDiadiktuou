@@ -73,6 +73,15 @@
 	float:right;
 }
 
+#imageStorage{
+	position:fixed;
+	border:solid;
+}
+
+#wrapperImage{
+	width:40%;
+}
+
 
 
 
