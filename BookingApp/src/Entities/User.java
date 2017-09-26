@@ -57,6 +57,8 @@ public class User implements Serializable {
 	private String tel;
 
 	private String username;
+	
+	private byte approved;
 
 	public User() {
 	}
@@ -214,6 +216,14 @@ public class User implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public byte getApproved() {
+		return approved;
+	}
+
+	public void setApproved(byte approved) {
+		this.approved = approved;
 	}
 
 }

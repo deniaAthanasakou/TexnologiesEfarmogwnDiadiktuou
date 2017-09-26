@@ -1,6 +1,7 @@
 package ServLets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,11 +52,24 @@ public class LoginServlet extends HttpServlet {
 	        HttpSession session = request.getSession();  
 			//System.out.println("after session");
 	        session.setAttribute("username", username);
-	        response.sendRedirect(request.getContextPath());
+	        response.setContentType("text/html; charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script type=text/javascript>");
+			out.println("window.history.back();");
+			out.println("</script>");
+			out.close();
 			
 		}else {
 			System.out.println("USER DOES NOT EXIST");
-			response.sendRedirect(request.getContextPath());
+			response.setContentType("text/html; charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script type=text/javascript>");
+			out.println("alert('Το Όνομα Χρήστη ή ο Κωδικός Πρόσβασης είναι λάθος.');");
+			out.println("window.history.back();");
+			out.println("</script>");
+			out.close();
 		}
 		
 	}

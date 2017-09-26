@@ -1,6 +1,8 @@
 package ServLets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +34,13 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session=request.getSession();  
         session.invalidate();
 		//System.out.println("LOGOUT COMPLETE");
-		response.sendRedirect(request.getContextPath());
+        response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script type=text/javascript>");
+		out.println("window.history.back();");
+		out.println("</script>");
+		out.close();
 
 	}
 
