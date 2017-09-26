@@ -26,7 +26,7 @@
 		
 	
 	
-		
+
 		
 		
 		<script language="JavaScript" type="text/javascript">
@@ -79,6 +79,8 @@
 				var onlyNumbers = new RegExp(".*[0-9].*");
 				var onlyCharacters = new RegExp("[A-Za-z]");
 				
+				var map = document.getElementById("myMap").value;
+				
 				var street = document.getElementById("street").value;
 				var address_num = document.getElementById("address_num").value;
 				var postal = document.getElementById("postal").value;
@@ -121,6 +123,8 @@
 				var minDays = document.getElementById("minDays").value;
 				
 				
+				
+				
 				if (onlyNumbers.test(street)){
 					alert("Η οδός περιέχει αριθμούς.");
 					return false;
@@ -157,6 +161,21 @@
 				
 			}
 		</script>
+		
+		<script>
+			$(document).ready(function() {
+				$("#submitbut").click(function() {
+					var img = document.getElementById("myImg").value;
+					document.getElementById("imagePath").value = img;
+		 
+				});
+			});
+			
+				
+		</script>
+		
+		
+				
 		
 	
 		
@@ -221,16 +240,13 @@
                 });
 			}
 			
-			
-  
-            
-            
-			
+	
 		
 		
 		</script>
-       
-        
+		
+		
+		
 		
 		
 		  
@@ -280,7 +296,7 @@
 				<div class="container" id="cont">
 				
 				
-				
+				<form action="../InputAptServlet" method="post" onsubmit="return checkValidityPopup();">	
 				
 					<div>
 						    <div class="pac-card" id="pac-card">
@@ -308,7 +324,7 @@
 						      </div>
 						      <div id="pac-container">
 						        <input id="pac-input" name="pac-input" type="text"
-						            placeholder="Enter a location">
+						            placeholder="Enter a location" required>
 						      </div>
 						    </div>
 						    <div id="map"></div>
@@ -351,6 +367,20 @@
 						          infowindow.close();
 						          marker.setVisible(false);
 						          var place = autocomplete.getPlace();
+						          
+						          
+						          
+						          var latitude = place.geometry.location.lat();
+						          var longtitude =place.geometry.location.lng();  
+						          var url = "http://maps.google.com/?ll=" + latitude+","+longtitude;          
+						          document.getElementById("myMap").value =url;
+						          
+						          
+						          
+						          
+						          
+						          		
+						          
 						          if (!place.geometry) {
 						            // User entered the name of a Place that was not suggested and
 						            // pressed the Enter key, or the Place Details request failed.
@@ -376,6 +406,19 @@
 						              (place.address_components[2] && place.address_components[2].short_name || '')
 						            ].join(' ');
 						          }
+						          
+						          var latitude = place.geometry.location.lat();
+						          var longtitude =place.geometry.location.lng();
+						          
+						          document.write("latitude "+ latitude);
+						          document.write("longtitude "+ longtitude);
+						          
+						          var url = "http://maps.google.com/?ll=" + latitude+","+longtitude;
+						          
+						          document.getElementById("myMap").innerHTML = url;
+						          
+						        //  document.write("url "+ url);
+						          
 						
 						          infowindowContent.children['place-icon'].src = place.icon;
 						          infowindowContent.children['place-name'].textContent = place.name;
@@ -406,6 +449,12 @@
 						    </script>
 						    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv3bA71tCCZtb67ABy68TLLTzjAwxshEY&libraries=places&callback=initMap" async defer></script>
 						
+						
+						<div class="form-group">
+			  				<textarea class="form-control" rows="1" name="myMap" id="myMap" size="200" maxlength="200" style= "display:none;"></textarea>
+						</div>
+						
+						
 					</div>
 					
 					
@@ -415,7 +464,7 @@
 					
 					<div>
 					
-						<form action="../InputAptServlet" method="post" onsubmit="return checkValidityPopup();">
+						
 							<div class="form-group">
 							  <label for="address">Διεύθυνση:</label>
 							  	<div id="address">
@@ -473,6 +522,8 @@
 							  
 							</div>
 							
+							
+							
 							<div class="form-group">
 							  <label for="transport" >Πρόσβαση:</label>
 							  <textarea class="form-control" rows="4" id="transport" name="transport" size="200" maxlength="200" style= "margin-top:1%; margin-bottom:5%; data-toggle="popover"  data-trigger="focus" class="form-control" placeholder="Εισαγωγή Πρόσβασης στο Διαμέρισμα" ></textarea>
@@ -500,8 +551,8 @@
 							   		
 		   	 						<div class="col-md-4">
 		        						<div class="form-group">
-		            						<div class='input-group date' id='from' name='from'>
-		                						<input type='text' class="form-control" data-toggle="popover"  data-trigger="focus" class="form-control"  required />
+		            						<div class='input-group date' id='from'>
+		                						<input type='text' class="form-control" data-toggle="popover"  name="from"  data-trigger="focus" class="form-control"  required />
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
 		                						</span>
@@ -510,8 +561,8 @@
 		    						</div>
 		    						<div class="col-md-4 nopadding" >
 		        						<div class="form-group">
-		            						<div class='input-group date' id='to' name='to' > 
-		                						<input type='text' class="form-control"  data-toggle="popover"  data-trigger="focus" class="form-control"  required />
+		            						<div class='input-group date' id='to'  > 
+		                						<input type='text' class="form-control"  data-toggle="popover"  name="to"  data-trigger="focus" class="form-control"  required />
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
 		                						</span>
@@ -765,9 +816,16 @@
 								</div>
 
 								
-								<span class="btn btn-default btn-file" id="imgBut" name="imgBut" style=" margin-top:-2%">
-								    Προσθήκη Φωτογραφιών <input type="file" id="imagePath" name="imagePath" multiple >
-								</span>
+								  <span class="btn btn-default btn-file" id="imgBut" name="imgBut" style=" margin-top:-2%">
+								    Προσθήκη Φωτογραφιών <input type="file" id="myImg" multiple >
+								    <div class="form-group">
+						  				<textarea class="form-control" rows="1" name="imagePath" id="imagePath" size="200" maxlength="200" style="display:none"></textarea>									
+									
+									</div>
+							 	</span> 
+								
+							
+								
 								
 								</div>
 								
@@ -780,9 +838,9 @@
 								     <button class="btn btn-primary " id="submitbut" name="submit" type="submit"><i class="glyphicon glyphicon-search"></i> Υποβολή</button>
 								</div>	
 
-						</form>
-					</div> 
-							
+						
+						</div> 
+					</form>		
 				</div>
 				</div>
 					
