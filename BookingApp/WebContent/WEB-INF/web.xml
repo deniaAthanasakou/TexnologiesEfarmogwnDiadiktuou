@@ -27,7 +27,6 @@
     <servlet-name>MyServlet</servlet-name>
     <url-pattern>/MyServlet/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>InputAptServlet</servlet-name>
     <servlet-class>ServLets.InputAptServlet</servlet-class>
@@ -36,7 +35,6 @@
     <servlet-name>InputAptServlet</servlet-name>
     <url-pattern>/InputAptServlet/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>RegisterUser</servlet-name>
     <servlet-class>ServLets.RegisterUser</servlet-class>
@@ -44,5 +42,37 @@
   <servlet-mapping>
     <servlet-name>RegisterUser</servlet-name>
     <url-pattern>/RegisterUser/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminHandle</servlet-name>
+    <servlet-class>ServLets.AdminHandle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminHandle</servlet-name>
+    <url-pattern>/admin_handle.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>ServLets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CheckLoggedUser</servlet-name>
+    <servlet-class>ServLets.CheckLoggedUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckLoggedUser</servlet-name>
+    <url-pattern>/CheckLoggedUser/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>ServLets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet/</url-pattern>
   </servlet-mapping>
 </web-app>
