@@ -160,7 +160,14 @@ body {
 }
 
 
-
+#user_logged{
+	align: right;
+	width:	150px;
+    text-size: auto;
+    float: right;
+    margin-right: 50px; 
+    text-align:center;
+}
 
 
 
