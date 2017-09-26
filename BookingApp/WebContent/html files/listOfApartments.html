@@ -63,7 +63,30 @@
             });
         </script>
        
-        
+        <script>
+            $(document).ready(function() { 
+            	var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	
+	            xmlhttp.open("GET", "../CheckLoggedUser", false);
+	            xmlhttp.send();
+	            var response = xmlhttp.responseText;
+	            if(response=="1"){
+	            	document.getElementById("register_login").style.display="none"; 
+	            	document.getElementById("user_logged").style.display="block";  
+	            }
+	            else{
+	            	document.getElementById("user_logged").style.display="none"; 
+	            	document.getElementById("register_login").style.display="block"; 
+	            }
+	            
+	        });
+        </script>
 		
 		
 		  
@@ -81,6 +104,16 @@
 			    			<div id = "register_login">
 			    				<a class="btn" href="javascript:login('show'); "><i class="glyphicon glyphicon-log-in"></i> Είσοδος ή Εγγραφή</a>
 			    			</div>
+			    			<div class="dropdown" id="user_logged" style="display:none">
+								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<i class="glyphicon glyphicon-home"></i> Συνδεδεμένος
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									<li><a class="nav-item" href="./html files/user_page.html"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
+									<li><a class="nav-item" href="../LogoutServlet"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+								</ul>
+							</div>
 			    		</td>
 			  		</tr>
 		  		</table>		
@@ -196,14 +229,14 @@
 
 
 		<div id="popup" style="display:none;text-align:center">
-			<form name="login" action="" method="post">
+			<form name="login" action="../LoginServlet" method="post">
 				<center>Όνομα Χρήστη</center>
-				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center><input class="form-control" placeholder="Εισαγωγή Ονόματος Χρήστη" name="username" size="45" maxlength="45" style="margin-top:10px;" required/></center>
 				<center style="margin-top:10px;">Κωδικός Πρόσβασης</center>
-				<center><input class="form-control" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;"/></center>
+				<center><input class="form-control" type="password" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;" required/></center>
 				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
 				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
-				<center style="margin-top:10px;"><a href="register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center style="margin-top:10px;"><a href="../html files/register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
 				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
 			</form>
 		</div>
