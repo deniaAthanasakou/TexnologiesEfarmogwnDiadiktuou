@@ -48,11 +48,11 @@ public class Apartments {
 	private boolean parking;
 	private boolean elevator;
 	
-	private ArrayList<String> from_dates;
-	private ArrayList<String> to_dates;
+	private ArrayList<Date> from_dates;
+	private ArrayList<Date> to_dates;
 
 	
-	public Apartments(String imagePath,int cost_per_day,String type,int number_rooms,int number_critics,float average_critic,int number_beds,int number_bathrooms,int number_bedrooms,boolean living_room,int capacity, String description,int max_tenants,int min_cost_booking, int cost_per_person, ArrayList<String> more_photos,int host_id,boolean smoking_allowed,boolean pets_allowed,boolean events,int min_days_booking,String map,int address_number,String street, String postal_code, String city,String country,String neighborhood,String transportation,boolean wifi, boolean aircondition,boolean heating,boolean kitchen,boolean tv,boolean parking,boolean elevator,ArrayList<String> from_dates, ArrayList<String> to_dates) {
+	public Apartments(String imagePath,int cost_per_day,String type,int number_rooms,int number_critics,float average_critic,int number_beds,int number_bathrooms,int number_bedrooms,boolean living_room,int capacity, String description,int max_tenants,int min_cost_booking, int cost_per_person, ArrayList<String> more_photos,int host_id,boolean smoking_allowed,boolean pets_allowed,boolean events,int min_days_booking,String map,int address_number,String street, String postal_code, String city,String country,String neighborhood,String transportation,boolean wifi, boolean aircondition,boolean heating,boolean kitchen,boolean tv,boolean parking,boolean elevator,ArrayList<Date> from_dates, ArrayList<Date> to_dates) {
 		this.imagePath = imagePath;
 		this.cost_per_day = cost_per_day;
 		this.type = type;
@@ -95,30 +95,30 @@ public class Apartments {
 		this.elevator = elevator;
 		
 		if(from_dates!=null)
-			this.from_dates = new ArrayList<String>(from_dates);
+			this.from_dates = from_dates;
 		
 		if(to_dates!=null)
-			this.to_dates = new ArrayList<String>(to_dates);
+			this.to_dates = to_dates;
 
 	}
 
 
-	public ArrayList<String> getFrom_dates() {
+	public ArrayList<Date> getFrom_dates() {
 		return from_dates;
 	}
 
 
-	public void setFrom_dates(ArrayList<String> from_dates) {
+	public void setFrom_dates(ArrayList<Date> from_dates) {
 		this.from_dates = from_dates;
 	}
 
 
-	public ArrayList<String> getTo_dates() {
+	public ArrayList<Date> getTo_dates() {
 		return to_dates;
 	}
 
 
-	public void setTo_dates(ArrayList<String> to_dates) {
+	public void setTo_dates(ArrayList<Date> to_dates) {
 		this.to_dates = to_dates;
 	}
 
