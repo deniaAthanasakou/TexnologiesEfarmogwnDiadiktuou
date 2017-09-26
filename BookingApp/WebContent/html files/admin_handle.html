@@ -52,6 +52,23 @@
 		});
 		
 		</script>
+		
+		<script>
+            $(document).ready(function() { var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	
+	            xmlhttp.open("GET", "../AdminHandle", false);
+	            xmlhttp.send();
+	            var response = xmlhttp.responseText;
+	            document.getElementById("table_body").innerHTML=response; 
+	            $('#users').dataTable();
+	        });
+        </script>
         
         <title>Admin Handle Users page</title>
 		
@@ -123,31 +140,8 @@
 											<th>Έγκριση</th>
 										</tr>
 									</thead>
-									<tbody style="cursor:pointer">
-										<tr>
-											<th scope="row">1</th>
-											<td id="username">darkstar</td>
-											<td>Στεφανία</td>
-											<td>Πατ</td>
-											<td>Ενοικιαστής</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td id="username">gchanya</td>
-											<td>Ντένια</td>
-											<td>Αθαν</td>
-											<td>Ενοικιαστής/Οικοδεσπότης</td>
-											<td><button class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Έγκριση</button></td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td id="username">Putheia9</td>
-											<td>Πικο</td>
-											<td>ΑΧ</td>
-											<td>Οικοδεσπότης</td>
-											<td><button class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Έγκριση</button></td>
-										</tr>
+									<tbody style="cursor:pointer" id="table_body">
+										
 									</tbody>
 								</table>
 							</div>
