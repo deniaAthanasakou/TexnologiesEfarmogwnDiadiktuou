@@ -1,16 +1,31 @@
 package JavaFiles;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import Entities.Apartments;
+import javax.imageio.ImageIO;
+
+import antlr.collections.List;
+
+import Entities.Facility;
+import Entities.Freedate;
+import Entities.Location;
+import Entities.Apartment;
+import Entities.Rule;
 
 public class InputAptSql {
-	public static void inputApt(Apartments apt)
+	public static void inputApt(Apartment apt, Location loc, Rule rules, Facility facilities, Freedate fd)
 	{
 		System.out.println("INSIDE inputApt");
 
@@ -20,7 +35,7 @@ public class InputAptSql {
 
 	      // create our mysql database connection
 	      String myDriver = "com.mysql.jdbc.Driver";
-	      String myUrl = "jdbc:mysql://localhost:3306/mydb";
+	      String myUrl = "jdbc:mysql://localhost:3306/mydb?useSSL=true";
 	      Class.forName(myDriver);
 	      Connection conn = DriverManager.getConnection(myUrl, "root", "root1@");
 	      
@@ -28,28 +43,42 @@ public class InputAptSql {
 
 	      Statement stmt = conn.createStatement();
 	      
-	      //insert into table Apartment
+	      System.out.println(" string " +apt.getImagePath());
+	      
+	      
+	      ArrayList<String> photoListString = new ArrayList<String>(Arrays.asList(apt.getImagePath().split(",")));
+	      System.out.println(" string list " +photoListString);
+	      ArrayList <byte[]> photoListBytes = new ArrayList <byte[]>();
+	      
+	      for(int i=0; i<photoListString.size(); i++) {
+	    	  byte[] element= convertImageToBArray(photoListString.get(i).trim());
+	    	  System.out.println("element " +element);
+	    	  photoListBytes.add(element);
+	      }
+	      
+	      System.out.println(" bytes " +photoListBytes);
+	      
+	      
+	    //insert into table Apartment
 	      String query = "INSERT INTO Apartment (room_photo, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person";
-	   //   System.out.println("first query is "+ query);	     
-	      String queryPart2 ="VALUES (" + "'" +apt.getImagePath() + "'" +","+apt.getCost_per_day() + "," + "'" +apt.getType()+"'" + "," + apt.getNumber_rooms()+ "," + apt.getNumber_critics() +"," + apt.getAverage_critic()+ "," + apt.getNumber_beds() +"," + apt.getNumber_bathrooms() +"," + apt.getNumber_bedrooms()+ "," + apt.isLiving_room() + "," + apt.getCapacity() + "," + apt.getMax_tenants() + "," + apt.getMin_cost_booking() + "," + apt.getCost_per_person();
-	  //    System.out.println("second query is "+ queryPart2);
+	      String queryPart2 ="VALUES (" + "'" +photoListBytes.get(0) + "'" +","+apt.getCostPerDay() + "," + "'" +apt.getType()+"'" + "," + apt.getNumberRooms()+ "," + apt.getNumberCritics() +"," + apt.getAverage_critic()+ "," + apt.getNumberBeds() +"," + apt.getNumberBathrooms() +"," + apt.getNumberBedrooms()+ "," + apt.getLivingRoom() + "," + apt.getCapacity() + "," + apt.getMaxTenants() + "," + apt.getMinCostBooking() + "," + apt.getCostPerPerson();
 	      
 	      if(!apt.getDescription().equals("")) {
-	    	  System.out.println("descr");
 	    	  query+=",description";
 	    	  queryPart2+=","+ "'" +apt.getDescription()+"'" ;
 	      }
-	      if(apt.getMore_photos()!=null) {
+	     /* if(photoListBytes.size()>1) {
 	    	  System.out.println("photos");
 	    	  query+=",photos";
 	    	  queryPart2+= ","+  apt.getMore_photos();
-	      }
-	      if(apt.getHost_id()!=-1) {	//auto tha afairethei meta
+	      }*/
+	      if(apt.getHostId()!=-1) {	//auto tha afairethei meta
 	    	  System.out.println("host_id");
 	    	  query+=",host_id";
-	    	  queryPart2+=","+ apt.getHost_id();
+	    	  queryPart2+=","+ apt.getHostId();
 	      }
 	      query+=")";
+	      
 	      queryPart2+=")";
 	      
 	      String finalQuery = query + queryPart2;
@@ -57,48 +86,50 @@ public class InputAptSql {
 	      System.out.println("query is "+ finalQuery);
 	   
 	      
-	     // String query = "INSERT INTO Apartment (room_id, room_photo, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity,description, max_tenants, min_cost_booking,cost_per_person, host_id)"+
-	     // "VALUES ('12432',3, 60, 'Domatio', 1, 17, 4, 2, 1, 1, 0, 20, 'Polu wraio kai aneto', 2, 30, 30,'0')";
-
-	    //  stmt.executeUpdate(query);
+//, Statement.RETURN_GENERATED_KEYS
+	      stmt.executeUpdate(finalQuery);
+	      ResultSet rs_id = stmt.getGeneratedKeys();
+	      if ( rs_id.next() ) {
+	    	    // Retrieve the auto generated key(s).
+	    	    int id = rs_id.getInt(1);
+	    	    System.out.println("id "+ id);
+	    	}
+	      else {
+	    	  System.out.println("id_not_found");
+	      }
 	      
+	      
+	      
+
 	      
 	      query = "INSERT INTO Rule (smoking_allowed, pets_allowed, events, min_days_booking)";
-	     // System.out.println("first query is "+ query);	     
-	      queryPart2 ="VALUES ("+apt.isSmoking_allowed() + ","+apt.isPets_allowed() + "," +apt.isEvents()+ "," + apt.getMin_days_booking()+")";
-	   //   System.out.println("second query is "+ queryPart2);
-	      
+	      queryPart2 ="VALUES ("+rules.getSmokingAllowed() + ","+rules.getPetsAllowed() + "," +rules.getEvents()+ "," + rules.getMinDaysBooking()+")";
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
+	      
+	      
 	      
 	      query = "INSERT INTO Facilities (wifi, aircondition, heating, kitchen, tv, parking, elevator)";
-	    //  System.out.println("first query is "+ query);	     
-	      queryPart2 ="VALUES ("+apt.isWifi() + ","+apt.isAircondition() + "," +apt.isHeating()+ "," + apt.isKitchen()+"," + apt.isTv()+"," + apt.isParking()+"," + apt.isElevator()+")";
-	    //  System.out.println("second query is "+ queryPart2);
-	      
+	      queryPart2 ="VALUES ("+facilities.getWifi() + ","+facilities.getAircondition() + "," +facilities.getHeating()+ "," + facilities.getKitchen()+"," + facilities.getTv()+"," + facilities.getParking()+"," + facilities.getElevator()+")";
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
 	      
-	      
-	      //exw valei map null
-	      
+	      	      
 	      query = "INSERT INTO Location (address_number, street, postal_code, city, country, neighborhood";
-	     // System.out.println("first query is "+ query);	     
-	      queryPart2 ="VALUES ("+apt.getAddress_number() + ","  +"'" +apt.getStreet()  +"'"+ "," +"'" +apt.getPostal_code() +"'"+ ","  +"'"+ apt.getCity() +"'"+"," +"'" + apt.getCountry()  +"'"+","  +"'"+ apt.getNeighborhood() +"'";
-	     // System.out.println("second query is "+ queryPart2);
+	      queryPart2 ="VALUES ("+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'";
 	      
-	      if(!apt.getMap().equals("")) {	
+	      if(!loc.getMap().equals("")) {	
 	    	  System.out.println("map");
 	    	  query+=",map";
-	    	  queryPart2+=","+ "'" +apt.getMap() +"'" ;
+	    	  queryPart2+=","+ "'" +loc.getMap() +"'" ;
 	      }
 	      	      
-	      if(!apt.getTransportation().equals("")) {	
+	      if(!loc.getTransportation().equals("")) {	
 	    	  System.out.println("transportation");
 	    	  query+=",transportation";
-	    	  queryPart2+=","+ "'" +apt.getTransportation() +"'" ;
+	    	  queryPart2+=","+ "'" +loc.getTransportation() +"'" ;
 	      }
 	      query+=")";
 	      queryPart2+=")";
@@ -110,24 +141,21 @@ public class InputAptSql {
 	      
 	      
 	      
-	      //IN NEED OF FREE DATES INSERT
+	      query = "INSERT INTO FreeDates (from, to)";
+		  queryPart2 ="VALUES ("+fd.getFrom() + ","  +fd.getTo() +")" ;
+		     
+		  finalQuery = query + queryPart2;
+	      
+	      System.out.println("query is "+ finalQuery);
 	      
 	      
 	      
-	    //  System.out.println(query);
+	      
 	 /*     String query1 = "SELECT * FROM Apartment";
 
 	      
 	      // execute the query, and get a java resultset
 	       ResultSet rs = stmt.executeQuery(query1);
-	      
-	      
-	      if (rs.next() == false) { 
-	    	  System.out.println("ResultSet is empty in Java"); 
-	      }
-	      else if (rs.next() == true) {
-	    	  System.out.println("ResultSet is NOT empty"); 
-	      }
 	      
 	      // iterate through the java resultset
 	      
@@ -149,4 +177,19 @@ public class InputAptSql {
 	      System.err.println(e.getMessage());
 	    }
 	}
+	
+	private static byte[] convertImageToBArray(String ImageName) throws IOException {
+
+		// open image
+		File imgPath = new File(ImageName);
+		
+		BufferedImage bufferedImage = ImageIO.read(imgPath);
+
+		// get DataBufferBytes from Raster
+		WritableRaster raster = bufferedImage .getRaster();
+		DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+
+		return ( data.getData() );
+	}
+	
 }
