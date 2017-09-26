@@ -1,7 +1,13 @@
 package ServLets;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import JavaFiles.InputAptSql;
 
-import Entities.Apartments;
+import Entities.Facility;
+import Entities.Freedate;
+import Entities.Location;
+import Entities.Apartment;
+import Entities.Rule;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,25 +70,29 @@ public class InputAptServlet extends HttpServlet {
 		   
 		    
 			
-			//Dates			
-			/*Date from;
+			//Dates		
+			
+			//ArrayList<Date> from = new ArrayList<Date>();
+			//ArrayList<Date> to = new ArrayList<Date>();
+			Date from = new Date();
+			Date to = new Date();
+			
+			
+			String fromDateStr = request.getParameter("from");
 			try {
-				from = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("from"));
-				System.out.println("from "+from);
-				Date from_date=Date.valueOf(from);//converting string into sql date  
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} 
-			Date to;
+				 from = new SimpleDateFormat("dd-MM-yyyy").parse(fromDateStr.replaceAll("/", "-"));
+			} catch (ParseException e2) {
+				e2.printStackTrace();
+			}
+			
+			String toDateStr = request.getParameter("to");
 			try {
-				to = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("to"));
-				System.out.println("to "+to);
-				Date to_date=Date.valueOf(to);//converting string into sql date 
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+				 to = new SimpleDateFormat("dd-MM-yyyy").parse(toDateStr.replaceAll("/", "-"));
+			} catch (ParseException e2) {
+				e2.printStackTrace();
+			}
+			
+		
 			
 			int beds = Integer.parseInt(request.getParameter("beds"));
 			int bathrooms = Integer.parseInt(request.getParameter("bathrooms"));
@@ -109,9 +123,7 @@ public class InputAptServlet extends HttpServlet {
 			
 			String imagePath = request.getParameter("imagePath");
 			
-			//maps den douleuoun
-			String map = request.getParameter("place-address"); 
-			String map2 = request.getParameter("pac-input");
+			String myMap = request.getParameter("myMap"); 
 			
 			boolean smoking;
 			boolean events;
@@ -182,7 +194,7 @@ public class InputAptServlet extends HttpServlet {
 				elevator=false;
 			
 			
-			
+		/*	
 			System.out.println(street);
 			System.out.println(address_num);
 			System.out.println(postal);
@@ -219,22 +231,31 @@ public class InputAptServlet extends HttpServlet {
 			System.out.println(bedrooms);
 			
 			System.out.println("img " +imagePath);
-					
-			System.out.println("map " +map);
-			System.out.println("map2 " +map2);
+			System.out.println("map " +map);		
+
+			*/
+			
 			
 			
 			//null
 			int critics =0;
-			float average_critic= 0;
-			String myMap="";
+			float averageCritic= 0;
 			int host_id=-1;
-			ArrayList<String> from = null;
-			ArrayList<String> to = null;
+			
 			ArrayList<String> photos = null;
 			
+
 			
-			Apartments apt = new Apartments(imagePath,costPerDay,type,rooms, critics,average_critic,beds,bathrooms,bedrooms,livingroom,space,description,maxPeople,minValue,costperpers,photos,host_id,smoking,pets,events,minDays,myMap,address_num,street,postal,city,country,neighborhood,transport,wifi,aircondition,heating,kitchen,tv,parking,elevator,from,to);
+			Apartment apt = new Apartment(averageCritic, space, costPerDay, costperpers, description, host_id, livingroom,maxPeople,minValue,bathrooms,bedrooms,beds,critics,rooms,imagePath,type);
+			Facility fac = new Facility(aircondition,elevator,heating,kitchen,parking,tv,wifi);
+			Rule rule = new Rule (events,minDays,pets, smoking );
+			Freedate fd = new Freedate(from, to);
+			Location loc = new Location(address_num,city,country,myMap,neighborhood,postal,street,transport);
+			
+			
+
+			
+		//	Apartments apt = new Apartments(imagePath,costPerDay,type,rooms, critics,average_critic,beds,bathrooms,bedrooms,livingroom,space,description,maxPeople,minValue,costperpers,photos,host_id,smoking,pets,events,minDays,myMap,address_num,street,postal,city,country,neighborhood,transport,wifi,aircondition,heating,kitchen,tv,parking,elevator,from,to);
 
 	
 	    	
@@ -242,7 +263,7 @@ public class InputAptServlet extends HttpServlet {
 
 	        if (request.getParameter("submit") != null) {
 	        	System.out.println("MAGKAS BEFORE");
-	            myClass.inputApt(apt);
+	            myClass.inputApt(apt,loc,rule,fac,fd);
 	            System.out.println("MAGKAS AFTER");
 	        } else {
 	        	System.out.println("GUFTOS");
@@ -250,6 +271,26 @@ public class InputAptServlet extends HttpServlet {
 
 	        //request.getRequestDispatcher("/WEB-INF/some-result.jsp").forward(request, response);
 		//doGet(request, response);
+	}
+	
+	
+	private static byte[] convertImageToBArray(String ImageName) throws IOException {
+
+		System.out.println("first line");
+		// open image
+		File imgPath = new File(ImageName);
+		System.out.println("2 line"+ImageName);
+		
+		BufferedImage bufferedImage = ImageIO.read(imgPath);
+		System.out.println("3 line");
+
+		// get DataBufferBytes from Raster
+		WritableRaster raster = bufferedImage .getRaster();
+		System.out.println("4 line");
+		DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+		System.out.println("5 line");
+
+		return ( data.getData() );
 	}
 
 
