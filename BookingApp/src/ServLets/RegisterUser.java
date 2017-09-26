@@ -118,6 +118,7 @@ public class RegisterUser extends HttpServlet {
 				out.println("alert('Το Όνομα Χρήστη χρησιμοποιείται ήδη.');");
 				out.println("window.history.back();");
 				out.println("</script>");
+				out.close();
 			}
 		}
 		else {
