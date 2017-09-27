@@ -41,6 +41,16 @@
 			
 		</script>
 		
+				
+		<script>
+		function openPopupPreviousPage() {
+		    var txt;
+		    if (confirm("Είστε σίγουρος/η ότι θέλετε να ακυρώσετε την εγγραφή (Οι αλλαγές θα διαγραφούν);") == true) {
+		    	window.history.back();
+		    }
+		}
+		</script>
+		
 		<script type="text/javascript">
             $(function () {
             	$('#from').datetimepicker({
@@ -866,9 +876,12 @@
 									<label class="checkbox-inline"><input type="checkbox" value=""  required >Είστε σίγουρος ότι θέλετε να υποβάλετε το δωμάτιο με τα παραπάνω χαρακτηριστικά για ενοικίαση;</label>
 								</div>	
 							
-								<div class="form-group" style="text-align:center; margin-top:-7%"> <!-- Submit button -->
-									<a href="#" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
-								     <button class="btn btn-primary " id="submitbut" name="submit" type="submit"><i class="glyphicon glyphicon-search"></i> Υποβολή</button>
+								<div  class="row" style=" margin-top:-7%; width:100%;" > <!-- Submit button -->
+									<!-- <a href="#" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
+								     <button class="btn btn-primary " id="submitbut" name="submit" type="submit"><i class="glyphicon glyphicon-search"></i> Υποβολή</button>-->
+								     	<div class="col-md-6 "><left><button class="btn btn-danger btn-md input-lg" id="cancel" "name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</button></left></div>
+										<div class="col-md-6 text-right"><right><button class="btn btn-success btn-lg input-lg  btn-primary" id="submitbut"  name="submit" type="submit"><i class="glyphicon glyphicon-search"></i>Υποβολή</button></right></div>
+								     
 								</div>	
 
 						
