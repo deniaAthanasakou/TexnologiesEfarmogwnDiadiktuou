@@ -57,8 +57,6 @@ public class Apartment implements Serializable {
 	@Column(name="number_rooms")
 	private int numberRooms;
 
-	@Lob
-	private byte[] photos;
 
 	@Lob
 	@Column(name="room_photo")
@@ -253,13 +251,6 @@ public class Apartment implements Serializable {
 		this.numberRooms = numberRooms;
 	}
 
-	public byte[] getPhotos() {
-		return this.photos;
-	}
-
-	public void setPhotos(byte[] photos) {
-		this.photos = photos;
-	}
 
 	public byte[] getRoomPhoto() {
 		return this.roomPhoto;

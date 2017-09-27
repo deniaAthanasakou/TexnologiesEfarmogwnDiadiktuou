@@ -67,11 +67,7 @@ public class InputAptSql {
 	    	  query+=",description";
 	    	  queryPart2+=","+ "'" +apt.getDescription()+"'" ;
 	      }
-	     /* if(photoListBytes.size()>1) {
-	    	  System.out.println("photos");
-	    	  query+=",photos";
-	    	  queryPart2+= ","+  apt.getMore_photos();
-	      }*/
+	      
 	      if(apt.getHostId()!=-1) {	//auto tha afairethei meta
 	    	  System.out.println("host_id");
 	    	  query+=",host_id";
@@ -86,39 +82,62 @@ public class InputAptSql {
 	      System.out.println("query is "+ finalQuery);
 	   
 	      
-//, Statement.RETURN_GENERATED_KEYS
-	      stmt.executeUpdate(finalQuery);
+	      stmt.executeUpdate(finalQuery,Statement.RETURN_GENERATED_KEYS);
 	      ResultSet rs_id = stmt.getGeneratedKeys();
+	      int room_id = -1;
 	      if ( rs_id.next() ) {
 	    	    // Retrieve the auto generated key(s).
-	    	    int id = rs_id.getInt(1);
-	    	    System.out.println("id "+ id);
+	    	  	room_id = rs_id.getInt(1);
+	    	    System.out.println("id "+ room_id);
 	    	}
 	      else {
 	    	  System.out.println("id_not_found");
 	      }
 	      
+	      String selectQuery = "SELECT room_id from Apartment WHERE room_photo = " + "'" +photoListBytes.get(0) + "'";
+	      ResultSet rsSelect = stmt.executeQuery(selectQuery);
 	      
+	      // iterate through the java resultset
 	      
-
+	      rsSelect.beforeFirst();
+	      String idSelect ="";
+	      while (rsSelect.next())
+	      {
+	          idSelect = rsSelect.getString("room_id");
+	      }  
+	        // print the results
+	        System.out.println("room id = "+ idSelect);
 	      
-	      query = "INSERT INTO Rule (smoking_allowed, pets_allowed, events, min_days_booking)";
-	      queryPart2 ="VALUES ("+rules.getSmokingAllowed() + ","+rules.getPetsAllowed() + "," +rules.getEvents()+ "," + rules.getMinDaysBooking()+")";
+        if(photoListBytes.size()>1) {
+	    	  System.out.println("photos");
+	    	  for(int i=1;i<photoListBytes.size();i++) {
+	    		  finalQuery = "INSERT INTO MorePhotos (room_id,image) VALUES ("+room_id +","+ "'" +photoListBytes.get(i) + "'"+ ")";
+	    	      System.out.println("query is "+ finalQuery);
+	    	      stmt.executeUpdate(finalQuery);
+	    	  }	
+	      }
+        
+        
+	      
+	      query = "INSERT INTO Rule (room_id,smoking_allowed, pets_allowed, events, min_days_booking)";
+	      queryPart2 ="VALUES ("+room_id +","+rules.getSmokingAllowed() + ","+rules.getPetsAllowed() + "," +rules.getEvents()+ "," + rules.getMinDaysBooking()+")";
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
+	      stmt.executeUpdate(finalQuery);
 	      
 	      
 	      
-	      query = "INSERT INTO Facilities (wifi, aircondition, heating, kitchen, tv, parking, elevator)";
-	      queryPart2 ="VALUES ("+facilities.getWifi() + ","+facilities.getAircondition() + "," +facilities.getHeating()+ "," + facilities.getKitchen()+"," + facilities.getTv()+"," + facilities.getParking()+"," + facilities.getElevator()+")";
+	      query = "INSERT INTO Facilities (room_id,wifi, aircondition, heating, kitchen, tv, parking, elevator)";
+	      queryPart2 ="VALUES ("+room_id +","+facilities.getWifi() + ","+facilities.getAircondition() + "," +facilities.getHeating()+ "," + facilities.getKitchen()+"," + facilities.getTv()+"," + facilities.getParking()+"," + facilities.getElevator()+")";
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
+	      stmt.executeUpdate(finalQuery);
 	      
 	      	      
-	      query = "INSERT INTO Location (address_number, street, postal_code, city, country, neighborhood";
-	      queryPart2 ="VALUES ("+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'";
+	      query = "INSERT INTO Location (room_id,address_number, street, postal_code, city, country, neighborhood";
+	      queryPart2 ="VALUES ("+room_id +","+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'";
 	      
 	      if(!loc.getMap().equals("")) {	
 	    	  System.out.println("map");
@@ -138,15 +157,17 @@ public class InputAptSql {
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
+	      stmt.executeUpdate(finalQuery);
 	      
 	      
 	      
-	      query = "INSERT INTO FreeDates (from, to)";
-		  queryPart2 ="VALUES ("+fd.getFrom() + ","  +fd.getTo() +")" ;
+	      query = "INSERT INTO FreeDates (room_id,from, to)";
+		  queryPart2 ="VALUES ("+room_id +","+fd.getFrom() + ","  +fd.getTo() +")" ;
 		     
 		  finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
+	      stmt.executeUpdate(finalQuery);
 	      
 	      
 	      

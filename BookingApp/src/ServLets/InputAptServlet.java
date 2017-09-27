@@ -5,6 +5,7 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 
 import javax.imageio.ImageIO;
@@ -234,6 +235,7 @@ public class InputAptServlet extends HttpServlet {
 			System.out.println("map " +map);		
 
 			*/
+
 			
 			
 			
@@ -242,7 +244,7 @@ public class InputAptServlet extends HttpServlet {
 			float averageCritic= 0;
 			int host_id=-1;
 			
-			ArrayList<String> photos = null;
+			//ArrayList<String> photos = null;
 			
 
 			
@@ -263,6 +265,20 @@ public class InputAptServlet extends HttpServlet {
 
 	        if (request.getParameter("submit") != null) {
 	        	System.out.println("MAGKAS BEFORE");
+	        /*	if(imagePath.length()>0) {
+					System.out.println("Submit was successfull!!");
+					response.sendRedirect("./html files/aptInputDone.html");
+				}else {
+					response.setContentType("text/html; charset=UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script type=text/javascript>");
+					out.println("alert('Δεν υποβάλατε κάποια εικόνα του διαμερίσματος');");
+					out.println("window.history.back();");
+					out.println("</script>");
+					out.close();
+				}*/
+				
 	            myClass.inputApt(apt,loc,rule,fac,fd);
 	            System.out.println("MAGKAS AFTER");
 	        } else {
