@@ -20,12 +20,13 @@
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>MyServlet</servlet-name>
-    <servlet-class>ServLets.MyServlet</servlet-class>
+    <servlet-name>WelcomeInsertServlet</servlet-name>
+    <servlet-class>ServLets.WelcomeInsertServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MyServlet</servlet-name>
-    <url-pattern>/MyServlet/</url-pattern>
+    <servlet-name>WelcomeInsertServlet</servlet-name>
+    <url-pattern>/WelcomeInsertServlet/</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>InputAptServlet</servlet-name>
