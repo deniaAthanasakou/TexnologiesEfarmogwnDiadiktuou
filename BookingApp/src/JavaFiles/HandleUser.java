@@ -76,6 +76,8 @@ public class HandleUser {
 					insertQuery += ")";
 				}
 				
+				System.out.println("INSERT: " + insertQuery);
+				
 				int colCount = stmt.executeUpdate(insertQuery);
 				if(colCount==-1) {
 					System.out.println("An error has occured.");

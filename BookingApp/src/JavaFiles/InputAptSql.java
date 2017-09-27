@@ -11,8 +11,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 
@@ -37,7 +39,7 @@ public class InputAptSql {
 	      String myDriver = "com.mysql.jdbc.Driver";
 	      String myUrl = "jdbc:mysql://localhost:3306/mydb?useSSL=true";
 	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(myUrl, "root", "root1@");
+	      Connection conn = DriverManager.getConnection(myUrl, "root", "root1234");
 	      
 	      System.out.println("INSIDE TRYYYY " + conn.isValid(1000));
 
@@ -61,7 +63,7 @@ public class InputAptSql {
 	      
 	    //insert into table Apartment
 	      String query = "INSERT INTO Apartment (room_photo, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person";
-	      String queryPart2 ="VALUES (" + "'" +photoListBytes.get(0) + "'" +","+apt.getCostPerDay() + "," + "'" +apt.getType()+"'" + "," + apt.getNumberRooms()+ "," + apt.getNumberCritics() +"," + apt.getAverage_critic()+ "," + apt.getNumberBeds() +"," + apt.getNumberBathrooms() +"," + apt.getNumberBedrooms()+ "," + apt.getLivingRoom() + "," + apt.getCapacity() + "," + apt.getMaxTenants() + "," + apt.getMinCostBooking() + "," + apt.getCostPerPerson();
+	      String queryPart2 =" VALUES (" + "'" +photoListBytes.get(0) + "'" +","+apt.getCostPerDay() + "," + "'" +apt.getType()+"'" + "," + apt.getNumberRooms()+ "," + apt.getNumberCritics() +"," + apt.getAverage_critic()+ "," + apt.getNumberBeds() +"," + apt.getNumberBathrooms() +"," + apt.getNumberBedrooms()+ "," + apt.getLivingRoom() + "," + apt.getCapacity() + "," + apt.getMaxTenants() + "," + apt.getMinCostBooking() + "," + apt.getCostPerPerson();
 	      
 	      if(!apt.getDescription().equals("")) {
 	    	  query+=",description";
@@ -120,7 +122,7 @@ public class InputAptSql {
         
 	      
 	      query = "INSERT INTO Rule (room_id,smoking_allowed, pets_allowed, events, min_days_booking)";
-	      queryPart2 ="VALUES ("+room_id +","+rules.getSmokingAllowed() + ","+rules.getPetsAllowed() + "," +rules.getEvents()+ "," + rules.getMinDaysBooking()+")";
+	      queryPart2 =" VALUES ("+room_id +","+rules.getSmokingAllowed() + ","+rules.getPetsAllowed() + "," +rules.getEvents()+ "," + rules.getMinDaysBooking()+")";
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
@@ -129,7 +131,7 @@ public class InputAptSql {
 	      
 	      
 	      query = "INSERT INTO Facilities (room_id,wifi, aircondition, heating, kitchen, tv, parking, elevator)";
-	      queryPart2 ="VALUES ("+room_id +","+facilities.getWifi() + ","+facilities.getAircondition() + "," +facilities.getHeating()+ "," + facilities.getKitchen()+"," + facilities.getTv()+"," + facilities.getParking()+"," + facilities.getElevator()+")";
+	      queryPart2 =" VALUES ("+room_id +","+facilities.getWifi() + ","+facilities.getAircondition() + "," +facilities.getHeating()+ "," + facilities.getKitchen()+"," + facilities.getTv()+"," + facilities.getParking()+"," + facilities.getElevator()+")";
 	      finalQuery = query + queryPart2;
 	      
 	      System.out.println("query is "+ finalQuery);
@@ -137,7 +139,7 @@ public class InputAptSql {
 	      
 	      	      
 	      query = "INSERT INTO Location (room_id,address_number, street, postal_code, city, country, neighborhood";
-	      queryPart2 ="VALUES ("+room_id +","+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'";
+	      queryPart2 =" VALUES ("+room_id +","+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'";
 	      
 	      if(!loc.getMap().equals("")) {	
 	    	  System.out.println("map");
@@ -160,9 +162,15 @@ public class InputAptSql {
 	      stmt.executeUpdate(finalQuery);
 	      
 	      
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	      Date from = fd.getFrom();
+	      Date to = fd.getTo();
+
 	      
-	      query = "INSERT INTO FreeDates (room_id,from, to)";
-		  queryPart2 ="VALUES ("+room_id +","+fd.getFrom() + ","  +fd.getTo() +")" ;
+	      
+	      
+	      query = "INSERT INTO FreeDates (room_id,from_date, to_date)";
+		  queryPart2 =" VALUES ("+room_id +","+ "'" + sdf.format(from) + "'"  + ","  + "'" + sdf.format(to) + "'" +")" ;
 		     
 		  finalQuery = query + queryPart2;
 	      

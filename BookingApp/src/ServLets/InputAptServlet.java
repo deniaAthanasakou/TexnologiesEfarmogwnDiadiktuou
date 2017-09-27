@@ -265,7 +265,8 @@ public class InputAptServlet extends HttpServlet {
 
 	        if (request.getParameter("submit") != null) {
 	        	System.out.println("MAGKAS BEFORE");
-	        /*	if(imagePath.length()>0) {
+	        	if(imagePath.length()>0) {
+	        		myClass.inputApt(apt,loc,rule,fac,fd);
 					System.out.println("Submit was successfull!!");
 					response.sendRedirect("./html files/aptInputDone.html");
 				}else {
@@ -277,9 +278,9 @@ public class InputAptServlet extends HttpServlet {
 					out.println("window.history.back();");
 					out.println("</script>");
 					out.close();
-				}*/
+				}
 				
-	            myClass.inputApt(apt,loc,rule,fac,fd);
+	            
 	            System.out.println("MAGKAS AFTER");
 	        } else {
 	        	System.out.println("GUFTOS");
