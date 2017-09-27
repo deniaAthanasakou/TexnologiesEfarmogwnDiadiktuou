@@ -56,6 +56,27 @@
 	            	document.getElementById("register_login").style.display="block"; 
 	            }
 	            
+	            //post method
+	            xmlhttp.open("POST", "../PopulateUserServlet", false);
+	            xmlhttp.send();
+	            
+	        });
+        </script>
+        
+        <script>
+            $(document).ready(function() { 
+            	var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	            
+	            //post method
+	            xmlhttp.open("POST", "../PopulateUserServlet", false);
+	            xmlhttp.send();
+	            
 	        });
         </script>
         

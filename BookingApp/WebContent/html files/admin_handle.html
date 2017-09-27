@@ -36,26 +36,45 @@
 		<script>
 		$(document).ready(function(){
 		    $('[data-toggle="popover"]').popover();   
+		    $('#users').DataTable();
 		});
 		</script>
 		
 		<script>
 		$(document).ready(function() {
-			$('#users').dataTable();
-		});
-		</script>
-		
-		<script>
-		$(document).ready(function() {
-			$("#users tbody tr").click(function() {
-				window.location.href="approve_user.html"
+			$('#users').on('click', '#button_approve', function(){
+				
+				var username = $(this).closest("tr").find('td:eq(1)').text();
+				
+				//alert(username);
+				var xmlhttp;
+				
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	
+	            var params = "?username=" + username;
+	            xmlhttp.open("GET", "../SendDataPopulate" + params, false);	            
+	            xmlhttp.send(null);
+
+	            
+	            var response = xmlhttp.responseText;
+	            if(response=="1"){
+	            	window.location.assign("approve_user.html");
+	            }
+	            
+	            
+
 			});
 		});
 		
 		</script>
 		
 		<script>
-            $(document).ready(function() { var xmlhttp;
+            $(document).ready(function() { 
+            	var xmlhttp;
 	
 	            if (window.XMLHttpRequest){  
 	              xmlhttp=new XMLHttpRequest();
@@ -63,11 +82,12 @@
 	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	            }
 	
-	            xmlhttp.open("GET", "../AdminHandle", false);
+	            xmlhttp.open("POST", "../AdminHandle", false);
 	            xmlhttp.send();
-	            var response = xmlhttp.responseText;
-	            document.getElementById("table_body").innerHTML=response; 
-	            $('#users').dataTable();
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+	            $('#users').DataTable().rows.add(jsonResponse).draw();
+	            
+	            
 	        });
         </script>
         
@@ -80,6 +100,7 @@
 	            } else {
 	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	            }
+	           
 	
 	            xmlhttp.open("GET", "../CheckLoggedUser", false);
 	            xmlhttp.send();
@@ -92,6 +113,8 @@
 	            	document.getElementById("user_logged").style.display="none"; 
 	            	document.getElementById("register_login").style.display="block"; 
 	            }
+	            
+	            
 	            
 	        });
         </script>
