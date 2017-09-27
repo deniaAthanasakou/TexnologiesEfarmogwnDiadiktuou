@@ -1,14 +1,21 @@
 package ServLets;
 
 import java.io.IOException;
+
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import JavaFiles.ImportUsersAdmin;
 
@@ -31,27 +38,31 @@ public class AdminHandle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		System.out.println("GETTT");
-		
+	    
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				
 		ImportUsersAdmin importUsers = new ImportUsersAdmin();
 		ResultSet rs = importUsers.populateAdminHandle();
 		try {
 			rs.beforeFirst();
 			String insideTable = "";
 			int counterRow = 1;
+			JSONObject  Users      = new JSONObject();
+			JSONArray  json      = new JSONArray();
 			while(rs.next()) {
 				String username = rs.getString("username");
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
 				byte roleHost = rs.getByte("role_host");
 				byte roleTenant = rs.getByte("role_tenant");
+				byte approved = rs.getByte("approved");
 				String roles = "";
-				insideTable += "<tr>" + "<th scope=\"row\">" + counterRow + "</th>" 
-							+ "<td id=\"username\">" + username + "</td>"
-							+ "<td>" + name + "</td>"
-							+ "<td>" + surname + "</td>";
+				String approval ="";
 				
 				if(roleTenant==1) {
 					roles += "Ενοικιαστής";
@@ -61,37 +72,43 @@ public class AdminHandle extends HttpServlet {
 					roles += "/Οικοδεσπότης";
 				}
 				
-				insideTable += "<td>" + roles + "</td>"
-							+ "<td><button class=\"btn btn-md btn-success\"><i class=\"glyphicon glyphicon-ok\"></i> Έγκριση</button></td>"
-							+ "</tr>";
+				
+				if(roleHost==1 && approved==1) {
+					approval = "<button class=\"btn btn-md btn-success\" id=\"button_approve\"><i class=\"glyphicon glyphicon-ok\"></i> Έγκριση</button>";
+				}
+				
+				JSONArray user = new JSONArray();
+				
+				//add to jsonobj
+				user.put(counterRow);
+				user.put(username);
+				user.put(name);
+				user.put(surname);
+				user.put(roles);
+				user.put(approval);
+				
+				json.put(user);
 				counterRow++;
+				
 			}
 			
-			System.out.println(insideTable);
-			response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-		    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-		    response.getWriter().write(insideTable);       
+			Users.put("Users", json);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json.toString());
+			response.getWriter().flush();
+			response.getWriter().close();
+
+			      
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
-		
-		
-
-	    
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

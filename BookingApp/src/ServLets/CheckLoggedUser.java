@@ -37,6 +37,9 @@ public class CheckLoggedUser extends HttpServlet {
 			if (session != null) {
 				// Already created.
 				response.getWriter().write("1");
+				response.getWriter().flush();
+				response.getWriter().close();
+
 			}
 	        
 		}catch(Exception e) {
