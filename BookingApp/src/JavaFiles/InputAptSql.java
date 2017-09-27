@@ -26,6 +26,8 @@ import Entities.Location;
 import Entities.Apartment;
 import Entities.Rule;
 
+import JavaFiles.ImgToBArray;
+
 public class InputAptSql {
 	public static void inputApt(Apartment apt, Location loc, Rule rules, Facility facilities, Freedate fd)
 	{
@@ -35,15 +37,8 @@ public class InputAptSql {
 	    {
 	        System.out.println("INSIDE TRYYYY");
 
-	      // create our mysql database connection
-	      String myDriver = "com.mysql.jdbc.Driver";
-	      String myUrl = "jdbc:mysql://localhost:3306/mydb?useSSL=true";
-	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(myUrl, "root", "root1234");
-	      
-	      System.out.println("INSIDE TRYYYY " + conn.isValid(1000));
 
-	      Statement stmt = conn.createStatement();
+	      Statement stmt = ConnectionManager.getConnection().createStatement();
 	      
 	      System.out.println(" string " +apt.getImagePath());
 	      
@@ -52,8 +47,10 @@ public class InputAptSql {
 	      System.out.println(" string list " +photoListString);
 	      ArrayList <byte[]> photoListBytes = new ArrayList <byte[]>();
 	      
+	      ImgToBArray imgToArray = new ImgToBArray();
+	      
 	      for(int i=0; i<photoListString.size(); i++) {
-	    	  byte[] element= convertImageToBArray(photoListString.get(i).trim());
+	    	  byte[] element= imgToArray.convertImageToBArray(photoListString.get(i).trim());
 	    	  System.out.println("element " +element);
 	    	  photoListBytes.add(element);
 	      }
@@ -202,18 +199,6 @@ public class InputAptSql {
 	    }
 	}
 	
-	private static byte[] convertImageToBArray(String ImageName) throws IOException {
-
-		// open image
-		File imgPath = new File(ImageName);
-		
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-		// get DataBufferBytes from Raster
-		WritableRaster raster = bufferedImage .getRaster();
-		DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-
-		return ( data.getData() );
-	}
+	
 	
 }

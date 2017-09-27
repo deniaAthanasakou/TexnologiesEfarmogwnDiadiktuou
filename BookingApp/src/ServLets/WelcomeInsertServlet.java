@@ -1,18 +1,24 @@
 package ServLets;
 
-
+import JavaFiles.ConnectionManager;
+import JavaFiles.ImgToBArray;
 import JavaFiles.JavaMysqlSelect;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,85 +40,135 @@ public class WelcomeInsertServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void init() throws ServletException
-	{
-		System.out.println("----------");
-		System.out.println("---------- INSERT  ----------");
-		System.out.println("----------");
+	public void init() throws ServletException {
 
+		try {
+			Statement stmt = ConnectionManager.getConnection().createStatement();
 
-		try
-		{
-			// create our mysql database connection
-			String myDriver = "com.mysql.jdbc.Driver";
-			String myUrl = "jdbc:mysql://localhost:3306/mydb?useSSL=true";
-			Class.forName(myDriver);
-			Connection conn = DriverManager.getConnection(myUrl, "root", "root1234");
-
-			Statement stmt = conn.createStatement();
-
-			System.out.println("INSIDE TRYYYY " + conn.isValid(1000));
-
-			
-
-			ArrayList<String> lines = new ArrayList<String>();
-			//insert users
-			lines.add("INSERT INTO User (user_id, username, password, name, surname, email,tel,role_host, role_tenant, role_admin,address_number,street_address, city,country,potal_code, birthday) VALUES (1,'Admin','1234@ds','Christos','Papadopoulos','chPap@gmail.com','6934546332',false, false, true ,2,'Eustratiou','Athens','Greece','Agia Paraskeuh','12452','1980-05-03')");
-			lines.add("INSERT INTO User (user_id, username, password, name, surname, email,role_host, role_tenant, role_admin,address_number,street_address, city,country,potal_code, birthday) VALUES (2,'eleni1','fd41s','Eleni','Georgiou','elenitsa@gmail.com',true, false, false ,24,'Karampampa','Athens','Greece','Imittos','12515','1990-05-05')");
-			lines.add("INSERT INTO User (user_id, username, password, name, surname, email,tel,role_host, role_tenant, role_admin,approved) VALUES (3,'maria','%^##Vda','Maria','Kitsou','mariaK@hotmail.com','6935125521',true, false, false ,0)");
-			lines.add("INSERT INTO User (user_id, username, password, name, surname, email,role_host, role_tenant, role_admin,) VALUES (4,'kostasG','jack24','Konstantinos','Grigoriou','kg@hotmail.com',false, true, false)");
-			
-			//insert apartments
-			lines.add("INSERT INTO Apartment (room_id, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person,description,host_id,room_photo)VALUES (1,30,'spiti',4,5,3.4,2,1,2,true,200,4,20,20,'Polu wraio kai aneto!',2,'[B@367a6a82')");
-			lines.add("INSERT INTO Apartment (room_id, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person,description,host_id,room_photo)VALUES (2,50,'spiti',2,1,2.0,2,1,2,false,150,2,15,10,'Euruxwro',2,'[B@367a6a83')");
-			lines.add("INSERT INTO Apartment (room_id, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person,description,host_id,room_photo)VALUES (3,30,'spiti',4,5,3.4,2,1,2,true,200,4,20,20,'Polu wraio kai aneto!',3,'[B@367a6a83')");
-			lines.add("INSERT INTO Apartment (room_id, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person,host_id,room_photo) VALUES (4,30,'domatio',4,5,3.4,2,1,2,true,70,4,20,20,3,'[B@367a6a83')");
-
-			//insert rules
-			
-			//insert facilities
-			
-			//insert free dates
-			
-			//insert locations
-			
-			
-			for(int i=0;i<lines.size();i++)   {
-				
-				stmt.executeUpdate(lines.get(i));
+			String query = "SELECT isInitialized FROM options";
+			ResultSet rs = stmt.executeQuery(query);
+			rs.beforeFirst();
+			boolean isInitialized = false;
+			while (rs.next()) {
+				isInitialized = rs.getBoolean(1);
 			}
 
-			conn.close();
+			if (isInitialized) {
+				return;
+			}
 
+			ArrayList<String> lines = getInitializationStatements();
+
+			// set isInitialized
+			lines.add("INSERT INTO options (isInitialized) VALUES (true)");
+			
+			ArrayList<String> fixedImages = fixApartmentPhoto();
+			
+			ArrayList<String> morePhotos = InsertMorePhotos();
+
+			ArrayList<String> finalLines = new ArrayList<String>();
+			
+			for (String line: lines) {
+				finalLines.add(line);
+			}
+			for (String line: fixedImages) {
+				finalLines.add(line);
+			}
+			for (String line: morePhotos) {
+				finalLines.add(line);
+			}
+			
+			
+			
+			
+			for (String line : finalLines) {
+				//System.out.println(line);
+				stmt.executeUpdate(line);
+			}
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		catch (SQLException e)
-		{
-			System.err.println("Got an SQL exception!");
-			System.err.println(e.getMessage());
-		}
-		catch(Exception e) {
-			System.err.println("Got an exception!");
-			System.err.println(e.getMessage());
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	}
 
+	private ArrayList<String> getInitializationStatements() {
+		ArrayList<String> statements = new ArrayList<String>();
+		
+		ServletContext context = this.getServletContext();
+		InputStream is = context.getResourceAsStream("/WEB-INF/init.txt");
+		
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       statements.add(line);
+		    }
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return statements;
+	}
+	
+	private ArrayList<String> fixApartmentPhoto() throws IOException{
+		ArrayList<String> statements = new ArrayList<String>();
+		ArrayList<String> barray = getBArrayImgs();
+		for(int i=0; i<12; i++) {
+			String ba=barray.get(i).toString();
+			String line = "UPDATE Apartment SET room_photo = '"+ ba+"' WHERE room_id= "+(i+1);
+			statements.add(line);
+		} 
+
+		
+		return statements;
+	}
+	
+	private ArrayList<String> getBArrayImgs() throws IOException{
+		ArrayList<String> barray = new ArrayList<String>();
+		ImgToBArray imgToArray = new ImgToBArray();
+		for(int i=1; i<13; i++) {
+			String image =getImage(i);
+			barray.add(imgToArray.convertImageToBArray(image).toString());
+		}
+		
+		return barray;
+	}
+	
+	private String getImage(int i) {
+		ServletContext context = this.getServletContext();
+		String fullPath = context.getRealPath("/WEB-INF/initializationImages/room"+i+".jpg");
+		return fullPath;
+	}
+	
+	private ArrayList<String> getMorePhotos() throws IOException{
+		ArrayList<String> barray = new ArrayList<String>();
+		ImgToBArray imgToArray = new ImgToBArray();
+		for(int i=13; i<=20; i++) {						//13,14,15,16,17,18,19,20
+			String image =getImage(i);
+			barray.add(imgToArray.convertImageToBArray(image).toString());
+		}
+		
+		return barray;
+	}
+	
+	private ArrayList<String> InsertMorePhotos() throws IOException{
+		ArrayList<String> lines = new ArrayList<String>();
+		ArrayList<String> barray = getMorePhotos();
+		
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (1,'"+barray.get(0)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (1,'"+barray.get(1)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (6,'"+barray.get(2)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (7,'"+barray.get(3)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (10,'"+barray.get(4)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (10,'"+barray.get(5)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (10,'"+barray.get(6)+"')");
+		lines.add("INSERT INTO MorePhotos (room_id,image) VALUES (12,'"+barray.get(7)+"')");
+		
+		return lines;
+	}
+	
 
 }

@@ -14,29 +14,7 @@ public class JavaMysqlSelect
 
     try
     {
-        System.out.println("INSIDE TRYYYY");
-
-      // create our mysql database connection
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://localhost:3306/mydb";
-      Class.forName(myDriver);
-      Connection conn = DriverManager.getConnection(myUrl, "root", "root1@");
-      
-      System.out.println("INSIDE TRYYYY " + conn.isValid(1000));
-
-      
-      // our SQL SELECT query. 
-      // if you only need a few columns, specify them by name instead of using "*"
-      
-      
-      //String query = "INSERT INTO User VALUES (00000000, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1, , 12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098, , 06/07/1975)";
-     // String query = "INSERT INTO User (user_id, username, password, name, surname, email, tel, role_host, role_tenant, role_admin,address_number,city, country, postal_code,birthday)"+
-      //"VALUES (00000009, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1,  12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098,  06/07/1975)";
-
-     // String query1 ="INSERT INTO User (user_id, username, password, name, surname, email, tel, role_host, role_tenant, role_admin,address_number,street_address,city, country, postal_code,birthday,comment_id) "+
-      //"VALUES (4, 'evagg', '1@3$kk2g', 'Evaggelos', 'Papadopoulos', 'evagPap@gmail.com', 6923673211, 0, 0, 1,  12, 'Efstratiou', 'Thessaloniki', 'Ellada', 11098,  06/07/1975,112)";
-
-      Statement stmt = conn.createStatement();
+    	Statement stmt = ConnectionManager.getConnection().createStatement();
        //stmt.executeUpdate(query1);
       
      // System.out.println(query1);

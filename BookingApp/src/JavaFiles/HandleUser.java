@@ -14,13 +14,7 @@ public class HandleUser {
 	{
 		try
 		{
-			// create our mysql database connection
-			String myDriver = "com.mysql.jdbc.Driver";
-			String myUrl = "jdbc:mysql://localhost:3306/mydb?useSSL=true";
-			Class.forName(myDriver);
-			Connection conn = DriverManager.getConnection(myUrl, "root", "root1234");
-
-			Statement stmt = conn.createStatement();
+			Statement stmt = ConnectionManager.getConnection().createStatement();
 
 			//check for same username before insert
 			String checkQuery = "SELECT username FROM User WHERE username=" + "'" + newUser.getUsername() + "'";
