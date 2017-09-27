@@ -111,7 +111,6 @@ public class Apartment implements Serializable {
 			int numberBedrooms, int numberBeds, int numberCritics, int numberRooms, String imagePath,
 			String type) {
 		
-		this.roomId = roomId;
 		this.average_critic = average_critic;
 		this.capacity = capacity;
 		this.costPerDay = costPerDay;

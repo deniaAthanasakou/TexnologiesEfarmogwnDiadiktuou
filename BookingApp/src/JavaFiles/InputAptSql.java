@@ -138,14 +138,9 @@ public class InputAptSql {
 	      stmt.executeUpdate(finalQuery);
 	      
 	      	      
-	      query = "INSERT INTO Location (room_id,address_number, street, postal_code, city, country, neighborhood";
-	      queryPart2 =" VALUES ("+room_id +","+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'";
+	      query = "INSERT INTO Location (room_id,address_number, street, postal_code, city, country, neighborhood, map";
+	      queryPart2 =" VALUES ("+room_id +","+loc.getAddressNumber() + ","  +"'" +loc.getStreet()  +"'"+ "," +"'" +loc.getPostalCode() +"'"+ ","  +"'"+ loc.getCity() +"'"+"," +"'" + loc.getCountry()  +"'"+","  +"'"+ loc.getNeighborhood() +"'" +" ," + "'" +loc.getMap() +"'";
 	      
-	      if(!loc.getMap().equals("")) {	
-	    	  System.out.println("map");
-	    	  query+=",map";
-	    	  queryPart2+=","+ "'" +loc.getMap() +"'" ;
-	      }
 	      	      
 	      if(!loc.getTransportation().equals("")) {	
 	    	  System.out.println("transportation");
