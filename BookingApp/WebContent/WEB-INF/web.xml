@@ -76,4 +76,79 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet/</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <servlet-class>ServLets.UpdateProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <url-pattern>/UpdateProfileServlet/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ApproveHost</servlet-name>
+    <servlet-class>ServLets.ApproveHost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveHost</servlet-name>
+    <url-pattern>/ApproveHost/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PopulateAdmin</servlet-name>
+    <servlet-class>ServLets.PopulateAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PopulateAdmin</servlet-name>
+    <url-pattern>/PopulateAdmin/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PopulateChangeProfile</servlet-name>
+    <servlet-class>ServLets.PopulateChangeProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PopulateChangeProfile</servlet-name>
+    <url-pattern>/PopulateChangeProfile/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PopulateProfile</servlet-name>
+    <servlet-class>ServLets.PopulateProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PopulateProfile</servlet-name>
+    <url-pattern>/PopulateProfile/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PopulateUserApprServlet</servlet-name>
+    <servlet-class>ServLets.PopulateUserApprServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PopulateUserApprServlet</servlet-name>
+    <url-pattern>/PopulateUserApprServlet/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SendDataPopulate</servlet-name>
+    <servlet-class>ServLets.SendDataPopulate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendDataPopulate</servlet-name>
+    <url-pattern>/SendDataPopulate/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UnapproveHost</servlet-name>
+    <servlet-class>ServLets.UnapproveHost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UnapproveHost</servlet-name>
+    <url-pattern>/UnapproveHost/</url-pattern>
+  </servlet-mapping>
+  
+  
+  
 </web-app>

@@ -33,6 +33,14 @@
 		    $('[data-toggle="popover"]').popover();   
 		});
 		</script>
+		
+		<script>
+		$(document).ready(function(){
+			function goChangeProf(){
+				window.location.href="change_profile_host.html";
+			}
+		});
+		</script>
         
         <script>
             $(document).ready(function() { 
@@ -59,6 +67,71 @@
 	        });
         </script>
         
+        <script>
+            $(document).ready(function() { 
+            	var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	            
+	            
+	            //post method
+	            xmlhttp.open("POST", "../PopulateProfile", false);
+	            xmlhttp.send();
+	       
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+	            document.getElementById("username").innerHTML = jsonResponse.username;
+	            document.getElementById("name").innerHTML = jsonResponse.name;
+	            document.getElementById("surname").innerHTML = jsonResponse.surname;
+	            document.getElementById("email").innerHTML = jsonResponse.email;
+	            if (jsonResponse.image != null){
+	            	document.getElementById("currentImage").src = jsonResponse.image;
+	            }
+	            	            
+	            if (jsonResponse.tel != null){
+	            	document.getElementById("tel").innerHTML = jsonResponse.tel;
+	            }
+	            if(jsonResponse.birthday != null){
+	            	document.getElementById("birthday").innerHTML = jsonResponse.birthday;
+	            }
+	            if(jsonResponse.roles != null){
+	            	document.getElementById("roles").innerHTML = jsonResponse.roles;
+	            }
+	            if(jsonResponse.country != null){
+	            	document.getElementById("country").innerHTML = jsonResponse.country;
+	            }
+	            if(jsonResponse.city != null){
+	            	document.getElementById("city").innerHTML = jsonResponse.city;
+	            }
+	            document.getElementById("full_address").innerHTML = jsonResponse.full_address;
+	            if(jsonResponse.postal_code != null){
+	            	document.getElementById("postal_code").innerHTML = jsonResponse.postal_code;
+	            }
+	            
+	            if(jsonResponse.statistics == "false"){
+	            	var elems = document.getElementsByClassName("tenant_stats");
+	            	for (i = 0; i < elems.length; i++) {
+	            	    elems[i].style.display = 'none';
+	            	}
+	            }else{
+	            	document.getElementById("no_critic").innerHTML = jsonResponse.no_critic;
+	            	document.getElementById("min_critic").innerHTML = jsonResponse.min_critic;
+	            	document.getElementById("max_critic").innerHTML = jsonResponse.max_critic;
+	            	document.getElementById("avg_critic").innerHTML = jsonResponse.avg_critic;
+	            }
+	            
+	            if(jsonResponse.messages == "false"){
+	            	document.getElementById("no_messages").innerHTML = '0';
+	            }else{
+	            	document.getElementById("no_messages").innerHTML = jsonResponse.no_messages;
+	            }
+
+	        });
+        </script>
+        
         <title>Host page</title>
 		
 
@@ -82,7 +155,7 @@
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-									<li><a class="nav-item" href="./html files/user_page.html"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
+									<li><a class="nav-item" href="host_page.html"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
 									<li><a class="nav-item" href="../LogoutServlet"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
 								</ul>
 							</div>
@@ -115,7 +188,7 @@
 						        </ul>
 							</li>
 							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-envelope"></i> Μηνύματα <span class="badge">4</span></a></li>
-							<li class="nav-item"><a href="#"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
+							<li class="nav-item"><a href="../LogoutServlet"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
 						</ul>
 						
 					</div>
@@ -128,14 +201,14 @@
 									<div class="row">
 										<div class="col-md-12">
 											<img class="img-responsive" id="currentImage" src="../Images/insert_photo.png"></img>
-											<button class="btn btn-primary" data-toggle="popover" data-content="Αλλαγή εικόνας" data-trigger="hover" id="btn_image"><i class="glyphicon glyphicon-camera"></i></button>
+											<button class="btn btn-primary" data-toggle="popover" data-content="Αλλαγή εικόνας" data-trigger="hover" id="btn_image" onclick="goChangeProf();"><i class="glyphicon glyphicon-camera"></i></button>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-9">
 									<div class="row">
 										<div class="col-md-12">
-											<h2><strong>Στοιχεία λογαριασμού</strong> <a href="#" style="text-decoration:none;font-size: medium;">[αλλαγή]</a></h2>
+											<h2><strong>Στοιχεία λογαριασμού</strong> <a href="change_profile_host.html" style="text-decoration:none;font-size: medium;">[αλλαγή]</a></h2>
 										</div>
 									</div>
 									<div class="row">
@@ -143,7 +216,7 @@
 											<label for="username">Όνομα Χρήστη:</label>
 										</div>
 										<div class="col-md-6">
-											<p>USERNAME</p>
+											<p id="username"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -151,7 +224,7 @@
 											<label for="name">Όνομα:</label>
 										</div>
 										<div class="col-md-6">
-											<p>NAME</p>
+											<p id="name"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -159,7 +232,7 @@
 											<label for="surname">Επώνυμο:</label>
 										</div>
 										<div class="col-md-6">
-											<p>SURNAME</p>
+											<p id="surname"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -167,7 +240,7 @@
 											<label for="email">Email:</label>
 										</div>
 										<div class="col-md-6" style="">
-											<p>EMAIL</p>
+											<p id="email"></p>
 										</div>
 									</div>
 								</div>
@@ -179,7 +252,7 @@
 								<div class="col-md-12">
 									<div class="row">
 										<div class="col-md-12">
-											<h2><strong>Λοιπά Στοιχεία</strong> <a href="#" style="text-decoration:none;font-size: medium;">[αλλαγή]</a></h2>
+											<h2><strong>Λοιπά Στοιχεία</strong> <a href="change_profile_host.html" style="text-decoration:none;font-size: medium;">[αλλαγή]</a></h2>
 										</div>
 									</div>
 									<div class="row">
@@ -187,7 +260,7 @@
 											<label for="tel">Τηλέφωνο:</label>
 										</div>
 										<div class="col-md-6">
-											<p>TEL</p>
+											<p id="tel"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -195,7 +268,7 @@
 											<label for="birth">Ημερομηνία Γέννησης:</label>
 										</div>
 										<div class="col-md-6">
-											<p>BIRTHDAY</p>
+											<p id="birthday"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -203,7 +276,7 @@
 											<label for="role">Ρόλος:</label>
 										</div>
 										<div class="col-md-6">
-											<p>HOST/TENANT</p>
+											<p id="roles"></p>
 										</div>
 									</div>
 								</div>
@@ -215,7 +288,7 @@
 								<div class="col-md-12">
 									<div class="row">
 										<div class="col-md-12">
-											<h2><strong>Στοιχεία Διαμονής</strong> <a href="#" style="text-decoration:none;font-size: medium;">[αλλαγή]</a></h2>
+											<h2><strong>Στοιχεία Διαμονής</strong> <a href="change_profile_host.html" style="text-decoration:none;font-size: medium;">[αλλαγή]</a></h2>
 										</div>
 									</div>
 									<div class="row">
@@ -223,7 +296,7 @@
 											<label for="country">Χώρα:</label>
 										</div>
 										<div class="col-md-6">
-											<p>COUNTRY</p>
+											<p id="country"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -231,7 +304,7 @@
 											<label for="city">Πόλη:</label>
 										</div>
 										<div class="col-md-6">
-											<p>CITY</p>
+											<p id="city"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -239,7 +312,7 @@
 											<label for="address">Διεύθυνση Οικίας:</label>
 										</div>
 										<div class="col-md-6">
-											<p>WHOLE ADDRESS</p>
+											<p id="full_address"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -247,7 +320,7 @@
 											<label for="postal_code">Ταχυδρομικώς Κώδικας:</label>
 										</div>
 										<div class="col-md-6">
-											<p>POSTAL CODE</p>
+											<p id="postal_code"></p>
 										</div>
 									</div>
 								</div>
@@ -262,38 +335,31 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6" style="border-right: 1px solid #e6e6e6;">
-									<div class="row">
-										<div class="col-md-6">
-											<label for="no_comments">Αριθμός σχολίων:</label>
-										</div>
-										<div class="col-md-6">
-											<p>NUMBER COMMENTS</p>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<label for="no_critics">Αριθμός κριτικών:</label>
-										</div>
-										<div class="col-md-6">
-											<p>NUMBER CRITICS</p>
-										</div>
-									</div>
+									
 									<div class="row">
 										<div class="col-md-6">
 											<label for="no_messages">Αριθμός μηνυμάτων:</label>
 										</div>
 										<div class="col-md-6">
-											<p>NUMBER MESSAGES</p>
+											<p id="no_messages"></p>
+										</div>
+									</div>
+									<div class="row tenant_stats" style="margin-top:20px;">
+										<div class="col-md-6">
+											<label for="no_critics">Αριθμός κριτικών:</label>
+										</div>
+										<div class="col-md-6" >
+											<p id="no_critics"></p>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6 tenant_stats">
 									<div class="row">
 										<div class="col-md-6">
 											<label for="avg_critics">Μέσος όρος κριτικών:</label>
 										</div>
 										<div class="col-md-6">
-											<p>AVERAGE CRITICS</p>
+											<p id="avg_critic"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -301,7 +367,7 @@
 											<label for="min_critic">Ελάχιστη κριτική:</label>
 										</div>
 										<div class="col-md-6">
-											<p>MIN CRITIC</p>
+											<p id="min_critic"></p>
 										</div>
 									</div>
 									<div class="row">
@@ -309,7 +375,7 @@
 											<label for="max_critix">Μέγιστη κριτική:</label>
 										</div>
 										<div class="col-md-6">
-											<p>MAX CRITIC</p>
+											<p id=""></p>
 										</div>
 									</div>
 								</div>
@@ -345,7 +411,7 @@
 				<center><input class="form-control" type="password" placeholder="Εισαγωγή Κωδικού Πρόσβασης" name="password" size="45" maxlength="45" style="margin-top:10px;" required/></center>
 				<center><button class="btn btn-primary" type="submit" name="login" style="margin-top:10px;"/><i class="glyphicon glyphicon-log-in"></i> Είσοδος</center>
 				<center style="margin-top:10px;"><a href="#">Ξέχασα τον κωδικό</a></center>
-				<center style="margin-top:10px;"><a href="../html files/register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
+				<center style="margin-top:10px;"><a href="register.html" class="btn btn-info"><i class="glyphicon glyphicon-book"></i> Εγγραφή</a></center>
 				<center><a class="btn btn-danger btn-sm" href="javascript:login('hide');" style="margin-top:50px;" ><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a></center>
 			</form>
 		</div>
