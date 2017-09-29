@@ -12,7 +12,7 @@ public class ConnectionManager {
 		String myUrl = "jdbc:mysql://localhost:3306/mydb?useSSL=true";
 
 		Class.forName(myDriver);
-		Connection conn = DriverManager.getConnection(myUrl, "root", "root1@");
+		Connection conn = DriverManager.getConnection(myUrl, "root", "root1234");
 		return conn;
 
 	}

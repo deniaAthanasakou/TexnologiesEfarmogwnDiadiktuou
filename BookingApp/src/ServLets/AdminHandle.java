@@ -1,22 +1,16 @@
 package ServLets;
 
 import java.io.IOException;
-
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-
 import JavaFiles.ImportUsersAdmin;
 
 /**
@@ -50,11 +44,14 @@ public class AdminHandle extends HttpServlet {
 		ResultSet rs = importUsers.populateAdminHandle();
 		try {
 			rs.beforeFirst();
-			String insideTable = "";
 			int counterRow = 1;
 			JSONObject  Users      = new JSONObject();
 			JSONArray  json      = new JSONArray();
 			while(rs.next()) {
+				byte roleAdmin = rs.getByte("role_admin");
+				if(roleAdmin==1) {
+					rs.next();
+				}
 				String username = rs.getString("username");
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
@@ -63,6 +60,7 @@ public class AdminHandle extends HttpServlet {
 				byte approved = rs.getByte("approved");
 				String roles = "";
 				String approval ="";
+				byte processed = rs.getByte("processed");
 				
 				if(roleTenant==1) {
 					roles += "Ενοικιαστής";
@@ -73,8 +71,14 @@ public class AdminHandle extends HttpServlet {
 				}
 				
 				
-				if(roleHost==1 && approved==1) {
+				if(roleHost==1 && approved==1 && processed==0) {
 					approval = "<button class=\"btn btn-md btn-success\" id=\"button_approve\"><i class=\"glyphicon glyphicon-ok\"></i> Έγκριση</button>";
+				}
+				else if(roleHost==1 && approved==0 && processed==1){
+					approval = "Εγκρίθηκε";
+				}
+				else if(roleHost==1 && approved==1 && processed==1){
+					approval = "Απορρίφθηκε";
 				}
 				
 				JSONArray user = new JSONArray();
@@ -93,14 +97,12 @@ public class AdminHandle extends HttpServlet {
 			}
 			
 			Users.put("Users", json);
-			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(json.toString());
 			response.getWriter().flush();
 			response.getWriter().close();
 
-			      
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

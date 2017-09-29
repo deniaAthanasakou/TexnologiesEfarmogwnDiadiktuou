@@ -2,18 +2,14 @@ package ServLets;
 
 
 import JavaFiles.HandleUser;
+import JavaFiles.ImgToBArray;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -87,8 +83,9 @@ public class RegisterUser extends HttpServlet {
 		
 		String imagePath = request.getParameter("imagePath");
 		byte[] photo = null;
+		ImgToBArray converter = new ImgToBArray();
 		if(imagePath.length() != 0) {
-			photo = convertImageToBArray(imagePath);
+			photo = converter.convertImageToBArray(imagePath);
 		}
 		
 		String country = request.getParameter("country");
@@ -127,17 +124,5 @@ public class RegisterUser extends HttpServlet {
 
 	}
 	
-	private static byte[] convertImageToBArray(String ImageName) throws IOException {
-
-		// open image
-		File imgPath = new File(ImageName);
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-		// get DataBufferBytes from Raster
-		WritableRaster raster = bufferedImage .getRaster();
-		DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-
-		return ( data.getData() );
-	}
 
 }

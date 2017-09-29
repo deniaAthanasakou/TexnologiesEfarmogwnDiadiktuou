@@ -1,7 +1,5 @@
 package JavaFiles;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -17,7 +15,7 @@ public class HandleUser {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 
 			//check for same username before insert
-			String checkQuery = "SELECT username FROM User WHERE username=" + "'" + newUser.getUsername() + "'";
+			String checkQuery = "SELECT * FROM User WHERE username=" + "'" + newUser.getUsername() + "'";
 			ResultSet rs = stmt.executeQuery(checkQuery);
 			rs.beforeFirst();
 			int rowCount = rs.last() ? rs.getRow() : 0;
@@ -79,6 +77,23 @@ public class HandleUser {
 				else {
 					System.out.println("Insert completed successfully!");
 				}
+				
+				ResultSet rsCheck = stmt.executeQuery(checkQuery);
+				rsCheck.beforeFirst();
+				int rowCountCheck = rsCheck.last() ? rsCheck.getRow() : 0;
+				
+				rsCheck.first();
+				if(rsCheck.first() && rowCountCheck==1) {
+					String user_id = rsCheck.getString("user_id");
+					if(newUser.getRoleHost()==1) {
+						String insertApproval = "INSERT INTO ProcessApproval (approved, host_id) VALUES (false,"
+											+ user_id + ")";
+						stmt.executeUpdate(insertApproval);
+					}
+				}
+				
+				
+				
 				stmt.close();
 				return 0;
 			}

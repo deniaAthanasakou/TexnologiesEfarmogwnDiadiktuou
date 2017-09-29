@@ -1,29 +1,19 @@
 package ServLets;
 
 import JavaFiles.ConnectionManager;
-import JavaFiles.ImgToBArray;
-import JavaFiles.JavaMysqlSelect;
 
+import JavaFiles.ImgToBArray;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class MyServlet
@@ -43,6 +33,8 @@ public class WelcomeInsertServlet extends HttpServlet {
 	public void init() throws ServletException {
 
 		try {
+			
+			System.out.println("------------------------INITIALIZE------------------------");
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 
 			String query = "SELECT isInitialized FROM options";
