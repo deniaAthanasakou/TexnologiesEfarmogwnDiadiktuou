@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -89,6 +90,9 @@ public class RegisterUser extends HttpServlet {
 		}
 		
 		String country = request.getParameter("country");
+		Locale.setDefault(new Locale("en", "US"));
+		Locale l = new Locale("", country);
+		country = l.getDisplayCountry();
 		String city = request.getParameter("city");
 
 		String postalCode = request.getParameter("postal_code");
