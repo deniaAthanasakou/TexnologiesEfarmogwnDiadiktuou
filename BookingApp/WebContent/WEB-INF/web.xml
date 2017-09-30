@@ -156,4 +156,20 @@
     <servlet-name>ExportData</servlet-name>
     <url-pattern>/ExportData/</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GetAptsFromWelcomeFilterSearch</servlet-name>
+    <servlet-class>ServLets.GetAptsFromWelcomeFilterSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAptsFromWelcomeFilterSearch</servlet-name>
+    <url-pattern>/GetAptsFromWelcomeFilterSearch/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetAptsFromWelcomeSearch</servlet-name>
+    <servlet-class>ServLets.GetAptsFromWelcomeSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAptsFromWelcomeSearch</servlet-name>
+    <url-pattern>/GetAptsFromWelcomeSearch/</url-pattern>
+  </servlet-mapping>
 </web-app>

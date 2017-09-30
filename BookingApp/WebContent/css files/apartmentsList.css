@@ -8,9 +8,6 @@
     vertical-align: top;
 }
 
-.myList{
-	background-color: #f5f5dc;
-}
 
 #ContainerList{
 	background-color:	#d9d9d9;
@@ -186,6 +183,11 @@
 #cal{
 	margin-bottom:5%;
 
+}
+
+.pagination li {
+  display:inline-block;
+  padding:5px;
 }
 
 
