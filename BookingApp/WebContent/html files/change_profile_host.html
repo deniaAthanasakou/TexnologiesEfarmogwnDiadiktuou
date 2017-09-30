@@ -72,8 +72,6 @@
 		}
 		</script>
 		
-		
-		
 		<script>
 		$(document).ready(function(){
 			
@@ -200,25 +198,39 @@
 		function checkValidityResidence(){
 			var inValid = new RegExp("[\\s]");		//whitespace
 			var numbersSymbols = new RegExp("[^A-Za-z]");
-			var onlyNumbers = new RegExp("[/^\d+$/]");
+			var onlyNumbers = new RegExp("^\\d+$");
 			var city = document.getElementById("city").value;
 			var streetAddress = document.getElementById("street_address").value;
+			var postalCode = document.getElementById("postal_code").value;
+			var streetAddressNumber = document.getElementById("address_number").value;
 			
 			//check for city
-			if (inValid.test(city)){
+			if (city.length!=0 && inValid.test(city)){
 				alert("Η Πόλη περιέχει κενά.");
 				return false;
 			}
-			if (numbersSymbols.test(city)){
+			if (city.length!=0 && numbersSymbols.test(city)){
 				alert("Η Πόλη περιέχει αριθμούς ή σύμβολα.");
 				return false;
 			}
 			
 			//check for street_address
-			if (!(/^[a-zA-Z\s]*$/.test(streetAddress))){
+			if (streetAddress.lentgh!=0 && !(/^[a-zA-Z\s]*$/.test(streetAddress))){
 				alert("Η Οδός περιέχει αριθμούς ή σύμβολα.");
 				return false;
-			}	
+			}	 	
+			
+			//check postal code
+			if(postalCode.length!=0 && !onlyNumbers.test(postalCode)){
+				alert("Ο Ταχυδρομικώς Κώδικας περιέχει μη αρθμητικούς χαρακτήρες ή κενά." + postalCode.length);
+				return false;
+			}
+			
+			//check street address number
+			if(streetAddressNumber.length!=0 && !onlyNumbers.test(streetAddressNumber)){
+				alert("Ο Αριθμός Οδού περιέχει μη αρθμητικούς χαρακτήρες ή κενά.");
+				return false;
+			}
 		}
 		
 		function checkValidityAdditionalInfo(){
@@ -272,8 +284,66 @@
 	            
 	        });
         </script>
+        
+        <script>
+            $(document).ready(function() { 
+            	var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	            
+	            
+	            //post method
+	            xmlhttp.open("POST", "../PopulateChangeProfile", false);
+	            xmlhttp.send();
+	       
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+	            document.getElementById("username").value = jsonResponse.username;
+	            document.getElementById("name").value = jsonResponse.name;
+	            document.getElementById("surname").value = jsonResponse.surname;
+	            document.getElementById("emailInput").value = jsonResponse.email;
+	            if (jsonResponse.image != null){
+	            	document.getElementById("currentImage").src = jsonResponse.image;
+	            }
+	            	            
+	            if (jsonResponse.tel != null){
+	            	document.getElementById("tel").value = jsonResponse.tel;
+	            }
+	            if(jsonResponse.birthday != null){
+	            	document.getElementById("birthInput").value = jsonResponse.birthday;
+	            }
+	           	if(jsonResponse.tenant=="1"){
+	            	document.getElementById("tenant").checked = true;
+	            }
+	           	if(jsonResponse.host=="1")
+	           		document.getElementById("host").checked = true;
+	            }
+	            if(jsonResponse.country != null){
+	            	document.getElementById("country").value = jsonResponse.country;
+	            }
+	            if(jsonResponse.city != null){
+	            	document.getElementById("city").value = jsonResponse.city;
+	            }
+	            if(jsonResponse.street_address != null){
+	            	document.getElementById("street_address").value = jsonResponse.street_address;
+	            }
+	            
+	            if(jsonResponse.street_address != null){
+	            	document.getElementById("address_number").value = jsonResponse.address_number;
+	            }
+	            
+	            if(jsonResponse.postal_code != null){
+	            	document.getElementById("postal_code").value = jsonResponse.postal_code;
+	            }
+	            
+
+	        });
+        </script>
 		
-		<title>User's/Host's/Admin's Edit Profile</title>
+		<title>Host's Edit Profile</title>
 
 	</head>
 	<body>
@@ -295,7 +365,7 @@
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-									<li><a class="nav-item" href="user_page.html"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
+									<li><a class="nav-item" href="../ChooseUserServlet"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
 									<li><a class="nav-item" href="../LogoutServlet"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
 								</ul>
 							</div>
@@ -319,7 +389,7 @@
 						
 						<ul class="nav nav-tabs">
 							<li class="nav-item"><a href="host_page.html"><i class="glyphicon glyphicon-home"></i> Αρχική</a></li>
-							<li class="nav-item"><a href="change_profile_host.html" id="active"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
+							<li class="nav-item"><a href="change_profile_host.html"   id="active"><i class="glyphicon glyphicon-cog"></i> Διαχείριση Προφίλ</a></li>
 							<li class="nav-item dropdown">
 							    <a class="nav-item dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="cursor: pointer;"><i class="glyphicon glyphicon-pencil"></i> Διαχείριση Οικειών<span class="caret"></span></a>
 							    <ul class="dropdown-menu">
@@ -336,7 +406,7 @@
 				
 					<div  id="input-profile" class="container-fluid">
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Εικόνας Προφίλ</h3>
@@ -351,7 +421,7 @@
 										<input type="file" name="img[]" class="file"/>
 		    							<div class="input-group col-xs-12">
 		      								<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-		      								<input type="text" class="form-control input-lg input_path" id="imagePath" placeholder="Upload Image"/>
+		      								<input type="text" class="form-control input-lg input_path" id="imagePath" name="imagePath" placeholder="Upload Image"/>
 		      								<span class="input-group-btn">
 		        								<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
 		      								</span>
@@ -359,13 +429,13 @@
 									</div>
 								</div>
 								<div class="row" style="margin-top:20px;">
-									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submitImage" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post" onsubmit="return checkValidityPersonalInfo();">
+							<form method="post" onsubmit="return checkValidityPersonalInfo();" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Προσωπικών Πληροφοριών</h3>
@@ -376,7 +446,7 @@
 										<label for="username">Όνομα Χρήστη:</label>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" type="text" value="USERNAME" disabled></input>
+										<input class="form-control" type="text" id="username" disabled></input>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -384,25 +454,25 @@
 										<label for="name">Όνομα*:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" value="NAME" required />
+										<input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" required/>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
 									<div class="col-md-6">
-										<label for="surname">Επώνυμο:</label>
+										<label for="surname">Επώνυμο*:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" value="SURNAME" required />
+										<input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" required/>
 									</div>
 								</div>
 								<div class="row" style="margin-top:20px;">
-									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submitPersonal" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post" onsubmit="return checkValidityEmail();">
+							<form method="post" onsubmit="return checkValidityEmail();" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Email</h3>
@@ -413,7 +483,7 @@
 										<label for="email">Email:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="email" id="emailInput" class="form-control" placeholder="Εισαγωγή E-mail" name="email" size="100" maxlength="100" value="EMAIL" required/>
+										<input type="email" id="emailInput" class="form-control" placeholder="Εισαγωγή E-mail" name="email" size="100" maxlength="100" required/>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -425,12 +495,12 @@
 									</div>
 								</div>
 								<div class="row" style="margin-top:20px;">
-									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submitEmail" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						<div class="sectionDiv">
-							<form method="post" onsubmit="return checkValidityPasswords();">
+							<form method="post" onsubmit="return checkValidityPasswords();" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Κωδικού Πρόσβασης</h3>
@@ -441,7 +511,7 @@
 										<label for="old_password">Κωδικός Πρόσβασης*:</label>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" type="password" id="old_password" required></input>
+										<input class="form-control" type="password" id="old_password" name="old_password" required></input>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -462,13 +532,13 @@
 								</div>
 								
 								<div class="row" style="margin-top:20px;">
-									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submitPass" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post">
+							<form method="post" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Ρόλου</h3>
@@ -476,18 +546,18 @@
 								</div>
 								<div class="row nomargin" >
 									<div class="col-md-12 well well-sm">
-										<label class="checkbox-inline"><input type="checkbox" value="tenant"  checked>Ενοικιαστής</label>
-										<label class="checkbox-inline"><input type="checkbox" value="host" id="host">Οικοδεσπότης</label>
+										<label class="checkbox-inline"><input type="checkbox" value="tenant" id="tenant" name="tenant">Ενοικιαστής</label>
+										<label class="checkbox-inline"><input type="checkbox" value="host" id="host" name="host">Οικοδεσπότης</label>
 										</div>
 									</div>
 								<div class="row" style="margin-top:20px;">
-									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submitRoles" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post" onsubmit="return checkValidityResidence();">
+							<form method="post" onsubmit="return checkValidityResidence();" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Στοιχείων Διαμονής</h3>
@@ -498,7 +568,7 @@
 										<label for="country">Χώρα:</label>
 									</div>
 									<div class="col-md-6">
-										<select class="form-control bfh-countries" data-country="GR"></select>
+										<select class="form-control bfh-countries"  id="country" data-country="GR" name="country"></select>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -506,16 +576,16 @@
 										<label for="city">Πόλη:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="text" id="city" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" placeholder="Εισαγωγή Πόλης" name="city" size="45" maxlength="45" value="CITY"/>
+										<input type="text" id="city" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" placeholder="Εισαγωγή Πόλης" name="city" size="45" maxlength="45" />
 									</div>
 								</div>
 								
 								<div class="row" style="margin-top: 10px;">
 									<div class="col-md-6">
-										<label for="postal_code">Ταχυδρομικός Κώδικας:</label>
+										<label for="postal_code">Ταχυδρομικώς Κώδικας:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="number" id="postal_code" class="form-control"  name="postal_code" size="10" maxlength="10" value="18547"/>
+										<input type="number" id="postal_code" class="form-control"  name="postal_code" size="10" maxlength="10" />
 									</div>
 								</div>
 								
@@ -524,7 +594,7 @@
 										<label for="address">Οδός:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="text" id="street_address" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" placeholder="Εισαγωγή Οδού" name="street_address" size="45" maxlength="45" value="ADDRESS"/>
+										<input type="text" id="street_address" class="form-control" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" placeholder="Εισαγωγή Οδού" name="street_address" size="45" maxlength="45" />
 									</div>
 								</div>
 								
@@ -533,18 +603,18 @@
 										<label for="address_num">Αριθμός:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="number" id="address_number" data-toggle="popover" data-content="Αριθμός οδού κατοικίας." data-trigger="focus" class="form-control" name="address_number" size="10" min="1" maxlength="10" value="145"/>
+										<input type="number" id="address_number" data-toggle="popover" data-content="Αριθμός οδού κατοικίας." data-trigger="focus" class="form-control" name="address_number" size="10" min="1" maxlength="10" />
 									</div>
 								</div>
 								
 								<div class="row" style="margin-top:20px;">
-									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 col-md-offset-6 text-right"><right><button class="btn btn-success btn-md" name="submitResidence" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
 						
 						<div class="sectionDiv">
-							<form method="post" onsubmit="return checkValidityAdditionalInfo();">
+							<form method="post" onsubmit="return checkValidityAdditionalInfo();" action="../UpdateProfileServlet">
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<h3>Αλλαγή Λοιπών Στοιχείων</h3>
@@ -555,7 +625,7 @@
 										<label for="city">Τηλέφωνο:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" value="TEL" name="tel" size="10" maxlength="10"/>
+										<input type="number" id="tel" data-toggle="popover" data-content="Προτιμότερη η εισαγωγή κινητού τηλεφώνου." data-trigger="focus" class="form-control" name="tel" size="10" maxlength="10"/>
 									</div>
 								</div>
 								
@@ -566,7 +636,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 		            						<div class='input-group date' id='birth'>
-		                						<input type='text' id="birthInput" class="form-control" required/>
+		                						<input type='text' id="birthInput" class="form-control" name="birthday"/>
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
 		                						</span>
@@ -577,7 +647,7 @@
 								
 								<div class="row" style="margin-top:20px;">
 									<div class="col-md-6 "><left><button class="btn btn-danger btn-sm" name="cancel" type="button" onclick="openPopupPreviousPage()"><i class="glyphicon glyphicon-remove"></i> Επιστροφή</button></left></div>
-									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submit" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
+									<div class="col-md-6 text-right"><right><button class="btn btn-success btn-md" name="submitAdditional" type="submit"><i class="glyphicon glyphicon-ok"></i> Καταχώρηση</button></right></div>
 								</div>
 							</form>
 						</div>
@@ -590,7 +660,7 @@
 		
 			<div id = "footer">
 				<!-- footer -->
-				<div class="links">
+				<div class="links">	
 					<a href="">Sitemap</a>
 					<p style="margin-top:8px">Copyright &copy; 2017-2018 <a href="../WelcomePage.html">Book A Room</a></p>
 				</div>

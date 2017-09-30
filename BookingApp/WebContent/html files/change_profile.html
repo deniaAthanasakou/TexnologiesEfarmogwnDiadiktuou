@@ -198,7 +198,7 @@
 		function checkValidityResidence(){
 			var inValid = new RegExp("[\\s]");		//whitespace
 			var numbersSymbols = new RegExp("[^A-Za-z]");
-			var onlyNumbers = new RegExp("[/^\d+$/]");
+			var onlyNumbers = new RegExp("^\\d+$");
 			var city = document.getElementById("city").value;
 			var streetAddress = document.getElementById("street_address").value;
 			var postalCode = document.getElementById("postal_code").value;
@@ -343,7 +343,7 @@
 	        });
         </script>
 		
-		<title>User's/Host's/Admin's Edit Profile</title>
+		<title>User's Edit Profile</title>
 
 	</head>
 	<body>
@@ -365,7 +365,7 @@
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-									<li><a class="nav-item" href="user_page.html"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
+									<li><a class="nav-item" href="../ChooseUserServlet"><i class="glyphicon glyphicon-user"></i> Προφίλ</a></li>
 									<li><a class="nav-item" href="../LogoutServlet"><i class="glyphicon glyphicon-log-out"></i> Έξοδος</a></li>
 								</ul>
 							</div>
@@ -445,15 +445,15 @@
 										<label for="name">Όνομα*:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" required />
+										<input type="text" id="name" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Ονόματος" name="name" size="45" maxlength="45" required/>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
 									<div class="col-md-6">
-										<label for="surname">Επώνυμο:</label>
+										<label for="surname">Επώνυμο*:</label>
 									</div>
 									<div class="col-md-6">
-										<input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" required />
+										<input type="text" id="surname" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί, σύμβολα ή κενά." data-trigger="focus" class="form-control" placeholder="Εισαγωγή Επωνύμου" name="surname" size="45" maxlength="45" required/>
 									</div>
 								</div>
 								<div class="row" style="margin-top:20px;">
@@ -502,7 +502,7 @@
 										<label for="old_password">Κωδικός Πρόσβασης*:</label>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" type="password" id="old_password" required></input>
+										<input class="form-control" type="password" id="old_password" name="old_password" required></input>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -537,8 +537,8 @@
 								</div>
 								<div class="row nomargin" >
 									<div class="col-md-12 well well-sm">
-										<label class="checkbox-inline"><input type="checkbox" value="tenant" id="tenant">Ενοικιαστής</label>
-										<label class="checkbox-inline"><input type="checkbox" value="host" id="host">Οικοδεσπότης</label>
+										<label class="checkbox-inline"><input type="checkbox" value="tenant" id="tenant" name="tenant">Ενοικιαστής</label>
+										<label class="checkbox-inline"><input type="checkbox" value="host" id="host" name="host">Οικοδεσπότης</label>
 										</div>
 									</div>
 								<div class="row" style="margin-top:20px;">
@@ -559,7 +559,7 @@
 										<label for="country">Χώρα:</label>
 									</div>
 									<div class="col-md-6">
-										<select class="form-control bfh-countries"  id="country" data-country="GR"></select>
+										<select class="form-control bfh-countries"  id="country" data-country="GR" name="country"></select>
 									</div>
 								</div>
 								<div class="row" style="margin-top: 10px;">
@@ -627,7 +627,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 		            						<div class='input-group date' id='birth'>
-		                						<input type='text' id="birthInput" class="form-control" required/>
+		                						<input type='text' id="birthInput" class="form-control" name="birthday"/>
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
 		                						</span>
