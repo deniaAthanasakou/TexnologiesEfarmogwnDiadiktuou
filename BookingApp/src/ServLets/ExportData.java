@@ -58,7 +58,7 @@ public class ExportData extends HttpServlet {
 			try {
 				String source = xml.areaHostingXML();
 				response.setContentType("text/xml");
-			    //response.setHeader("Content-Disposition", "attachment; filename=\"areaHosting.xml\"");
+			    response.setHeader("Content-Disposition", "attachment; filename=\"areaHosting.xml\"");
 			    OutputStream outputStream = response.getOutputStream();
 		        outputStream.write(source.getBytes());
 		        outputStream.flush();
@@ -69,12 +69,69 @@ public class ExportData extends HttpServlet {
 		}
 		if(request.getParameter("booking") != null) {
 			System.out.println("XML booking");
+			String source = null;
+			try {
+				source = xml.bookingXML();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("text/xml");
+		    response.setHeader("Content-Disposition", "attachment; filename=\"booking.xml\"");
+		    OutputStream outputStream = response.getOutputStream();
+	        outputStream.write(source.getBytes());
+	        outputStream.flush();
+	        outputStream.close();
 		}
 		if(request.getParameter("criticsApt") != null) {
 			System.out.println("XML criticsApt");
+			String source = null;
+			try {
+				source = xml.criticsAptXML();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("text/xml");
+		    response.setHeader("Content-Disposition", "attachment; filename=\"criticsApt.xml\"");
+		    OutputStream outputStream = response.getOutputStream();
+	        outputStream.write(source.getBytes());
+	        outputStream.flush();
+	        outputStream.close();
 		}
 		if(request.getParameter("criticsHost") != null) {
 			System.out.println("XML criticsHost");
+			String source = null;
+			try {
+				source = xml.criticsHostXML();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("text/xml");
+		    response.setHeader("Content-Disposition", "attachment; filename=\"criticsHost.xml\"");
+		    OutputStream outputStream = response.getOutputStream();
+	        outputStream.write(source.getBytes());
+	        outputStream.flush();
+	        outputStream.close();
 		}
 	}
 
