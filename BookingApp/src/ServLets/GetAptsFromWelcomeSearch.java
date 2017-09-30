@@ -43,7 +43,7 @@ public class GetAptsFromWelcomeSearch extends HttpServlet {
 		String neighborhood = "";
 		String fromDate = "02/05/2018";
 		String toDate = "05/12/2020";
-		String tenants = "2";
+		String tenants = "1";
 		
 		GetAptsFromWelcomeSearchSQL search = new GetAptsFromWelcomeSearchSQL();
 		String allApts = search.ExecuteQuery(neighborhood,fromDate,toDate,tenants);

@@ -2,15 +2,20 @@ package JavaFiles;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
 
 import Entities.SearchFilters;
 
 public class GetAptsFromWelcomeSearchFilterSQL {
 
 
-	public  HashMap<Integer, HashMap<String, String>> ExecuteQuery(SearchFilters filters) {
+	public  String ExecuteQuery(SearchFilters filters) {
 		try {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 			//String query = "SELECT * FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN Rule NATURAL JOIN FreeDates WHERE";
@@ -19,34 +24,38 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 				query+="  neighborhood = '" + filters.getNeighborhood() + "' ";
 			else 
 				query+=" (1) ";
-			query+= "AND type = '" + filters.getRoomType() + "' ";
+			
+			if (!filters.getRoomType().contains("All") )
+				query+= "AND type = '" + filters.getRoomType() + "' ";
 			if(filters.getMaxCost()!=0) {
 				query += " AND " + filters.getMaxCost() + " >= min_cost_ booking ";
 			}
-			if(filters.getWifi()!=null) {
-				query += " AND wifi = true";
-			}
-			if(filters.getAircondition()!=null) {
-				query += " AND aircondition = true";
-			}
-			if(filters.getHeating()!=null) {
-				query += " AND heating = true";
-			}
-			if(filters.getKitchen()!=null) {
-				query += " AND kitchen = true";
-			}
-			if(filters.getTv()!=null) {
-				query += " AND tv = true";
-			}
-			if(filters.getParking()!=null) {
-				query += " AND parking = true";
-			}
-			if(filters.getElevator()!=null) {
-				query += " AND elevator = true";
-			}
 			
-			query+= " AND from_date <= " + filters.getFrom();
-			query+= " AND to_date >= " + filters.getTo();
+			if(filters.isWifi())
+				query += " AND wifi = " +filters.isWifi();
+			if(filters.isAircondition())
+				query += " AND aircondition = " +filters.isAircondition();
+			if(filters.isHeating())
+				query += " AND heating = " +filters.isHeating();
+			if(filters.isKitchen())
+				query += " AND kitchen = " +filters.isKitchen();
+			if(filters.isTv())
+				query += " AND tv = " +filters.isTv();
+			if(filters.isParking())
+				query += " AND parking = " +filters.isParking();
+			if(filters.isElevator())
+				query += " AND elevator = " +filters.isElevator();
+			
+			
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			Date fromDate = sdf.parse(filters.getFrom().replaceAll("/", "-"));
+			Date toDate = sdf.parse(filters.getTo().replaceAll("/", "-"));
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+
+			query+= " AND from_date >= " + "'" + sdf2.format(fromDate) + "'";
+			query+= " AND to_date <= " + "'" +  sdf2.format(toDate) + "'";
+			query+= " AND max_tenants >=" + filters.getTenants();
 			
 			query+= " ORDER BY min_cost_booking";
 
@@ -76,38 +85,45 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 
 			rs.beforeFirst();
 			int i=0;
+			JSONArray aptArray = new JSONArray();
 			while (rs.next()) {
 
 				i++;
-
+				
 				HashMap <String,String> apt = new HashMap <String,String>();    	  
 				String id = rs.getString("room_id");
 				ids.add(id);
 				ImgToBArray image = new ImgToBArray();//getRoomPhotoAsString
-				String imgPath = image.convertBArrayToImage(rs.getBytes("room_photo"));
+				//String imgPath = image.convertBArrayToImage(rs.getBytes("room_photo"));
 				String costPerDay = rs.getString("cost_per_day");
 				String type = rs.getString("type");
 				String beds = rs.getString("number_beds");
 				String critics = rs.getString("number_critics");
 				String avgCritic = rs.getString("average_critic");
-				System.out.println("results " +id +" "+type +" "+beds +" "+critics +" "+avgCritic + " " + imgPath);
+				System.out.println("results " +id +" "+type +" "+beds +" "+critics +" "+avgCritic );
 
 				//insert data into inner HashMap
 				apt.put("room_id",id);
-				apt.put("image",imgPath);				//photo
+				//apt.put("image",imgPath);				//photo
 				apt.put("costPerDay",costPerDay);
 				apt.put("type",type);
 				apt.put("beds",beds);
 				apt.put("critics",critics);
 				apt.put("avgCritic",avgCritic);
 
+				JSONObject aptJSON = new JSONObject(apt);
+				aptArray.put(aptJSON);
 				//insert data into outer HashMap
 				allApts.put(i, apt);
 			}
+			
+			JSONObject allAptsJSON = new JSONObject();
+			allAptsJSON.put("apts", aptArray);
 
+			System.out.println("JSONNNN:" + allAptsJSON.toString());
 
 			stmt.close();
-			return allApts;
+			return allAptsJSON.toString();
 		}
 		catch (Exception e)
 		{

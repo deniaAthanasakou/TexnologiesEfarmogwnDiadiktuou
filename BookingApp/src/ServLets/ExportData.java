@@ -58,7 +58,7 @@ public class ExportData extends HttpServlet {
 			try {
 				String source = xml.areaHostingXML();
 				response.setContentType("text/xml");
-			    response.setHeader("Content-Disposition", "attachment; filename=\"areaHosting.xml\"");
+			    //response.setHeader("Content-Disposition", "attachment; filename=\"areaHosting.xml\"");
 			    OutputStream outputStream = response.getOutputStream();
 		        outputStream.write(source.getBytes());
 		        outputStream.flush();

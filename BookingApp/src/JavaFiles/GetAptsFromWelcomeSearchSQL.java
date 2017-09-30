@@ -13,7 +13,7 @@ import org.codehaus.jettison.json.JSONObject;
 import Entities.SearchFilters;
 
 public class GetAptsFromWelcomeSearchSQL {
-	public  String ExecuteQuery(String neighborhood, String from, String to, String max_tenants) {
+	public  String ExecuteQuery(String neighborhood, String from, String to, String tenants) {
 		try {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 			//String query = "SELECT * FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN Rule NATURAL JOIN FreeDates WHERE";
@@ -31,6 +31,7 @@ public class GetAptsFromWelcomeSearchSQL {
 
 			query+= " AND from_date >= " + "'" + sdf2.format(fromDate) + "'";
 			query+= " AND to_date <= " + "'" +  sdf2.format(toDate) + "'";
+			query+= " AND max_tenants >=" + "'" + tenants + "'";
 			query+= " ORDER BY min_cost_booking";
 			
 
@@ -69,17 +70,17 @@ public class GetAptsFromWelcomeSearchSQL {
 				String id = rs.getString("room_id");
 				ids.add(id);
 				ImgToBArray image = new ImgToBArray();//getRoomPhotoAsString
-				String imgPath = image.convertBArrayToImage(rs.getBytes("room_photo"));
+				//String imgPath = image.convertBArrayToImage(rs.getBytes("room_photo"));
 				String costPerDay = rs.getString("cost_per_day");
 				String type = rs.getString("type");
 				String beds = rs.getString("number_beds");
 				String critics = rs.getString("number_critics");
 				String avgCritic = rs.getString("average_critic");
-				System.out.println("results " +id +" "+type +" "+beds +" "+critics +" "+avgCritic + " " + imgPath);
+				System.out.println("results " +id +" "+type +" "+beds +" "+critics +" "+avgCritic );
 
 				//insert data into inner HashMap
 				apt.put("room_id",id);
-				apt.put("image",imgPath);				//photo
+				//apt.put("image",imgPath);				//photo
 				apt.put("costPerDay",costPerDay);
 				apt.put("type",type);
 				apt.put("beds",beds);

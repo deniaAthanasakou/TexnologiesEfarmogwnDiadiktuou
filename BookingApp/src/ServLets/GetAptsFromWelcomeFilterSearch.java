@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import Entities.SearchFilters;
 import JavaFiles.GetAptsFromWelcomeSearchFilterSQL;
+import JavaFiles.GetAptsFromWelcomeSearchSQL;
 /**
- * Servlet implementation class GetAptsFromWelcomeSearch
+ * Servlet implementation class GetAptsFromWelcomeFilterSearch
  */
 @WebServlet("/GetAptsFromWelcomeFilterSearch")
 public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
@@ -33,8 +35,71 @@ public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("INSIDE GetAptsFromWelcomeFilterSearch SERVLET");
+		
+		//get fields
+		String roomType = request.getParameter("roomType");
+		String maxC = request.getParameter("maxCost");
+		int maxCost = 0;					//default
+		if(maxC!=null) {
+			maxCost = Integer.parseInt(request.getParameter("maxCost"));
+		}
+		
+		boolean wifi = false;
+		boolean aircondition = false;
+		boolean heating = false;
+		boolean kitchen = false;		
+		boolean tv = false;		
+		boolean parking = false;
+		boolean elevator= false;
+		
+		if(request.getParameter("wifi").equals("true")){
+			wifi = true;
+		}
+		if(request.getParameter("aircondition").equals("true")){
+			 aircondition = true;
+		}
+		if(request.getParameter("heating").equals("true")){
+			heating = true;
+		}
+		if(request.getParameter("kitchen").equals("true")){
+			kitchen = true;
+		}
+		if(request.getParameter("tv").equals("true")){
+			tv = true;
+		}
+		if(request.getParameter("parking").equals("true")){
+			parking = true;
+		}
+		if(request.getParameter("elevator").equals("true")){
+			elevator = true;
+		}
+		
+		String neighborhood = "";								//default
+		String from = "02/05/2018";
+		String to = "05/12/2020";
+		String tenants = "2";
+		
+		//somehow get neighborhood
+		
+		System.out.println("roomType" + roomType +"!"+ wifi + "!"+  aircondition);
+		SearchFilters filters = new SearchFilters(roomType,maxCost,wifi,aircondition,heating,kitchen,tv,parking,elevator,neighborhood, from, to, tenants);
+				
+		GetAptsFromWelcomeSearchFilterSQL search = new GetAptsFromWelcomeSearchFilterSQL();
+		String allApts = search.ExecuteQuery(filters);
+    	JSONObject aptsInfo=null;
+		try {
+			aptsInfo = new JSONObject(allApts);
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(aptsInfo.toString());
+			response.getWriter().flush();
+			response.getWriter().close();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("JSON: " + aptsInfo.toString());
 	}
 
 	/**
@@ -43,50 +108,7 @@ public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("INSIDE GetAptsFromWelcomeSearch SERVLET");
 		
-		//get fields
-		String roomType = request.getParameter("roomType");
-		int maxCost = Integer.parseInt(request.getParameter("maxCost"));
-		String wifi = request.getParameter("wifi");
-		String aircondition = request.getParameter("aircondition");
-		String heating = request.getParameter("heating");
-		String kitchen = request.getParameter("kitchen");
-		String tv = request.getParameter("tv");
-		String parking = request.getParameter("parking");
-		String elevator = request.getParameter("elevator");
-		String neighborhood = "";								//default
-		String from ="2017-12-01";
-		String to ="2018-02-01";
-		
-		//somehow get neighborhood
-		
-		System.out.println("roomType" + roomType +"!"+ wifi);
-		SearchFilters filters = new SearchFilters(roomType,maxCost,wifi,aircondition,heating,kitchen,tv,parking,elevator,neighborhood, from, to);
-		
-		GetAptsFromWelcomeSearchFilterSQL getApts = new GetAptsFromWelcomeSearchFilterSQL();
-		
-		if (request.getParameter("submit") != null) {
-			
-        	System.out.println("BEFORE SELECT");
-        	HashMap<Integer, HashMap<String, String>> allApts = getApts.ExecuteQuery(filters);
-        	JSONObject aptsInfo = new JSONObject(allApts);
-    		System.out.println("room_id: " + allApts.get(1).get("room_id"));
-    		System.out.println("JSON: " + aptsInfo.toString());
-    		response.setContentType("application/json");
-    		response.setCharacterEncoding("UTF-8");
-    		response.getWriter().write(aptsInfo.toString());
-    		response.getWriter().flush();
-    		response.getWriter().close();
-        	
-        	
-        	
-        	
-            System.out.println("AFTER SELECT");
-            
-        } else {
-        	System.out.println("SELECT DIDN'T HAPPEN");
-        }
 	}
 
 }

@@ -3,19 +3,21 @@ package Entities;
 public class SearchFilters {
 	private String roomType;			//table Apartment
 	private int maxCost;				//table Apartment computed with min_cost_booking
-	private String wifi;				//table Facilities
-	private String aircondition;		//table Facilities
-	private String heating;				//table Facilities
-	private String kitchen;				//table Facilities
-	private String tv;					//table Facilities
-	private String parking;				//table Facilities
-	private String elevator;			//table Facilities
+	private boolean wifi;				//table Facilities
+	private boolean aircondition;		//table Facilities
+	private boolean heating;				//table Facilities
+	private boolean kitchen;				//table Facilities
+	private boolean tv;					//table Facilities
+	private boolean parking;				//table Facilities
+	private boolean elevator;			//table Facilities
 	private String neighborhood;		//table Location
-	private String from;
-	private String to;
+	private String from;				//table FreeDates
+	private String to;					//table FreeDates
+	private String tenants;				//table Apartment
 	
-	public SearchFilters(String roomType, int maxCost, String wifi, String aircondition, String heating,
-			String kitchen, String tv, String parking, String elevator, String neighborhood,String from, String to) {
+	public SearchFilters(String roomType, int maxCost, boolean wifi, boolean aircondition, boolean heating,
+			boolean kitchen, boolean tv, boolean parking, boolean elevator, String neighborhood, String from, String to,
+			String tenants) {
 		super();
 		this.roomType = roomType;
 		this.maxCost = maxCost;
@@ -29,22 +31,7 @@ public class SearchFilters {
 		this.neighborhood = neighborhood;
 		this.from = from;
 		this.to = to;
-	}
-
-	public String getFrom() {
-		return from;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public String getTo() {
-		return to;
-	}
-
-	public void setTo(String to) {
-		this.to = to;
+		this.tenants = tenants;
 	}
 
 	public String getRoomType() {
@@ -63,59 +50,59 @@ public class SearchFilters {
 		this.maxCost = maxCost;
 	}
 
-	public String getWifi() {
+	public boolean isWifi() {
 		return wifi;
 	}
 
-	public void setWifi(String wifi) {
+	public void setWifi(boolean wifi) {
 		this.wifi = wifi;
 	}
 
-	public String getAircondition() {
+	public boolean isAircondition() {
 		return aircondition;
 	}
 
-	public void setAircondition(String aircondition) {
+	public void setAircondition(boolean aircondition) {
 		this.aircondition = aircondition;
 	}
 
-	public String getHeating() {
+	public boolean isHeating() {
 		return heating;
 	}
 
-	public void setHeating(String heating) {
+	public void setHeating(boolean heating) {
 		this.heating = heating;
 	}
 
-	public String getKitchen() {
+	public boolean isKitchen() {
 		return kitchen;
 	}
 
-	public void setKitchen(String kitchen) {
+	public void setKitchen(boolean kitchen) {
 		this.kitchen = kitchen;
 	}
 
-	public String getTv() {
+	public boolean isTv() {
 		return tv;
 	}
 
-	public void setTv(String tv) {
+	public void setTv(boolean tv) {
 		this.tv = tv;
 	}
 
-	public String getParking() {
+	public boolean isParking() {
 		return parking;
 	}
 
-	public void setParking(String parking) {
+	public void setParking(boolean parking) {
 		this.parking = parking;
 	}
 
-	public String getElevator() {
+	public boolean isElevator() {
 		return elevator;
 	}
 
-	public void setElevator(String elevator) {
+	public void setElevator(boolean elevator) {
 		this.elevator = elevator;
 	}
 
@@ -127,5 +114,29 @@ public class SearchFilters {
 		this.neighborhood = neighborhood;
 	}
 
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public String getTenants() {
+		return tenants;
+	}
+
+	public void setTenants(String tenants) {
+		this.tenants = tenants;
+	}
 	
+
 }
