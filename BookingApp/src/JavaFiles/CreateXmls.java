@@ -38,19 +38,21 @@ public class CreateXmls {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 	
-		if(rowCount!=0) {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = null;
-			try {
-				docBuilder = docFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			}
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = null;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 
-			// root elements
-			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("booking");
-			doc.appendChild(rootElement);
+		// root elements
+		Document doc = docBuilder.newDocument();
+		Element rootElement = doc.createElement("booking");
+		doc.appendChild(rootElement);
+		
+		if(rowCount!=0) {
+			
 			
 			rs.beforeFirst();
 			while(rs.next()) {
@@ -233,8 +235,11 @@ public class CreateXmls {
 		    return lsSerializer.writeToString(doc);   
 			
 			
+		}else {
+			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
+		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
+		    return lsSerializer.writeToString(doc); 
 		}
-		return null;
 	}
 	
 	public String bookingXML() throws SQLException, ClassNotFoundException, TransformerException {
@@ -249,20 +254,22 @@ public class CreateXmls {
 		ResultSet rs = stmt.executeQuery(checkQuery);
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
+		
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = null;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		// root elements
+		Document doc = docBuilder.newDocument();
+		Element rootElement = doc.createElement("booking");
+		doc.appendChild(rootElement);
 	
 		if(rowCount!=0) {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = null;
-			try {
-				docBuilder = docFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			}
-
-			// root elements
-			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("booking");
-			doc.appendChild(rootElement);
+			
 			
 			rs.beforeFirst();
 			while(rs.next()) {
@@ -298,14 +305,222 @@ public class CreateXmls {
 				bookInfo.appendChild(dateTo);
 				
 			}
-			
 			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
 		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
 		    return lsSerializer.writeToString(doc);   
 			
+		}else {
+			//bookInfo elements
+			Element bookInfo = doc.createElement("bookInfo");
+			rootElement.appendChild(bookInfo);
+			
+			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
+		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
+		    return lsSerializer.writeToString(doc);
+
 		}
-		return null;
 	}
+	
+	public String criticsAptXML() throws SQLException, ClassNotFoundException, TransformerException {
+		System.out.println("INSIDE XML BOOKING");
+		Statement stmt = ConnectionManager.getConnection().createStatement();
+
+		//check for same username before insert
+		String checkQuery = "SELECT DISTINCT tenant_id, username, room_id ,street, address_number, neighborhood, date, critic  FROM CriticsApt" + 
+				" NATURAL JOIN Apartment" + 
+				" NATURAL JOIN User" + 
+				" NATURAL JOIN Location";
+		
+		System.out.println(checkQuery);
+
+		ResultSet rs = stmt.executeQuery(checkQuery);
+		rs.beforeFirst();
+		int rowCount = rs.last() ? rs.getRow() : 0;
+		
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = null;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		// root elements
+		Document doc = docBuilder.newDocument();
+		Element rootElement = doc.createElement("booking");
+		doc.appendChild(rootElement);
+	
+		if(rowCount!=0) {
+			
+			rs.beforeFirst();
+			while(rs.next()) {
+				
+				//critic elements
+				Element criticInfo = doc.createElement("critic_info");
+				rootElement.appendChild(criticInfo);
+				
+				//tenant elements
+				Element tenant = doc.createElement("tenant");
+				criticInfo.appendChild(tenant);
+				
+				
+				// tenant id elements
+				Element tenantId = doc.createElement("tenant_id");
+				tenantId.appendChild(doc.createTextNode(rs.getString("tenant_id")));
+				tenant.appendChild(tenantId);
+				
+				// username elements
+				Element username = doc.createElement("username");
+				username.appendChild(doc.createTextNode(rs.getString("username")));
+				tenant.appendChild(username);
+				
+				//room info elements
+				Element roomInfo = doc.createElement("room_info");
+				criticInfo.appendChild(roomInfo);
+				
+				// room_id elements
+				Element roomId = doc.createElement("room_id");
+				roomId.appendChild(doc.createTextNode(rs.getString("room_id")));
+				roomInfo.appendChild(roomId);
+				
+				// street elements
+				Element street = doc.createElement("street");
+				street.appendChild(doc.createTextNode(rs.getString("street")));
+				roomInfo.appendChild(street);
+				
+				// address_number elements
+				Element addressNumber = doc.createElement("address_number");
+				addressNumber.appendChild(doc.createTextNode(rs.getString("address_number")));
+				roomInfo.appendChild(addressNumber);
+				
+				// neighborhood elements
+				Element neighborhood = doc.createElement("neighborhood");
+				neighborhood.appendChild(doc.createTextNode(rs.getString("neighborhood")));
+				roomInfo.appendChild(neighborhood);
+				
+				// date elements
+				Element date = doc.createElement("date");
+				date.appendChild(doc.createTextNode(rs.getString("date")));
+				criticInfo.appendChild(date);
+				
+				// critic elements
+				Element critic = doc.createElement("critic");
+				neighborhood.appendChild(doc.createTextNode(rs.getString("critic")));
+				criticInfo.appendChild(critic);
+	
+				
+			}
+			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
+		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
+		    return lsSerializer.writeToString(doc);   
+			
+		}else {
+			//bookInfo elements
+			Element criticInfo = doc.createElement("critic_info");
+			rootElement.appendChild(criticInfo);
+			
+			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
+		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
+		    return lsSerializer.writeToString(doc);
+
+		}
+	}
+	
+	public String criticsHostXML() throws SQLException, ClassNotFoundException, TransformerException {
+		System.out.println("INSIDE XML BOOKING");
+		Statement stmt = ConnectionManager.getConnection().createStatement();
+
+		//check for same username before insert
+		String checkQuery = "SELECT DISTINCT t1.user_id AS tenant_id,t1.username AS tenant_username, t2.user_id AS host_id, t2.username AS host_username, date, critic FROM CriticsHost,User AS t1, User AS t2" + 
+				" WHERE criticshost.host_id = t2.user_id AND criticshost.tenant_id = t1.user_id;";
+		
+		System.out.println(checkQuery);
+
+		ResultSet rs = stmt.executeQuery(checkQuery);
+		rs.beforeFirst();
+		int rowCount = rs.last() ? rs.getRow() : 0;
+		
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = null;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		// root elements
+		Document doc = docBuilder.newDocument();
+		Element rootElement = doc.createElement("booking");
+		doc.appendChild(rootElement);
+	
+		if(rowCount!=0) {
+			
+			
+			rs.beforeFirst();
+			while(rs.next()) {
+				
+				//criticInfo elements
+				Element criticInfo = doc.createElement("critic_info");
+				rootElement.appendChild(criticInfo);
+				
+				//tenantInfo elements
+				Element tenantInfo = doc.createElement("tenant");
+				criticInfo.appendChild(tenantInfo);
+				
+				//tenantId elements
+				Element tenantId = doc.createElement("tenant_id");
+				tenantId.appendChild(doc.createTextNode(rs.getString("tenant_id")));
+				tenantInfo.appendChild(tenantId);
+				
+				// tenantInfo elements
+				Element tenantUsername = doc.createElement("tenant_username");
+				tenantUsername.appendChild(doc.createTextNode(rs.getString("tenant_username")));
+				tenantInfo.appendChild(tenantUsername);
+				
+				//hostInfo elements
+				Element hostInfo = doc.createElement("host");
+				criticInfo.appendChild(hostInfo);
+				
+				// host_id, host_username, date, critic
+				//host_id elements
+				Element hostId = doc.createElement("host_id");
+				hostId.appendChild(doc.createTextNode(rs.getString("host_id")));
+				hostInfo.appendChild(hostId);
+				
+				// host_username elements
+				Element hostUsername = doc.createElement("host_username");
+				hostUsername.appendChild(doc.createTextNode(rs.getString("host_username")));
+				hostInfo.appendChild(hostUsername);
+				
+				// date elements
+				Element date = doc.createElement("date");
+				date.appendChild(doc.createTextNode(rs.getString("date")));
+				criticInfo.appendChild(date);
+				
+				// critic elements
+				Element critic = doc.createElement("critic");
+				critic.appendChild(doc.createTextNode(rs.getString("critic")));
+				criticInfo.appendChild(critic);
+
+				
+			}
+			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
+		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
+		    return lsSerializer.writeToString(doc);   
+			
+		}else {
+			//bookInfo elements
+			Element bookInfo = doc.createElement("critic_info");
+			rootElement.appendChild(bookInfo);
+			
+			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
+		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
+		    return lsSerializer.writeToString(doc);
+
+		}
+	}
+	
+	
 	
 
 }
