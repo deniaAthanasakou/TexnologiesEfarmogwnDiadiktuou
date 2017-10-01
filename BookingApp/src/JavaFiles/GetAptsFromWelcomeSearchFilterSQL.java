@@ -28,7 +28,7 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 			if (!filters.getRoomType().contains("All") )
 				query+= "AND type = '" + filters.getRoomType() + "' ";
 			if(filters.getMaxCost()!=0) {
-				query += " AND " + filters.getMaxCost() + " >= min_cost_ booking ";
+				query += " AND " + filters.getMaxCost() + " >= min_cost_booking ";
 			}
 			
 			if(filters.isWifi())
