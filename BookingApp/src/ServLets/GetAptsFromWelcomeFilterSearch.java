@@ -75,10 +75,32 @@ public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
 			elevator = true;
 		}
 		
-		String neighborhood = "";								//default
-		String from = "02/05/2018";
-		String to = "05/12/2020";
-		String tenants = "2";
+		Cookie[] cookies = null;
+		// Get an array of Cookies associated with this domain
+		String neighborhood="";
+
+		String from = "";
+		String to = "";
+		String tenants = "";
+		cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("neighborhood")) {
+				//do something
+				neighborhood = cookie.getValue();
+			}
+			if (cookie.getName().equals("from")) {
+				//do something
+				from = cookie.getValue();
+			}
+			if (cookie.getName().equals("to")) {
+				//do something
+				to = cookie.getValue();
+			}
+			if (cookie.getName().equals("people")) {
+				//do something
+				tenants = cookie.getValue();
+			}
+		}
 		
 		//somehow get neighborhood
 		
