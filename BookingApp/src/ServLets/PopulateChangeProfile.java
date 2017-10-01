@@ -41,7 +41,7 @@ public class PopulateChangeProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("INSIDE CHANGE POPULATE PROFILE: PSS ");
+		System.out.println("INSIDE CHANGE POPULATE PROFILE: PSS AXXXXXXXXX");
 		try {
 			System.out.println("INSIDE POPULATE PROFILE: ");
 			HttpSession session = request.getSession(false); 

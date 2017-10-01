@@ -19,7 +19,7 @@ import JavaFiles.PopulateUser;
 /**
  * Servlet implementation class PopulateUser
  */
-@WebServlet("/PopulateUser")
+@WebServlet("/PopulateProfile")
 public class PopulateProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

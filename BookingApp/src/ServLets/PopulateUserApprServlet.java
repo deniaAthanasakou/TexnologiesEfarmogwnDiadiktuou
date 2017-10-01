@@ -17,7 +17,7 @@ import JavaFiles.PopulateUser;
 /**
  * Servlet implementation class PopulateUserServlet
  */
-@WebServlet("/PopulateUserServlet")
+@WebServlet("/PopulateUserApprServlet")
 public class PopulateUserApprServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,22 +39,36 @@ public class PopulateUserApprServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	    Cookie[] cookies = null;
-	    // Get an array of Cookies associated with this domain
-	    cookies = request.getCookies();
-	    String username = cookies[0].getValue();
-		System.out.println("Populate Servlet: " + cookies[0].getValue());
-		PopulateUser populateProf = new PopulateUser();
-		HashMap<String,String> populateInfo = new HashMap<String,String>(populateProf.populateProfile(username));
-		JSONObject userInfo = new JSONObject(populateInfo);
-		System.out.println("RESULT SET: " + populateInfo.get("username"));
-		System.out.println("JSON: " + userInfo.toString());
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(userInfo.toString());
-		response.getWriter().flush();
-		response.getWriter().close();
-		return;
+		try {
+			Thread.currentThread();
+			Thread.sleep((long) Math.random() * 1000);
+			System.out.println("approval");
+		    Cookie[] cookies = null;
+		    // Get an array of Cookies associated with this domain
+		    cookies = request.getCookies();
+		    String username=null;
+		    for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("username")) {
+					//do something
+					username = cookie.getValue();
+				}
+
+			}
+		    System.out.println("Populate Servlet: " + username);
+			PopulateUser populateProf = new PopulateUser();
+			HashMap<String,String> populateInfo = new HashMap<String,String>(populateProf.populateProfile(username));
+			JSONObject userInfo = new JSONObject(populateInfo);
+			System.out.println("RESULT SET: " + populateInfo.get("username"));
+			System.out.println("JSON: " + userInfo.toString());
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(userInfo.toString());
+			response.getWriter().flush();
+			response.getWriter().close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 
