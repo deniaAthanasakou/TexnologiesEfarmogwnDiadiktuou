@@ -18,7 +18,7 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>WelcomeInsertServlet</servlet-name>
     <servlet-class>ServLets.WelcomeInsertServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -51,7 +51,7 @@
     <servlet-name>CheckLoggedUser</servlet-name>
     <url-pattern>/CheckLoggedUser/</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>ChooseUserServlet</servlet-name>
     <servlet-class>ServLets.ChooseUserServlet</servlet-class>
   </servlet>
@@ -84,7 +84,7 @@
     <url-pattern>/GetAptsFromWelcomeSearch/</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>InputAptServlet</servlet-name>
+    <servlet-name>InputAptServlet</servlet-name>
     <servlet-class>ServLets.InputAptServlet</servlet-class>
   </servlet>
   <servlet-mapping>
@@ -108,7 +108,7 @@
     <url-pattern>/LogoutServlet/</url-pattern>
   </servlet-mapping>
   <servlet>
-   <servlet-name>PopulateAdmin</servlet-name>
+    <servlet-name>PopulateAdmin</servlet-name>
     <servlet-class>ServLets.PopulateAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
@@ -171,6 +171,21 @@
     <servlet-name>UpdateProfileServlet</servlet-name>
     <url-pattern>/UpdateProfileServlet/</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>GetApartmentsOfHost</servlet-name>
+    <servlet-class>ServLets.GetApartmentsOfHost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetApartmentsOfHost</servlet-name>
+    <url-pattern>/GetApartmentsOfHost/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ApartmentWithDetails</servlet-name>
+    <servlet-class>ServLets.ApartmentWithDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApartmentWithDetails</servlet-name>
+    <url-pattern>/ApartmentWithDetails/</url-pattern>
+  </servlet-mapping>
   
 </web-app>

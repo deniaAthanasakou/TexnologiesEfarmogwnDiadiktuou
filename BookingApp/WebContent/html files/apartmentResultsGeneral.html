@@ -188,7 +188,6 @@
 				            document.getElementById('submit').onclick=function()
 				            {
 				            	//parameters
-				            	alert("AXXXXXXXXXXXX");
 				            	var roomType = document.getElementById("roomType").value;
 								var maxCost = document.getElementById("maxCost").value;
 								var wifi = document.getElementById("wifi").checked;
@@ -215,7 +214,6 @@
 				            	var jsonResponse = JSON.parse(xmlhttp.responseText);
 					            
 					           
-					            alert("MAGJAKS");
 					            var jsonLength = jsonResponse.apts.length;
 
 								var container = document.getElementById('ContainerList');
@@ -245,7 +243,7 @@
 							       "           <td class=\"noOfCritics\"></td>"+
 							       "         </tr>"+
 							       "         <tr>"+
-							       "           <td>Κριτική</td>"+
+							       "           <td>Κριτική (0-5)</td>"+
 							       "           <td class=\"avgCritic\"></td>"+
 							       "         </tr>"+
 							       "		</table>   "+

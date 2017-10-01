@@ -57,6 +57,78 @@
 	        });
         </script>
         
+        
+        <script>
+            $(document).ready(function() { 
+            	
+            	var xmlhttp;
+            	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	            
+	            xmlhttp.open("POST", "../ApartmentWithDetails", false);
+	            xmlhttp.send();
+
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+				
+	            //get Elements By Id
+	       
+	           	document.getElementById("noOfRooms").innerHTML = jsonResponse.number_rooms;
+	           	document.getElementById("noOfBeds").innerHTML = jsonResponse.beds;
+	           	document.getElementById("noOfBathrooms").innerHTML = jsonResponse.bathrooms;
+	           	document.getElementById("noOfBedrooms").innerHTML = jsonResponse.bedrooms;
+	           	document.getElementById("roomType").innerHTML = jsonResponse.type;
+	           	document.getElementById("LivingRoom").innerHTML = jsonResponse.livingroom;
+	           	document.getElementById("Wifi").innerHTML = jsonResponse.wifi;
+	           	document.getElementById("AirCondition").innerHTML = jsonResponse.aircondition;
+	           	document.getElementById("heating").innerHTML = jsonResponse.heating;
+	           	document.getElementById("tv").innerHTML = jsonResponse.tv;	
+	           	document.getElementById("kitchen").innerHTML = jsonResponse.kitchen;
+	           	document.getElementById("parking").innerHTML = jsonResponse.parking;
+	           	document.getElementById("elevator").innerHTML = jsonResponse.elevator;
+	           	document.getElementById("space").innerHTML = jsonResponse.capacity;
+	           	document.getElementById("maxTenants").innerHTML = jsonResponse.max_tenants;
+	           	document.getElementById("costPerDay").innerHTML = jsonResponse.costPerDay;
+	           	document.getElementById("minCost").innerHTML = jsonResponse.min_cost_booking;
+	           	document.getElementById("costPerPerson").innerHTML = jsonResponse.cost_per_person;
+	           	
+	           	document.getElementById("description").innerHTML = jsonResponse.description;
+	           	document.getElementById("smoking").innerHTML = jsonResponse.smoking; 	
+	           	document.getElementById("events").innerHTML = jsonResponse.events;
+	           	document.getElementById("pets").innerHTML = jsonResponse.pets;
+	           	document.getElementById("minDays").innerHTML = jsonResponse.min_days_booking;
+	           	
+	           	document.getElementById("freeDates").innerHTML = jsonResponse.fullDates;
+	           	document.getElementById("fullAddress").innerHTML = jsonResponse.fullAddress;
+	           	
+	           	document.getElementById("myMap").src = jsonResponse.map;
+	           	document.getElementById("transportation").innerHTML = jsonResponse.fullAddress;
+	        	document.getElementById("fromDate").innerHTML = jsonResponse.from_date;
+	        	document.getElementById("toDate").innerHTML = jsonResponse.to_date;
+	        	
+	        	document.getElementById("critics").innerHTML = jsonResponse.critics;
+	        	document.getElementById("avgCritic").innerHTML = jsonResponse.avgCritic;
+	        	
+	           	//document.getElementById("photosHost").innerHTML = jsonResponse.fullAddress;
+	           //	document.getElementById("morePhotos").innerHTML = jsonResponse.fullAddress;
+	           	//document.getElementById("img").innerHTML = jsonResponse.fullAddress;
+	           	
+	           	
+	            
+	          
+	            
+           
+	            
+	            
+	        });
+        </script>
+        
+        
+        
+        
 		<title>Apartment Info</title>
 	</head>
 	<body>
@@ -95,60 +167,111 @@
 						<img src="../Images/apartment-room.jpg" class="img-thumbnail" width="500" height="500">
 					</div>
 					<div id="details">
-					<h4><strong>Χώρος</strong></h4>	
+					<h4><strong>Λεπτομέριες Χώρου</strong></h4>	
 						<table class="table table-hover">
 					         <tr>
+					           <td>Αριθμός Δωματίων</td>
+					           <td id="noOfRooms"></td>
+					         </tr>
+					         <tr>
 					           <td>Αριθμός Κρεβατιών</td>
-					           <td>3</td>
+					           <td id="noOfBeds"></td>
 					         </tr>
 					         <tr>
 					           <td>Αριθμός Μπάνιων</td>
-					           <td>2</td>
-					         </tr>
-					         <tr>
-					           <td>Τύπος Ενοικιαζόμενου Χώρου</td>
-					           <td>Δωμάτιο</td>
+					           <td id="noOfBathrooms"></td>
 					         </tr>
 					         <tr>
 					           <td>Αριθμός Υπνοδωματιών</td>
-					           <td>2</td>
+					           <td id="noOfBedrooms"></td>
+					         </tr>
+					         <tr>
+					           <td>Τύπος Ενοικιαζόμενου Χώρου</td>
+					           <td id="roomType"></td>
 					         </tr>
 					         <tr>
 					           <td>Ύπαρξη Καθιστικού</td>
-					           <td>Ναι</td>
+					           <td id="LivingRoom"></td>
 					         </tr>
 					         <tr>
-					           <td>Εμβαδό Χώρου</td>
-					           <td>20 τ.μ.</td>
+					           <td>Ύπαρξη Wifi</td>
+					           <td id="Wifi"></td>
+					         </tr>
+					         <tr>
+					           <td>Ύπαρξη Aircondition</td>
+					           <td id="AirCondition"></td>
+					         </tr>
+					         <tr>
+					           <td>Ύπαρξη Θέρμανσης</td>
+					           <td id="heating"></td>
+					         </tr>
+					         <tr>
+					           <td>Ύπαρξη Κουζίνας</td>
+					           <td id="kitchen"></td>
+					         </tr>
+					         <tr>
+					           <td>Ύπαρξη Τηλεόρασης</td>
+					           <td id="tv"></td>
+					         </tr>
+					         <tr>
+					           <td>Ύπαρξη Parking</td>
+					           <td id="parking"></td>
+					         </tr>
+					         <tr>
+					           <td>Ύπαρξη Ανελκυστήρα</td>
+					           <td id="elevator"></td>
+					         </tr>
+					         <tr>
+					           <td>Εμβαδό Χώρου (σε τ.μ.)</td>
+					           <td id="space"></td>
+					         </tr>
+					         <tr>
+					           <td>Μέγιστος αριθμός ατόμων</td>
+					           <td id="maxTenants"></td>
+					         </tr>
+					         <tr>
+					           <td>Κόστος ανά ημέρα (σε €)</td>
+					           <td id="costPerDay"></td>
+					         </tr>
+					         <tr>
+					           <td>Ελάχιστη τιμή ενοικίασης (σε €)</td>
+					           <td id="minCost"></td>
+					         </tr>
+					         <tr>
+					           <td>Επιπλέον κόστος ανά άτομο (σε €)</td>
+					           <td id="CostPerPerson"></td>
 					         </tr>
 					        </table>
 					        
 					        
 					        <h4><strong>Περιγραφή του χώρου</strong></h4>
-				           	
-				           	<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ante eu felis varius fringilla ac non libero. Cras sollicitudin elit ante, vitae convallis purus vestibulum egestas. Sed nec mauris lorem. Sed mi nisl, auctor placerat ultrices in, luctus et diam. Duis est mi, lobortis id tempus non, vulputate quis lorem. Donec ut risus nisi. Aliquam aliquet odio ligula, eget congue arcu imperdiet non.<br></p>
+				           	<p id="description"></p>
 							
 							<div id="rules">
 								<h4><strong>Κανόνες Ενοικίασης</strong></h4>	
 						        <table class="table table-hover">
-		
 						         <tr>
 						           <td>Επιτρέπετεται το Κάπνισμα</td>
-						           <td>Ναι</td>
+						           <td id="smoking"></td>
 						         </tr>
 						         <tr>
 						           <td>Επιτρέπονται τα κατοικίδια</td>
-						           <td>Όχι</td>
+						           <td id="pets"></td>
 						         </tr>
 						         <tr>
 						           <td>Επιτρέπονται οι εκδηλώσεις</td>
-						           <td>Όχι</td>
+						           <td id="events"></td>
 						         </tr>
 						         <tr>
 						           <td>Ελάχιστος αριθμός ημερών ενοικίασης</td>
-						           <td>1</td>
+						           <td id="minDays"></td>
 						         </tr> 
 					       		</table>
+				      		 </div>
+				      		 
+				      		 <div id="dates">
+				      			<h4><strong>Διαθέσιμες Ημερομηνίες</strong></h4>
+				      			<p id="freeDates"></p> 
 				      		 </div>
 				      		 
 				      		
@@ -157,19 +280,13 @@
 						       <div class="container">
 									<div class="row-fluid">
 								        <div class="span8">
-								        	<iframe  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&q=15+Springfield+Way,+Hythe,+CT21+5SH&aq=t&sll=52.8382,-2.327815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+								        	<iframe  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="myMap"></iframe>
 								    	</div>
 								    	
 								      	<div class="span4">
-								    		<h2>Snail mail</h2>
+								    		<h2>Διεύθυνση</h2>
 								    		<address>
-								    			<strong>Hythe Window Cleaning</strong><br>
-								    			15 Springfield Way<br>
-								    			Hythe<br>
-								    			Kent<br>
-								    			United Kingdon<br>
-								    			CT21 5SH<br>
-								    			<abbr title="Phone">P:</abbr> 01234 567 890
+								    			<p id="fullAddress"></p>
 								    		</address>
 								    	</div>
 								    </div>
@@ -178,26 +295,37 @@
 					     	
 					     	 <div id="transport">
 								<h4><strong>Πως θα μας βρείτε:</strong></h4>
-									<p>Diadromh Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu ante eu felis varius fringilla ac non libero. Cras sollicitudin elit ante, vitae convallis purus vestibulum egestas. Sed nec mauris lorem. Sed mi nisl, auctor placerat ultrices in, luctus et diam. Duis est mi, lobortis id tempus non, vulputate quis lorem. Donec ut risus nisi. Aliquam aliquet odio ligula, eget congue arcu imperdiet non.<br></p>
+									<p id="transportation"></p>
 							</div>	
 							
 							<table id="photosHost" class="table">
 								<tr>
 							       	<td><a href="#">Επιπλέον Φωτογραφίες</a></td>
-							       	<td >  <img src="../Images/apartment-room.jpg" class="img-thumbnail" width="300" height="300"></td> 
+							       	<td >  <img  id="moreImages" class="img-responsive" width="300" height="300"></td> 
 						      	</tr>	
 						      	<tr>
 							       	<td><a href="./hostDetails.html">Πληροφορίες για τον Οικοδεσπότη</a></td>
-							       	<td style="margin-left:5%">   <img src="../Images/host.jpg" class="img-thumbnail" width="300" height="300" margin-left:20%></td> 
+							       	<td style="margin-left:5%">   <img  class="img-responsive" id="photosHost" width="300" height="300" margin-left:20%></td> 
 						      	</tr>		
 							</table> 
+							<h4><strong>Κριτικές</strong></h4>	
+							<table class="table table-hover">
+					         <tr>
+					           <td>Αριθμός Κριτικών</td>
+					           <td id="critics"></td>
+					         </tr>
+					         <tr>
+					           <td>Κριτική (0-5)</td>
+					           <td id="avgCritic"></td>
+					         </tr>
+					         </table>
 							
 							<div id="submit">
-						<p >Επιθυμείτε να κλείσετε το δωμάτιο αυτό για τις ημερομηνίες <strong>TADE</strong> μέχρι <strong>TADE</strong>?</p>
-						<form method="post" >
-							<div class="form-group" style="text-align:center; "> <!-- Submit button -->
+						<p>Επιθυμείτε να κλείσετε το δωμάτιο αυτό για τις ημερομηνίες <strong id="fromDate"></strong> μέχρι <strong id="toDate"></strong>;</p>
+							<form method="post" >
+								<div class="form-group" style="text-align:center; "> <!-- Submit button -->
 								<a href="#" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
-							      <button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-check"></i> Υποβολή Κράτησης</button>
+							<button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-check"></i> Υποβολή Κράτησης</button>
 							      
 					      
 							</div>

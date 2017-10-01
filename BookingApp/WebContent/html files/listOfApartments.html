@@ -148,64 +148,80 @@
 					
 			      
 					<h1 style="text-align:center">Αποτελέσματα αναζήτησης</h1> 
-					<div class= "text-center">
-						<div class="pagination">
-						  <a href="#">&laquo;</a>
-						  <a href="#"  class="active">1</a>
-						  <a href="#" >2</a>
-						  <a href="#">3</a>
-						  <a href="#">&raquo;</a>
-						</div>
-					</div>
+
 					<div class="container-fluid" id="ContainerList">
 						
 						<div id="containerItem">
 						
-						</div>
 							<script language="JavaScript" type="text/javascript">
+							
+								var xmlhttp;
+				            	
+					            if (window.XMLHttpRequest){  
+					              xmlhttp=new XMLHttpRequest();
+					            } else {
+					              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					            }
+					            
+					            xmlhttp.open("POST", "../GetApartmentsOfHost", false);
+					            xmlhttp.send();
+		
+					            var jsonResponse = JSON.parse(xmlhttp.responseText);
+
+					            var jsonLength = jsonResponse.apts.length;
+
 								var container = document.getElementById('ContainerList');
 								
 								var myHtmlCode = 
-	                                 " <img src=\"../Images/apartment-room.jpg\" class=\"img-thumbnail\" width=\"200\" height=\"200\">"+
+	                                 " <img class=\"img-responsive photo_apt\" width=\"200\" height=\"200\">"+
+	                                 "<textarea rows=\"1\" class=\"room_id\" name=\"room_id\" style=\"display:none\"></textarea>"+
 	                                    "<table class=\"table table-hover\">"+
-	                                    "<tr>"+
-	                                      "<td>Διαμέρισμα Νο</td>"+
-	                                      "<td>1</td>"+
-	                                    "</tr>"+
 	                                   " <tr>"+
 	                                     " <td>Διέυθυνση</td>"+
-	                                      "<td>Ευστρατίου 26, Άγιος Νικόλαος, Θεσσαλονίκη</td>"+
+	                                      "<td class=\"fullAddress\"></td>"+
 	                                    "</tr>"+
 	                                    "<tr>"+
 	                                     " <td>Αριθμός Κριτικών</td>"+
-	                                      "<td>17</td>"+
+	                                      "<td class=\"noOfCritics\"></td>"+
 	                                   " </tr>"+
 	                                    "<tr>"+
-	                                      "<td>Κριτική</td>"+
-	                                      "<td>3/5</td>"+
+	                                      "<td>Κριτική (0-5)</td>"+
+	                                      "<td class=\"avgCritic\"></td>"+
 	                                    "</tr>"+
 	                                  "</table>"+
 	                                  "<div id=\"aptLink\">"+
-	                                  "<a href = \"hostApartmentDetails.html\">Περισσότερες πληροφορίες<a>"+
+	                                  "<div style=\"text-align:center\"><a href = \"hostApartmentDetails.html\">Περισσότερες πληροφορίες<a></div>"+
 	                                  "</div>";
 								
 								
-								for (var i = 0; i < 10; i++) {								
-									container.innerHTML+=myHtmlCode;
-								}
-							
+                                for (i = 0; i < jsonLength; i++) {
+  				            		container.innerHTML+=myHtmlCode;
+  				            	} 
+								
+								var fullAddress = document.getElementsByClassName("fullAddress");
+					            var noOfCitics = document.getElementsByClassName("noOfCritics");
+					            var avgCritic = document.getElementsByClassName("avgCritic");
+					            var Ids = document.getElementsByClassName("room_id");
+					            //var images = document.getElementsByClassName("photo_apt");
+					            
+				           
+					            for (i = 0; i < jsonLength; i++) {
+					            	
+					            	fullAddress[i].innerHTML = jsonResponse.apts[i].fullAddress;
+					            	noOfCitics[i].innerHTML = jsonResponse.apts[i].critics;
+					            	avgCritic[i].innerHTML = jsonResponse.apts[i].avgCritic;
+					            	Ids[i].innerHTML = jsonResponse.apts[i].room_id;
+					            	//images[i].src = jsonResponse.apts[i].image;	
+					            	
+					            }  
+								
 							</script>
 		
-						</div> 
-						<div class= "text-center">
-						<div class="pagination">
-						  <a href="#" >&laquo;</a>
-						  <a href="#" class="active">1</a>
-						  <a href="#" >2</a>
-						  <a href="#">3</a>
-						  <a href="#">&raquo;</a>
+						
 						</div>
+							
 					</div> 
+
 				</div>
 
 			</div>
