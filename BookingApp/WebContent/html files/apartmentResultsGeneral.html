@@ -298,7 +298,8 @@
 
 							var container = document.getElementById('ContainerList');
 
-				            var htmlCode = "<div class=\"row apartment\" style=\"margin-bottom:10%;\">"+
+				            var htmlCode = "<form action=\"../SendRoomIdToAptDetails\" method=\"get\">" +
+				            	"<div class=\"row apartment\" style=\"margin-bottom:10%;\">"+
 						       "<div class=\"col-sm-3\" style=\"vertical-align:middle;height:100%;\">"+
 						       "	<img class=\"img-responsive photo_apt\" width=\"200\" height=\"100%\" style=\"vertical-align:middle;\">"+
 						       "</div>"+
@@ -326,9 +327,10 @@
 						       "           <td class=\"avgCritic\"></td>"+
 						       "         </tr>"+
 						       "		</table>   "+
-						       " 		<div class=\"text-right\"> <a href =\"apartmentWithDetails.html\"> Περισσότερα</a> </div>	"	+
+						       " 		<div class=\"text-right\"> <button type=\"submit\"> Περισσότερα</button> </div>	"	+
 						       "  </div>"+
-						       "</div> ";
+						       "</div> "+
+						       "</form>";
 						       
 						       
 						    var i=0;

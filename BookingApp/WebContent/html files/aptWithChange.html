@@ -22,6 +22,7 @@
 		<link href="../css files/welcome.css" rel="stylesheet" />
 		<link href="../css files/apartmentsList.css" rel="stylesheet" />
 		<link href="../css files/hostApt.css" rel="stylesheet" />
+		<link href="../css files/map.css" rel="stylesheet" />		
 		
 		
 		<script language="JavaScript" type="text/javascript">
@@ -102,7 +103,7 @@
 				var description = document.getElementById("description").value;
 				
 				
-				if (numbersSymbols.test(street)){
+			/*	if (numbersSymbols.test(street)){
 					alert("Η οδός περιέχει αριθμούς ή σύμβολα.");
 					return false;
 				}
@@ -122,7 +123,7 @@
 					return false;
 				}
 							
-				
+				*/
 			}
 		</script>
 		
@@ -190,6 +191,71 @@
 	            
 	        });
         </script>
+        
+        
+        
+        <script>
+            $(document).ready(function() { 
+            	//populate from db
+            	var xmlhttp;
+            	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	            
+	            xmlhttp.open("POST", "../AptWithChangePopulate", false);
+	            xmlhttp.send();
+
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+				
+	            //get Elements By Id
+	            
+	            alert(jsonResponse.type);
+	            
+	            document.getElementById("street").value = jsonResponse.street;
+	            document.getElementById("address_num").value = jsonResponse.address_number;
+	            document.getElementById("postal").value = jsonResponse.postal_code;
+	            document.getElementById("neighborhood").value = jsonResponse.neighborhood;
+	            document.getElementById("city").value = jsonResponse.city;
+	            document.getElementById("country").value = jsonResponse.country;
+	       
+	           	document.getElementById("rooms").value = jsonResponse.number_rooms;
+	           	document.getElementById("beds").value = jsonResponse.beds;
+	           	document.getElementById("bathrooms").value = jsonResponse.bathrooms;
+	           	document.getElementById("bedrooms").value = jsonResponse.bedrooms;
+	           	document.getElementById("type").value = jsonResponse.type;
+	           	document.getElementById("livingroom").value = jsonResponse.livingroom;
+	           	document.getElementById("wifi").value = jsonResponse.wifi;
+	           	document.getElementById("aircondition").value = jsonResponse.aircondition;
+	           	document.getElementById("heating").value = jsonResponse.heating;
+	           	document.getElementById("tv").value = jsonResponse.tv;	
+	           	document.getElementById("kitchen").value = jsonResponse.kitchen;
+	           	document.getElementById("parking").value = jsonResponse.parking;
+	           	document.getElementById("elevator").value = jsonResponse.elevator;
+	           	document.getElementById("space").value = jsonResponse.capacity;
+	           	document.getElementById("maxPeople").value = jsonResponse.max_tenants;
+	           	document.getElementById("costPerDay").value = jsonResponse.costPerDay;
+	           	document.getElementById("minValue").value = jsonResponse.min_cost_booking;
+	           	document.getElementById("costperpers").value = jsonResponse.cost_per_person;
+	           	
+	           	document.getElementById("description").value = jsonResponse.description;
+	           	document.getElementById("smoking").value = jsonResponse.smoking; 	
+	           	document.getElementById("events").value = jsonResponse.events;
+	           	document.getElementById("pets").value = jsonResponse.pets;
+	           	document.getElementById("minDays").value = jsonResponse.min_days_booking;
+	           		           	
+	           	//document.getElementById("myMap").src = jsonResponse.map;
+	           	document.getElementById("transport").value = jsonResponse.transportation;
+	        	
+	        	
+	           //document.getElementById("morePhotos").innerHTML = jsonResponse.fullAddress;
+	           //document.getElementById("imgPath").innerHTML = jsonResponse.fullAddress; 
+	            
+	        });
+        </script>
+        
 		
 		
 		  
@@ -248,34 +314,179 @@
 				
 				<div class="container" id="cont">
 				
-					<!--map-->
-					<div id="image">
-						<div id="map" style="width:350px;height:350px;background:yellow"></div>
-
-							<script>
-							function myMap() {
-							  var mapCanvas = document.getElementById("map");
-							  var mapOptions = {
-							    center: new google.maps.LatLng(51.5, -0.2), zoom: 10
-							  };
-							  var map = new google.maps.Map(mapCanvas, mapOptions);
-							}
-							</script>
-							
-							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv3bA71tCCZtb67ABy68TLLTzjAwxshEY&callback=myMap"></script>
+				
+				<form action="../ChangeAptUpdate" method="post" onsubmit="return checkValidityPopup();">	
+				
+					<div>
+						    <div class="pac-card" id="pac-card">
+						      <div>
+						        <div id="title">
+						          Autocomplete search
+						        </div>
+						        <div id="type-selector" class="pac-controls">
+						          <input type="radio" name="type" id="changetype-all" checked="checked">
+						          <label for="changetype-all">All</label>
+						
+						          <input type="radio" name="type" id="changetype-establishment">
+						          <label for="changetype-establishment">Establishments</label>
+						
+						          <input type="radio" name="type" id="changetype-address">
+						          <label for="changetype-address">Addresses</label>
+						
+						          <input type="radio" name="type" id="changetype-geocode">
+						          <label for="changetype-geocode">Geocodes</label>
+						        </div>
+						        <div id="strict-bounds-selector" class="pac-controls">
+						          <input type="checkbox" id="use-strict-bounds" value="">
+						          <label for="use-strict-bounds">Strict Bounds</label>
+						        </div>
+						      </div>
+						      <div id="pac-container">
+						        <input id="pac-input" name="pac-input" type="text" 
+						            placeholder="Enter a location" required>
+						      </div>
+						    </div>
+						    <div id="map"></div>
+						    <div id="infowindow-content">
+						      <img src="" width="16" height="16" id="place-icon">
+						      <span id="place-name" name="place-name" class="title"></span><br>
+						      <span id="place-address" name="place-address"></span>
+						    </div>
+						
+						    <script>
+						
+						      function initMap() {
+						        var map = new google.maps.Map(document.getElementById('map'), {
+						          center: {lat: -33.8688, lng: 151.2195},
+						          zoom: 13
+						        });
+						        var card = document.getElementById('pac-card');
+						        var input = document.getElementById('pac-input');
+						        var types = document.getElementById('type-selector');
+						        var strictBounds = document.getElementById('strict-bounds-selector');
+						
+						        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+						
+						        var autocomplete = new google.maps.places.Autocomplete(input);
+						
+						        // Bind the map's bounds (viewport) property to the autocomplete object,
+						        // so that the autocomplete requests use the current map bounds for the
+						        // bounds option in the request.
+						        autocomplete.bindTo('bounds', map);
+						
+						        var infowindow = new google.maps.InfoWindow();
+						        var infowindowContent = document.getElementById('infowindow-content');
+						        infowindow.setContent(infowindowContent);
+						        var marker = new google.maps.Marker({
+						          map: map,
+						          anchorPoint: new google.maps.Point(0, -29)
+						        });
+						
+						        autocomplete.addListener('place_changed', function() {
+						          infowindow.close();
+						          marker.setVisible(false);
+						          var place = autocomplete.getPlace();
+						          
+						          
+						          
+						          var latitude = place.geometry.location.lat();
+						          var longtitude =place.geometry.location.lng();  
+						          var url = "http://maps.google.com/?ll=" + latitude+","+longtitude;          
+						          document.getElementById("myMap").value =url;
+						          
+						          
+						          
+						          
+						          
+						          		
+						          
+						          if (!place.geometry) {
+						            // User entered the name of a Place that was not suggested and
+						            // pressed the Enter key, or the Place Details request failed.
+						            window.alert("No details available for input: '" + place.name + "'");
+						            return;
+						          }
+						
+						          // If the place has a geometry, then present it on a map.
+						          if (place.geometry.viewport) {
+						            map.fitBounds(place.geometry.viewport);
+						          } else {
+						            map.setCenter(place.geometry.location);
+						            map.setZoom(17);  // Why 17? Because it looks good.
+						          }
+						          marker.setPosition(place.geometry.location);
+						          marker.setVisible(true);
+						
+						          var address = '';
+						          if (place.address_components) {
+						            address = [
+						              (place.address_components[0] && place.address_components[0].short_name || ''),
+						              (place.address_components[1] && place.address_components[1].short_name || ''),
+						              (place.address_components[2] && place.address_components[2].short_name || '')
+						            ].join(' ');
+						          }
+						          
+						          var latitude = place.geometry.location.lat();
+						          var longtitude =place.geometry.location.lng();
+						          
+						          document.write("latitude "+ latitude);
+						          document.write("longtitude "+ longtitude);
+						          
+						          var url = "http://maps.google.com/?ll=" + latitude+","+longtitude;
+						          
+						          document.getElementById("myMap").innerHTML = url;
+						          
+						        //  document.write("url "+ url);
+						          
+						
+						          infowindowContent.children['place-icon'].src = place.icon;
+						          infowindowContent.children['place-name'].textContent = place.name;
+						          infowindowContent.children['place-address'].textContent = address;
+						          infowindow.open(map, marker);
+						        });
+						
+						        // Sets a listener on a radio button to change the filter type on Places
+						        // Autocomplete.
+						        function setupClickListener(id, types) {
+						          var radioButton = document.getElementById(id);
+						          radioButton.addEventListener('click', function() {
+						            autocomplete.setTypes(types);
+						          });
+						        }
+						
+						        setupClickListener('changetype-all', []);
+						        setupClickListener('changetype-address', ['address']);
+						        setupClickListener('changetype-establishment', ['establishment']);
+						        setupClickListener('changetype-geocode', ['geocode']);
+						
+						        document.getElementById('use-strict-bounds')
+						            .addEventListener('click', function() {
+						              console.log('Checkbox clicked! New state=' + this.checked);
+						              autocomplete.setOptions({strictBounds: this.checked});
+						            });
+						      }
+						    </script>
+						    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv3bA71tCCZtb67ABy68TLLTzjAwxshEY&libraries=places&callback=initMap" async defer></script>
+						
+						
+						<div class="form-group">
+			  				<textarea class="form-control" rows="1" name="myMap" id="myMap" size="200" maxlength="200" style= "display:none;"></textarea>
+						</div>
+						
+						
 					</div>
-					<div id="details">
+					<div>
 					
-						<form method="post" >
+						
 							<div class="form-group">
-							  <label for="address">Διέυθυνση:</label>
+							  <label for="address">Διεύθυνση:</label>
 							  	<div id="address">
 								   <table class="table table-hover">
 							         <tr>
 							           <td>Οδός</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="street" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" class="form-control" required></textarea>
+								  				<textarea class="form-control" rows="1" name="street" id="street" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" class="form-control" required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -291,7 +502,7 @@
 							           <td>Ταχυδρομικός Κώδικας</td>
 							           <td>
 								           <div class="form-group">
-											   <input class="form-control" type="number" min="1" id="postal" name="postal"  data-toggle="popover"  data-trigger="focus" class="form-control"  required >
+								           		<textarea class="form-control" rows="1" id="postal" name="postal" size="5" maxlength="5" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται χαρακτήρες." data-trigger="focus" class="form-control" required></textarea>   
 											</div>
 										</td>
 							         </tr>
@@ -299,7 +510,7 @@
 							           <td>Δήμος</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="neighborhood" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-toggle="popover"  data-trigger="focus" class="form-control"  required></textarea>
+								  				<textarea class="form-control" rows="1" id="neighborhood" name="neighborhood" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-toggle="popover"  data-trigger="focus" class="form-control"  required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -307,7 +518,7 @@
 							           <td>Πόλη</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="city" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-toggle="popover"  data-trigger="focus" class="form-control"   required></textarea>
+								  				<textarea class="form-control" rows="1" id="city"  name="city" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-toggle="popover"  data-trigger="focus" class="form-control"   required></textarea>
 											</div>
 										</td>
 							         </tr>
@@ -315,22 +526,24 @@
 							           <td>Χώρα</td>
 							           <td>
 								           <div class="form-group">
-								  				<textarea class="form-control" rows="1" id="country" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-trigger="focus" class="form-control"   required></textarea>
+								  				<textarea class="form-control" rows="1" id="country" name="country" size="45" maxlength="45" style= "margin-top:1%; margin-bottom:5%;" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα."  data-trigger="focus" class="form-control"   required></textarea>
 											</div>
 										</td>
 							         </tr>
 							        </table>
-						        </div>
+						        
 							  
 							</div>
 							
+							
+							
 							<div class="form-group">
 							  <label for="transport" >Πρόσβαση:</label>
-							  <textarea class="form-control" rows="4" id="transport" style= "margin-top:1%; margin-bottom:5%; data-toggle="popover"  data-trigger="focus" class="form-control"  size="45" maxlength="45" placeholder="Εισαγωγή Πρόσβασης στο Διαμέρισμα" ></textarea>
+							  <textarea class="form-control" rows="4" id="transport" name="transport" size="200" maxlength="200" style= "margin-top:1%; margin-bottom:5%; data-toggle="popover"  data-trigger="focus" class="form-control" placeholder="Εισαγωγή Πρόσβασης στο Διαμέρισμα" ></textarea>
 							</div>
 						
 						
-						    <label for="cal" >Διαθέσιμες Ημερομηνίες</label>    
+						    <label id="label_cal" for="cal" >Διαθέσιμες Ημερομηνίες</label>    
 						    <div class="container-fluid" id="cal">
 							   <div class="row" style="width:100%;" >
 							   		<div class="col-md-4">
@@ -352,7 +565,7 @@
 		   	 						<div class="col-md-4">
 		        						<div class="form-group">
 		            						<div class='input-group date' id='from'>
-		                						<input type='text' class="form-control" data-toggle="popover"  data-trigger="focus" class="form-control"  required />
+		                						<input type='text' class="form-control" data-toggle="popover"  name="from"  data-trigger="focus" class="form-control"  required />
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
 		                						</span>
@@ -361,8 +574,8 @@
 		    						</div>
 		    						<div class="col-md-4 nopadding" >
 		        						<div class="form-group">
-		            						<div class='input-group date' id='to'>
-		                						<input type='text' class="form-control"  data-toggle="popover"  data-trigger="focus" class="form-control"  required />
+		            						<div class='input-group date' id='to'  > 
+		                						<input type='text' class="form-control"  data-toggle="popover"  name="to"  data-trigger="focus" class="form-control"  required />
 		                						<span class="input-group-addon">
 		                    						<span class="glyphicon glyphicon-calendar"></span>
 		                						</span>
@@ -371,16 +584,27 @@
 		    						</div>
 		    						<div class="col-md-4">
 		        						<div id="addButton">
-							 				<button type="addCal" class="btn btn-info" onclick="addCal()"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>    
+							 				<button type="button" class="btn btn-info" onclick="addCal(1)"><i class="glyphicon glyphicon-plus"></i> Προσθήκη</button>  	 				
+							 				  
 										 </div>
 		    						</div>
+								</div>
+								<div id= "addIt">
 								</div>
 							</div>
 							
 							 
-							 <label for="aptDet">Λεπτομέριες Δωματίου</label>
+							 <label for="aptDet">Λεπτομέριες Χώρου</label>
 							 <div id="aptDet">
 								 <table class="table table-hover">
+								 <tr>
+						           <td>Αριθμός Δωματίων</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number" min="1" value="1" id="rooms" name="rooms"  data-toggle="popover"  data-trigger="focus" class="form-control"  required >
+										</div>
+									</td>
+						         </tr>
 						         <tr>
 						           <td>Αριθμός Κρεβατιών</td>
 						           <td>
@@ -401,24 +625,105 @@
 						           <td>Αριθμός Υπνοδωματιών</td>
 						            <td>
 							           <div class="form-group">
-										   <input class="form-control" type="number" min="1" value="1" id="rooms" name="rooms"  data-toggle="popover"  data-trigger="focus" class="form-control"  required >
+										   <input class="form-control" type="number" min="1" value="1" id="bedrooms" name="bedrooms"  data-toggle="popover"  data-trigger="focus" class="form-control"  required >
 										</div>
 									</td>
 						         </tr>
 						         <tr>
 						           <td>Τύπος Ενοικιαζόμενου Χώρου</td>
 						           <td>
-						           		<textarea class="form-control" rows="1" id="type" size="60" maxlength="60" data-toggle="popover"  data-trigger="focus" class="form-control"  required  ></textarea>
-						           	</td>
+										<select class="form-control" id="type"  name="roomtype" >
+								    	<option value="Private Room">Private Room</option>
+								    	<option value="Non Private Room">Non Private Room</option>
+								    	<option value="House">House</option>
+							  			</select>	
+							  	 	</td>
 						         </tr>
-						         
+	
 						         <tr>
 						           <td>Ύπαρξη Καθιστικού</td>
 						           <td>
 						           		<div class="form-group">
-										  <select class="form-control" id="livingroom">
-										    <option>Ναι</option>
-										    <option>Όχι</option>
+										  <select class="form-control" id="livingroom" name="livingroom">
+										    <option value="Ναι">Yes</option>
+										    <option  value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Ύπαρξη Wifi</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="wifi" name="wifi">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						          <tr>
+						           <td>Ύπαρξη Aircondition</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="aircondition" name="aircondition">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						          <tr>
+						           <td>Ύπαρξη Θέρμανσης</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="heating" name="heating">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						          <tr>
+						           <td>Ύπαρξη Κουζίνας</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="kitchen" name="kitchen">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						          <tr>
+						           <td>Υπαρξη Τηλεόρασης</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="tv" name="tv">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Ύπαρξη Parking</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="parking" name="parking">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
+										  </select>
+										</div>
+									</td>
+						         </tr>
+						         <tr>
+						           <td>Ύπαρξη Ανελκυστήρα</td>
+						           <td>
+						           		<div class="form-group">
+										  <select class="form-control" id="elevator" name="elevator">
+										    <option value="Ναι">Yes</option>
+								   			<option value="Όχι">No</option>
 										  </select>
 										</div>
 									</td>
@@ -442,6 +747,15 @@
 						         </tr>
 						         
 						         <tr>
+						           <td>Κόστος ανά ημέρα (σε €)</td>
+						           <td>
+							           <div class="form-group">
+										   <input class="form-control" type="number"  id="costPerDay" name="costPerDay"  data-toggle="popover" data-content="Δεν επιτρέπονται χαρακτήρες, σύμβολα ή κενά."  data-trigger="focus" class="form-control"  required > 
+										</div>
+									</td>
+						         </tr>
+						         
+						         <tr>
 						           <td>Ελάχιστη τιμή ενοικίασης (σε €)</td>
 						           <td>
 							           <div class="form-group">
@@ -458,8 +772,10 @@
 										</div>
 									</td>
 						         </tr>
+						        
 						          
 						        </table>
+						      </div>
 					        
 							 
 								<label for="rules">Κανόνες Ενοικίασης</label>
@@ -470,9 +786,9 @@
 								           <td>Επιτρέπετεται το Κάπνισμα</td>
 								           <td>
 								           		<div class="form-group">
-												  <select class="form-control" id="smoking">
-												    <option>Ναι</option>
-												    <option>Όχι</option>
+												  <select class="form-control" id="smoking" name="smoking">
+												    <option value="Ναι">Yes</option>
+										    		<option value="Όχι">No</option>
 												  </select>
 												</div>
 											</td>
@@ -481,9 +797,9 @@
 								           <td>Επιτρέπονται τα κατοικίδια</td>
 								           <td>
 								           		<div class="form-group">
-												  <select class="form-control" id="pets">
-												    <option>Ναι</option>
-												    <option>Όχι</option>
+												  <select class="form-control" id="pets" name="pets">
+												    <option value="Ναι">Yes</option>
+										   			<option value="Όχι">No</option>
 												  </select>
 												</div>
 											</td>
@@ -492,9 +808,9 @@
 								           <td>Επιτρέπονται οι εκδηλώσεις</td>
 								           <td>
 								           		<div class="form-group">
-												  <select class="form-control" id="events">
-												    <option>Ναι</option>
-												    <option>Όχι</option>
+												  <select class="form-control" id="events" name="events">
+												    <option value="Ναι">Yes</option>
+										   			<option value="Όχι">No</option>
 												  </select>
 												</div>
 											</td>
@@ -507,16 +823,17 @@
 											  </div>		      
 						     				</td>
 								         </tr> 
+								         
 							       		</table>
 						      	 </div>
 							        
 						         <div class="form-group">
 								  <label for="transport" >Περιγραφή του Χώρου</label>
-								  <textarea class="form-control" rows="5" id="description" style= "margin-top:1%; margin-bottom:5%;" size="200" maxlength="200" data-toggle="popover"  data-trigger="focus" class="form-control" placeholder="Περιγράψτε το διαμέρισμα σε ένα κείμενο των πολύ 200 χαρακτήρων."></textarea>
+								  <textarea class="form-control" rows="5" id="description"  name="description" style= "margin-top:1%; margin-bottom:5%;" size="200" maxlength="200" data-toggle="popover"  data-trigger="focus" class="form-control"  placeholder="Περιγράψτε το διαμέρισμα σε ένα κείμενο των πολύ 200 χαρακτήρων."></textarea>
 								</div>
+
 								
-								
-								<div id="apt-images">
+								  <div id="apt-images">
 								
 									<table class="imgtable">
 										<tr>
@@ -547,8 +864,6 @@
 								</div>	
 							
 						</form>
-					</div> 
-							
 				</div>
 					
 					

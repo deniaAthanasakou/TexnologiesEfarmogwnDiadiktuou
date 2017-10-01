@@ -105,7 +105,7 @@
 	           	document.getElementById("freeDates").innerHTML = jsonResponse.fullDates;
 	           	document.getElementById("fullAddress").innerHTML = jsonResponse.fullAddress;
 	           	
-	           	document.getElementById("myMap").src = jsonResponse.map;
+	           	//document.getElementById("myMap").src = jsonResponse.map + "&output=embed";
 	           	document.getElementById("transportation").innerHTML = jsonResponse.transportation;
 	        	document.getElementById("fromDate").innerHTML = jsonResponse.from_date;
 	        	document.getElementById("toDate").innerHTML = jsonResponse.to_date;
@@ -161,7 +161,7 @@
 						<img id="imgPath" class="img-responsive" width="500" height="500">
 					</div>
 					<div id="details">
-					<h4><strong>Λεπτομέριες Χώρου</strong></h4>	
+					<h4><strong>Λεπτομέρειες Χώρου</strong></h4>	
 						<table class="table table-hover">
 					         <tr>
 					           <td>Αριθμός Δωματίων</td>
@@ -269,13 +269,14 @@
 				      		 </div>
 				      		 
 				      		
-				       		<div id= "map">
-				       			<h4><strong>Βρείτε μας στο χάρτη</strong></h4> 
+				       <div id= "map">
+				       			
 						       <div class="container">
 									<div class="row-fluid">
+									<!-- <h4><strong>Βρείτε μας στο χάρτη</strong></h4> 
 								        <div class="span8">
-								        	<iframe  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="myMap"></iframe>
-								    	</div>
+								        <iframe  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="myMap"></iframe>	
+								    	</div> -->
 								    	
 								      	<div class="span4">
 								    		<h2>Διεύθυνση</h2>
@@ -285,7 +286,7 @@
 								    	</div>
 								    </div>
 								</div> 
-					     	</div>
+					     	</div>   
 					     	
 					     	 <div id="transport">
 								<h4><strong>Πως θα μας βρείτε:</strong></h4>
@@ -293,13 +294,13 @@
 							</div>	
 							
 							<table id="photosHost" class="table">
-								<tr>
-							       	<td><a href="#">Επιπλέον Φωτογραφίες</a></td>
+								<!--<tr>
+							       	<td>Επιπλέον Φωτογραφίες</td>
 							       	<td >  <img  id="moreImages" class="img-responsive" width="300" height="300"></td> 
-						      	</tr>	
+						      	</tr> -->	
 						      	<tr>
 							       	<td><a href="./hostDetails.html">Πληροφορίες για τον Οικοδεσπότη</a></td>
-							       	<td style="margin-left:5%">   <img  class="img-responsive" id="photosHost" width="300" height="300" margin-left:20%></td> 
+							       	<td style="margin-left:5%">   <img  class="img-responsive" src = "../Images/host.jpg" id="photosHost" width="300" height="300" margin-left:20%></td> 
 						      	</tr>		
 							</table> 
 							<h4><strong>Κριτικές</strong></h4>	
