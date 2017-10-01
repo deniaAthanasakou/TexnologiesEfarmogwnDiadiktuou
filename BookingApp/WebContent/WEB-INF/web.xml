@@ -215,4 +215,30 @@
     <url-pattern>/SubmitCritic/</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>AptWithChangePopulate</servlet-name>
+    <servlet-class>ServLets.AptWithChangePopulate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AptWithChangePopulate</servlet-name>
+    <url-pattern>/AptWithChangePopulate/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ChangeAptUpdate</servlet-name>
+    <servlet-class>ServLets.ChangeAptUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeAptUpdate</servlet-name>
+    <url-pattern>/ChangeAptUpdate/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SendRoomIdToAptDetails</servlet-name>
+    <servlet-class>ServLets.SendRoomIdToAptDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendRoomIdToAptDetails</servlet-name>
+    <url-pattern>/SendRoomIdToAptDetails/</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
