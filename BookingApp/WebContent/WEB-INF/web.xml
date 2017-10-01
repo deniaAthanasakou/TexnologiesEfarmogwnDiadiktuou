@@ -188,4 +188,22 @@
     <url-pattern>/ApartmentWithDetails/</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>PopulateLocation</servlet-name>
+    <servlet-class>ServLets.PopulateLocation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PopulateLocation</servlet-name>
+    <url-pattern>/PopulateLocation/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>WelcomePageServlet</servlet-name>
+    <servlet-class>ServLets.WelcomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WelcomePageServlet</servlet-name>
+    <url-pattern>/WelcomePageServlet/</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
