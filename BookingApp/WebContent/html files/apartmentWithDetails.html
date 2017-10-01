@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		<link href="../css files/welcome.css" rel="stylesheet" />
 		<link href="../css files/apartmentsList.css" rel="stylesheet" />
@@ -107,15 +107,19 @@
 	           	
 	           	//document.getElementById("myMap").src = jsonResponse.map + "&output=embed";
 	           	document.getElementById("transportation").innerHTML = jsonResponse.transportation;
-	        	document.getElementById("fromDate").innerHTML = jsonResponse.from_date;
-	        	document.getElementById("toDate").innerHTML = jsonResponse.to_date;
+	           	
+	           	
+	           	document.getElementById("fromDate").innerHTML = jsonResponse.from_date;
+	           	document.getElementById("toDate").innerHTML = jsonResponse.from_date;
+	           	document.getElementById("fromDateTxt").value = jsonResponse.from_date;
+	           	document.getElementById("toDateTxt").value = jsonResponse.from_date;
 	        	
 	        	document.getElementById("critics").innerHTML = jsonResponse.critics;
 	        	document.getElementById("avgCritic").innerHTML = jsonResponse.avgCritic;
 	        	
 	           	//document.getElementById("photosHost").innerHTML = jsonResponse.fullAddress;
 	           //document.getElementById("morePhotos").innerHTML = jsonResponse.fullAddress;
-	           	//document.getElementById("imgPath").innerHTML = jsonResponse.fullAddress; 
+	           //document.getElementById("imgPath").innerHTML = jsonResponse.fullAddress; 
 	            
 	        });
         </script>
@@ -316,8 +320,14 @@
 					         </table>
 							
 							<div id="submit">
-						<p>Επιθυμείτε να κλείσετε το δωμάτιο αυτό για τις ημερομηνίες <strong id="fromDate"></strong> μέχρι <strong id="toDate"></strong>;</p>
-							<form method="post" >
+						
+							<form method="post" action="../BookARoom">
+								<input type="text" id="fromDateTxt" name="fromDateTxt" style="display:none">
+								<input type="text" id="toDateTxt" name="toDateTxt" style="display:none">
+								<p>Επιθυμείτε να κλείσετε το δωμάτιο αυτό για τις ημερομηνίες 
+								<strong id="fromDate"></strong> μέχρι 
+								<strong id="toDate"></strong>;
+								</p>
 								<div class="form-group" style="text-align:center; "> <!-- Submit button -->
 								<a href="apartmentResultsGeneral.html" id="cancel" name="cancel" class="btn btn-danger" style="margin-right:20%;"><i class="glyphicon glyphicon-remove"></i> Ακύρωση</a>
 							<button class="btn btn-primary " name="submit" type="submit"><i class="glyphicon glyphicon-check"></i> Υποβολή Κράτησης</button>

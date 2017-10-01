@@ -187,7 +187,6 @@
     <servlet-name>ApartmentWithDetails</servlet-name>
     <url-pattern>/ApartmentWithDetails/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>PopulateLocation</servlet-name>
     <servlet-class>ServLets.PopulateLocation</servlet-class>
@@ -196,7 +195,6 @@
     <servlet-name>PopulateLocation</servlet-name>
     <url-pattern>/PopulateLocation/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>WelcomePageServlet</servlet-name>
     <servlet-class>ServLets.WelcomePageServlet</servlet-class>
@@ -205,7 +203,6 @@
     <servlet-name>WelcomePageServlet</servlet-name>
     <url-pattern>/WelcomePageServlet/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SubmitCritic</servlet-name>
     <servlet-class>ServLets.SubmitCritic</servlet-class>
@@ -214,7 +211,6 @@
     <servlet-name>SubmitCritic</servlet-name>
     <url-pattern>/SubmitCritic/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AptWithChangePopulate</servlet-name>
     <servlet-class>ServLets.AptWithChangePopulate</servlet-class>
@@ -231,7 +227,6 @@
     <servlet-name>ChangeAptUpdate</servlet-name>
     <url-pattern>/ChangeAptUpdate/</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SendRoomIdToAptDetails</servlet-name>
     <servlet-class>ServLets.SendRoomIdToAptDetails</servlet-class>
@@ -240,5 +235,4 @@
     <servlet-name>SendRoomIdToAptDetails</servlet-name>
     <url-pattern>/SendRoomIdToAptDetails/</url-pattern>
   </servlet-mapping>
-  
 </web-app>
