@@ -59,19 +59,14 @@ public class InputAptSql {
 	      
 	      
 	    //insert into table Apartment
-	      String query = "INSERT INTO Apartment (room_photo, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person";
-	      String queryPart2 =" VALUES (" + "'" +photoListBytes.get(0) + "'" +","+apt.getCostPerDay() + "," + "'" +apt.getType()+"'" + "," + apt.getNumberRooms()+ "," + apt.getNumberCritics() +"," + apt.getAverage_critic()+ "," + apt.getNumberBeds() +"," + apt.getNumberBathrooms() +"," + apt.getNumberBedrooms()+ "," + apt.getLivingRoom() + "," + apt.getCapacity() + "," + apt.getMaxTenants() + "," + apt.getMinCostBooking() + "," + apt.getCostPerPerson();
+	      String query = "INSERT INTO Apartment (room_photo, host_id, cost_per_day, type, number_rooms, number_critics, average_critic, number_beds, number_bathrooms, number_bedrooms, livingroom,capacity, max_tenants, min_cost_booking,cost_per_person";
+	      String queryPart2 =" VALUES (" + "'" +photoListBytes.get(0) + "'" +","+ apt.getHostId()+ ","+ apt.getCostPerDay() + "," + "'" +apt.getType()+"'" + "," + apt.getNumberRooms()+ "," + apt.getNumberCritics() +"," + apt.getAverage_critic()+ "," + apt.getNumberBeds() +"," + apt.getNumberBathrooms() +"," + apt.getNumberBedrooms()+ "," + apt.getLivingRoom() + "," + apt.getCapacity() + "," + apt.getMaxTenants() + "," + apt.getMinCostBooking() + "," + apt.getCostPerPerson();
 	      
 	      if(!apt.getDescription().equals("")) {
 	    	  query+=",description";
 	    	  queryPart2+=","+ "'" +apt.getDescription()+"'" ;
 	      }
 	      
-	      if(apt.getHostId()!=-1) {	//auto tha afairethei meta
-	    	  System.out.println("host_id");
-	    	  query+=",host_id";
-	    	  queryPart2+=","+ apt.getHostId();
-	      }
 	      query+=")";
 	      
 	      queryPart2+=")";

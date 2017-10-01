@@ -195,55 +195,13 @@ public class InputAptServlet extends HttpServlet {
 				elevator=false;
 			
 			
-		/*	
-			System.out.println(street);
-			System.out.println(address_num);
-			System.out.println(postal);
-			System.out.println(neighborhood);
-			System.out.println(city);
-			System.out.println(country);
-			System.out.println(transport);
-			System.out.println(beds);
-			System.out.println(bathrooms);
-			System.out.println(rooms);
-			
-			System.out.println(type);
-			System.out.println(costPerDay);
-			
-			System.out.println("l "+livingroom);
-			System.out.println(wifi);
-			System.out.println(kitchen);
-			System.out.println(heating);
-			System.out.println(tv);
-			System.out.println(aircondition);
-			System.out.println(parking);
-			System.out.println(elevator);
-			
-			
-			System.out.println(space);
-			System.out.println(maxPeople);
-			System.out.println(minValue);
-			System.out.println("s "+smoking);
-			System.out.println(costperpers);
-			System.out.println(pets);
-			System.out.println(events);
-			System.out.println(minDays);
-			System.out.println(description);
-			System.out.println(bedrooms);
-			
-			System.out.println("img " +imagePath);
-			System.out.println("map " +map);		
-
-			*/
-
-			
+	
 			
 			
 			//null
 			int critics =0;
 			float averageCritic= 0;
-			int host_id=-1;
-			
+			int host_id=3;
 			//ArrayList<String> photos = null;
 			
 

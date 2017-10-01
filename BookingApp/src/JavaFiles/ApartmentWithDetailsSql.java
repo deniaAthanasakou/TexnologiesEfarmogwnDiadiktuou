@@ -2,13 +2,15 @@ package JavaFiles;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 public class ApartmentWithDetailsSql {
-	public String getApt(String room_id) {
+	public String getApt(String room_id, String from_dateTenant, String to_dateTenant) {
 		
 		try {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
@@ -32,6 +34,15 @@ public class ApartmentWithDetailsSql {
 			else {
 				System.out.println(" NULL"); 
 			}
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			Date fromDate = sdf.parse(from_dateTenant.replaceAll("/", "-"));
+			Date toDate = sdf.parse(to_dateTenant.replaceAll("/", "-"));
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			String fromTenant = sdf2.format(fromDate);
+			String toTenant = sdf2.format(toDate);
+
 
 			HashMap <String,String> apt = new HashMap <String,String>();   
 
@@ -54,9 +65,15 @@ public class ApartmentWithDetailsSql {
 				String beds = rs.getString("number_beds");
 				String bathrooms = rs.getString("number_bathrooms");
 				String bedrooms = rs.getString("number_bedrooms");
-				String livingroom = rs.getString("livingroom");
+				
 				String capacity = rs.getString("capacity");
+				
+				
 				String description = rs.getString("description");
+				if(description==null)
+					description="Δεν υπάρχει κάποια περιγραφή του χώρου.";
+				
+				
 				String max_tenants = rs.getString("max_tenants");
 				String min_cost_booking = rs.getString("min_cost_booking");
 				String cost_per_person = rs.getString("cost_per_person");
@@ -69,21 +86,51 @@ public class ApartmentWithDetailsSql {
 				String country = rs.getString("country");
 				String neighborhood = rs.getString("neighborhood");
 				String transportation = rs.getString("transportation");
-				String wifi = rs.getString("wifi");
-				String aircondition = rs.getString("aircondition");
-				String heating = rs.getString("heating");
-				String kitchen = rs.getString("kitchen");
-				String tv = rs.getString("tv");
-				String parking = rs.getString("parking");
-				String elevator = rs.getString("elevator");
-				String smoking = rs.getString("smoking_allowed");
-				String pets = rs.getString("pets_allowed");
-				String events = rs.getString("events");
+				if(transportation==null)
+					transportation="Δεν υπάρχει κάποια περιγραφή για μετακίνηση στον χώρο μας.";
+				
 				String min_days_booking = rs.getString("min_days_booking");
 				String from_date = rs.getString("from_date");
 				String to_date = rs.getString("to_date");
 				String fullAddress = street + " " + address_number + ", " + neighborhood + " "+postal_code+ ", " + city +", " + country;
-				String fullDates = from_date + " - " + to_date;
+				String fullDates = from_date + "  μέχρι  " + to_date;
+				
+				
+				
+				String livingroom ="Όχι";
+				if(rs.getString("livingroom").equals("1"))
+					livingroom="Ναι";
+				String wifi ="Όχι";
+				if(rs.getString("wifi").equals("1"))
+					wifi="Ναι";
+				String aircondition ="Όχι";
+				if(rs.getString("aircondition").equals("1"))
+					aircondition="Ναι";
+				String heating ="Όχι";
+				if(rs.getString("heating").equals("1"))
+					heating="Ναι";
+				String kitchen ="Όχι";
+				if(rs.getString("kitchen").equals("1"))
+					kitchen="Ναι";
+				String tv ="Όχι";
+				if(rs.getString("tv").equals("1"))
+					tv="Ναι";
+				String parking ="Όχι";
+				if(rs.getString("parking").equals("1"))
+					parking="Ναι";
+				String elevator ="Όχι";
+				if(rs.getString("elevator").equals("1"))
+					elevator="Ναι";
+				String smoking ="Όχι";
+				if(rs.getString("smoking_allowed").equals("1"))
+					smoking="Ναι";
+				String pets ="Όχι";
+				if(rs.getString("pets_allowed").equals("1"))
+					pets="Ναι";
+				String events ="Όχι";
+				if(rs.getString("events").equals("1"))
+					events="Ναι";
+				
 
 				//insert data into inner HashMap
 				apt.put("room_id",room_id);
@@ -118,8 +165,8 @@ public class ApartmentWithDetailsSql {
 				apt.put("pets",pets);
 				apt.put("events",events);
 				apt.put("min_days_booking",min_days_booking);
-				apt.put("from_date",from_date);
-				apt.put("to_date",to_date);
+				apt.put("from_date",fromTenant);
+				apt.put("to_date",toTenant);
 				apt.put("fullDates",fullDates);
 				
 

@@ -42,7 +42,7 @@ public class GetApartmentsOfHost extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		//get host id
-		String host_id="2";
+		String host_id="3";
 		
 		GetAptsOfHostSql myClass = new GetAptsOfHostSql();
 		

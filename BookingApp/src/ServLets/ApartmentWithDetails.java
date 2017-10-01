@@ -42,11 +42,13 @@ public class ApartmentWithDetails extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//get room_id
-		String room_id = "7";
+		String room_id = "11";
+		String date_fromTenant = "20/07/2017";
+		String date_toTenant = "25/07/2017";
 		
 		ApartmentWithDetailsSql myClass = new ApartmentWithDetailsSql();
 		
-		String apt = myClass.getApt(room_id);
+		String apt = myClass.getApt(room_id,date_fromTenant , date_toTenant);
     	JSONObject aptInfo=null;
 		try {
 			aptInfo = new JSONObject(apt);
