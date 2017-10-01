@@ -40,14 +40,36 @@ public class GetAptsFromWelcomeSearch extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("POPULATE FROM WELCOME");
-		String neighborhood = "";
-		String fromDate = "02/05/2018";
-		String toDate = "05/12/2020";
-		String tenants = "1";
+		Cookie[] cookies = null;
+		// Get an array of Cookies associated with this domain
+		String neighborhood="";
+
+		String fromDate = "";
+		String toDate = "";
+		String tenants = "";
+		cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("neighborhood")) {
+				//do something
+				neighborhood = cookie.getValue();
+			}
+			if (cookie.getName().equals("from")) {
+				//do something
+				fromDate = cookie.getValue();
+			}
+			if (cookie.getName().equals("to")) {
+				//do something
+				toDate = cookie.getValue();
+			}
+			if (cookie.getName().equals("people")) {
+				//do something
+				tenants = cookie.getValue();
+			}
+		}
 		
 		GetAptsFromWelcomeSearchSQL search = new GetAptsFromWelcomeSearchSQL();
 		String allApts = search.ExecuteQuery(neighborhood,fromDate,toDate,tenants);
-    	JSONObject aptsInfo=null;
+    		JSONObject aptsInfo=null;
 		try {
 			aptsInfo = new JSONObject(allApts);
 			response.setContentType("application/json");
