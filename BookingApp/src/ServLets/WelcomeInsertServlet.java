@@ -34,7 +34,6 @@ public class WelcomeInsertServlet extends HttpServlet {
 
 		try {
 			
-			System.out.println("------------------------INITIALIZE------------------------");
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 
 			String query = "SELECT isInitialized FROM options";
@@ -74,7 +73,6 @@ public class WelcomeInsertServlet extends HttpServlet {
 			
 			
 			for (String line : finalLines) {
-				//System.out.println(line);
 				stmt.executeUpdate(line);
 			}
 			
@@ -138,7 +136,7 @@ public class WelcomeInsertServlet extends HttpServlet {
 	private ArrayList<String> getMorePhotos() throws IOException{
 		ArrayList<String> barray = new ArrayList<String>();
 		ImgToBArray imgToArray = new ImgToBArray();
-		for(int i=13; i<=20; i++) {						//13,14,15,16,17,18,19,20
+		for(int i=13; i<=20; i++) {						
 			String image =getImage(i);
 			barray.add(imgToArray.convertImageToBArray(image).toString());
 		}

@@ -18,7 +18,6 @@ public class ChangeAptUpdateSql {
 		
 		 try
 		    {
-		        System.out.println("INSIDE TRYYYY");
 		      Statement stmt = ConnectionManager.getConnection().createStatement();
 		      String query1="UPDATE Apartment";
 		      String query2=" SET capacity =" + apt.getCapacity() +", cost_per_day="+apt.getCostPerDay() +", cost_per_person=" +apt.getCostPerPerson()+
@@ -52,18 +51,14 @@ public class ChangeAptUpdateSql {
 		      String query3=" WHERE room_id =" + room_id;
 		      
 		      String finalQuery = query1+query2+query3;
-		      System.out.println("query is "+finalQuery);
 		      stmt.executeUpdate(finalQuery);
-		      
-		      
-		      
+
 		      query1="UPDATE Facilities";
 		      query2=" SET aircondition =" + facilities.getAircondition() + ", elevator=" +facilities.getElevator() + ", heating="+facilities.getHeating()+
 		    		  ", kitchen="+facilities.getKitchen()  +", parking=" + facilities.getParking() + ",tv="+facilities.getTv()+ ", wifi="+ facilities.getWifi();
 		      query3=" WHERE room_id =" + room_id;
 		      
 		      finalQuery = query1+query2+query3;
-		      System.out.println("query is "+finalQuery);
 		      stmt.executeUpdate(finalQuery);
 		      
 		      
@@ -72,7 +67,6 @@ public class ChangeAptUpdateSql {
 		      query3=" WHERE room_id =" + room_id;
 		      
 		      finalQuery = query1+query2+query3;
-		      System.out.println("query is "+finalQuery);
 		      stmt.executeUpdate(finalQuery);
 		      
 		      
@@ -99,7 +93,6 @@ public class ChangeAptUpdateSql {
 		      query2=" SET from_date ='" + sdf.format(from) + "'" + ", to_date='" +sdf.format(to) +  "'";
 		      query3=" WHERE room_id =" + room_id;
 		      finalQuery = query1+query2+query3;
-		      System.out.println("query is "+finalQuery);
 		      stmt.executeUpdate(finalQuery);
 		      
 		      
@@ -118,10 +111,9 @@ public class ChangeAptUpdateSql {
 		      query3=" WHERE room_id =" + room_id;
 		      
 		      finalQuery = query1+query2+query3;
-		      System.out.println("query is "+finalQuery);
 		      
 		      stmt.executeUpdate(finalQuery);
-  
+		      stmt.close();
 		      		      
 		    }
 		    catch (Exception e)

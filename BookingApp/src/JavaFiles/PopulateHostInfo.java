@@ -19,7 +19,6 @@ public class PopulateHostInfo {
 			//check for same username before insert
 			String query = "SELECT DISTINCT name,surname,email,tel,photo FROM User,criticshost where user_id ="
 					+ hostId + " AND host_id=" + hostId;
-			System.out.println(query);
 
 			ResultSet rs = stmt.executeQuery(query);
 			rs.beforeFirst();

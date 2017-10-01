@@ -18,7 +18,6 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 	public  String ExecuteQuery(SearchFilters filters) {
 		try {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
-			//String query = "SELECT * FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN Rule NATURAL JOIN FreeDates WHERE";
 			String query = "SELECT room_id , room_photo, cost_per_day, type, number_beds, number_critics, average_critic FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN FreeDates WHERE";
 			if (!filters.getNeighborhood().equals(""))
 				query+="  neighborhood = '" + filters.getNeighborhood() + "' ";
@@ -59,8 +58,6 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 			
 			query+= " ORDER BY min_cost_booking";
 
-			System.out.println("My query is "+ query);
-
 			ResultSet rs = stmt.executeQuery(query);
 
 
@@ -93,11 +90,9 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 				String beds = rs.getString("number_beds");
 				String critics = rs.getString("number_critics");
 				String avgCritic = rs.getString("average_critic");
-				System.out.println("results " +id +" "+type +" "+beds +" "+critics +" "+avgCritic );
 
 				//insert data into inner HashMap
 				apt.put("room_id",id);
-				//apt.put("image",imgPath);				//photo
 				apt.put("costPerDay",costPerDay);
 				apt.put("type",type);
 				apt.put("beds",beds);
@@ -112,8 +107,6 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 			
 			JSONObject allAptsJSON = new JSONObject();
 			allAptsJSON.put("apts", aptArray);
-
-			System.out.println("JSONNNN:" + allAptsJSON.toString());
 
 			stmt.close();
 			return allAptsJSON.toString();

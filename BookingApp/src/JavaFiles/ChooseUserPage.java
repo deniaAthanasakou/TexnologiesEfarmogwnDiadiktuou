@@ -6,12 +6,10 @@ import java.sql.Statement;
 
 public class ChooseUserPage {
 	public int getUser(String username) throws ClassNotFoundException, SQLException {
-		System.out.println("INSIDE CHOOSE PAGE");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + username + "'";
-		System.out.println(checkQuery);
 
 		ResultSet rs = stmt.executeQuery(checkQuery);
 		rs.beforeFirst();
@@ -23,6 +21,7 @@ public class ChooseUserPage {
 				byte roleAdmin = rs.getByte("role_admin");
 				byte roleTenant = rs.getByte("role_tenant");
 				
+				stmt.close();
 				if(roleHost==1) {
 					return 1;
 				}else if(roleAdmin==1) {
@@ -30,8 +29,10 @@ public class ChooseUserPage {
 				}else if(roleHost==0 && roleAdmin==0) {
 					return 0;
 				}
+				
 			}	
 		}else {
+			stmt.close();
 			return 3;
 		}
 		return 3;

@@ -48,16 +48,13 @@ public class UpdateProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("INSIDE UPDATE PROFILE");
 		try {
-			System.out.println("TRYYYY");
 			HttpSession session = request.getSession(false); 
 			if (session != null) {
 				String username = (String) session.getAttribute("username");
 				User updateUser = new User();
 				updateUser.setUsername(username);
 				if(request.getParameter("submitImage") != null) {
-					System.out.println("Submit an image");
 					String imgPath = request.getParameter("imagePath");
 					ImgToBArray image = new ImgToBArray();
 					updateUser.setPhoto(image.convertImageToBArray(imgPath));
@@ -73,7 +70,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					out.close();
 				}
 				if(request.getParameter("submitPersonal") != null) {
-					System.out.println("Submit personal Info");
 					String name = request.getParameter("name");
 					String surname = request.getParameter("surname");
 					updateUser.setName(name);
@@ -90,7 +86,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					out.close();
 				}
 				if(request.getParameter("submitEmail") != null) {
-					System.out.println("Submit email Info");
 					String email = request.getParameter("email");
 					updateUser.setEmail(email);
 					UpdateProfile update = new UpdateProfile();
@@ -105,7 +100,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					out.close();
 				}
 				if(request.getParameter("submitPass") != null) {
-					System.out.println("Submit new pass");
 					String old_password = request.getParameter("old_password");
 					String password = request.getParameter("password");
 					updateUser.setPassword(password);
@@ -125,7 +119,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					out.close();
 				}
 				if(request.getParameter("submitRoles") != null) {
-					System.out.println("Submit roles Info");
 					String tenant = request.getParameter("tenant");
 					String host = request.getParameter("host");
 					byte tenantB = 0;
@@ -136,8 +129,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					if(host!=null) {
 						hostB=1;
 					}
-					System.out.print("tenant: " + tenant);
-					System.out.print("host: " + host);
 					updateUser.setRoleHost(hostB);
 					updateUser.setRoleTenant(tenantB);
 					UpdateProfile update = new UpdateProfile();
@@ -152,7 +143,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					out.close();
 				}
 				if(request.getParameter("submitResidence") != null) {
-					System.out.println("Submit residence Info");
 					String country = request.getParameter("country");
 					Locale.setDefault(new Locale("en", "US"));
 					Locale l = new Locale("", country);
@@ -182,7 +172,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					out.close();
 				}
 				if(request.getParameter("submitAdditional") != null) {
-					System.out.println("Submit additional info");
 					String tel = request.getParameter("tel");
 					String birthdayStr = request.getParameter("birthday");
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

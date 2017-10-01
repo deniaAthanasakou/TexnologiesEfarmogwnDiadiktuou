@@ -42,7 +42,6 @@ public class PopulateUserApprServlet extends HttpServlet {
 		try {
 			Thread.currentThread();
 			Thread.sleep((long) Math.random() * 1000);
-			System.out.println("approval");
 		    Cookie[] cookies = null;
 		    // Get an array of Cookies associated with this domain
 		    cookies = request.getCookies();
@@ -54,12 +53,9 @@ public class PopulateUserApprServlet extends HttpServlet {
 				}
 
 			}
-		    System.out.println("Populate Servlet: " + username);
 			PopulateUser populateProf = new PopulateUser();
 			HashMap<String,String> populateInfo = new HashMap<String,String>(populateProf.populateProfile(username));
 			JSONObject userInfo = new JSONObject(populateInfo);
-			System.out.println("RESULT SET: " + populateInfo.get("username"));
-			System.out.println("JSON: " + userInfo.toString());
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(userInfo.toString());

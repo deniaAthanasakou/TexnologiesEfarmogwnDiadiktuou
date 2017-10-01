@@ -11,7 +11,6 @@ import Entities.User;
 public class UpdateProfile {
 	public void updateImage(User updateUser) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change image");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'";
@@ -21,7 +20,6 @@ public class UpdateProfile {
 
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
@@ -30,17 +28,14 @@ public class UpdateProfile {
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 		}
 
-		System.out.println("DONE DONE");
 
 		stmt.close();
 	}
 
 	public void updatePersonal(User updateUser) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change personal");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'";
@@ -48,31 +43,25 @@ public class UpdateProfile {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 
-		System.out.println("UPDATE: " + checkQuery);
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
 				String updateQuery = "UPDATE User SET name=" + "'" + updateUser.getName() + "'" + ", surname=" + "'" + updateUser.getSurname() + "'"
 						+ " WHERE username=" + "'" + updateUser.getUsername() + "'";
 
-				System.out.println("UPDATE QUERY: " + updateQuery);
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 		}
 
-		System.out.println("DONE DONE");
 
 		stmt.close();
 	}
 	
 	public void updateEmail(User updateUser) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change email");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'";
@@ -80,31 +69,25 @@ public class UpdateProfile {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 
-		System.out.println("UPDATE: " + checkQuery);
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
 				String updateQuery = "UPDATE User SET email=" + "'" + updateUser.getEmail() + "'" 
 						+ " WHERE username=" + "'" + updateUser.getUsername() + "'";
 
-				System.out.println("UPDATE QUERY: " + updateQuery);
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 		}
 
-		System.out.println("DONE DONE");
 
 		stmt.close();
 	}
 	
 	public boolean updatePass(User updateUser,String old_pass) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change password");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'"
@@ -113,25 +96,20 @@ public class UpdateProfile {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 
-		System.out.println("UPDATE: " + checkQuery);
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
 				String updateQuery = "UPDATE User SET password=" + "'" + updateUser.getPassword() + "'" 
 						+ " WHERE username=" + "'" + updateUser.getUsername() + "'";
 
-				System.out.println("UPDATE QUERY: " + updateQuery);
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 			stmt.close();
 			return true;
 		}else {
-			System.out.println("Password incorrect");
 			stmt.close();
 			return false;
 		}
@@ -139,7 +117,6 @@ public class UpdateProfile {
 	
 	public boolean updateRoles(User updateUser) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change roles");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'";
@@ -148,10 +125,8 @@ public class UpdateProfile {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 
-		System.out.println("UPDATE: " + checkQuery);
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
@@ -159,15 +134,12 @@ public class UpdateProfile {
 						+ ", role_host=" + updateUser.getRoleHost()
 						+ " WHERE username=" + "'" + updateUser.getUsername() + "'";
 
-				System.out.println("UPDATE QUERY: " + updateQuery);
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 			stmt.close();
 			return true;
 		}else {
-			System.out.println("Password incorrect");
 			stmt.close();
 			return false;
 		}
@@ -175,7 +147,6 @@ public class UpdateProfile {
 	
 	public boolean updateResidence(User updateUser) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change residence");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'";
@@ -184,10 +155,8 @@ public class UpdateProfile {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 
-		System.out.println("UPDATE: " + checkQuery);
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
@@ -198,15 +167,12 @@ public class UpdateProfile {
 						+ ", address_number=" + "'" + updateUser.getAddressNumber() + "'"
 						+ " WHERE username=" + "'" + updateUser.getUsername() + "'";
 
-				System.out.println("UPDATE QUERY: " + updateQuery);
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 			stmt.close();
 			return true;
 		}else {
-			System.out.println("Password incorrect");
 			stmt.close();
 			return false;
 		}
@@ -215,7 +181,6 @@ public class UpdateProfile {
 	
 	public boolean updateAdditional(User updateUser) throws ClassNotFoundException, SQLException {
 
-		System.out.println("change residence");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 		//check for same username before insert
 		String checkQuery = "SELECT * FROM User WHERE username=" + "'" + updateUser.getUsername() + "'";
@@ -224,10 +189,8 @@ public class UpdateProfile {
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
 
-		System.out.println("UPDATE: " + checkQuery);
 
 		if(rowCount==1) {
-			System.out.println("USER EXISTS");
 
 
 			if(rs.first()) {
@@ -237,15 +200,12 @@ public class UpdateProfile {
 						+ ", birthday=" + "'" + sdf.format(birthday) + "'" 
 						+ " WHERE username=" + "'" + updateUser.getUsername() + "'";
 
-				System.out.println("UPDATE QUERY: " + updateQuery);
 				stmt.executeUpdate(updateQuery);
 			}
 
-			System.out.println("QUERY DONE");
 			stmt.close();
 			return true;
 		}else {
-			System.out.println("Password incorrect");
 			stmt.close();
 			return false;
 		}

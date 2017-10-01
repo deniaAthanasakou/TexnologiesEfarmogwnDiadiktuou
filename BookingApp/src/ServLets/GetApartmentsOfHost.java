@@ -58,7 +58,6 @@ public class GetApartmentsOfHost extends HttpServlet {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("JSON: " + aptsInfo.toString());
 
 	}
 

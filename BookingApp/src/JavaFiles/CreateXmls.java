@@ -22,7 +22,6 @@ import org.w3c.dom.ls.LSSerializer;
 
 public class CreateXmls {
 	public String areaHostingXML() throws SQLException, ClassNotFoundException, TransformerException {
-		System.out.println("INSIDE XML AREA HOSTING");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 
 		//check for same username before insert
@@ -32,7 +31,6 @@ public class CreateXmls {
 				" NATURAL JOIN Rule" + 
 				" NATURAL JOIN Facilities";
 		
-		System.out.println(checkQuery);
 
 		ResultSet rs = stmt.executeQuery(checkQuery);
 		rs.beforeFirst();
@@ -243,14 +241,10 @@ public class CreateXmls {
 	}
 	
 	public String bookingXML() throws SQLException, ClassNotFoundException, TransformerException {
-		System.out.println("INSIDE XML BOOKING");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 
-		//check for same username before insert
 		String checkQuery = "SELECT * FROM Booking";
 		
-		System.out.println(checkQuery);
-
 		ResultSet rs = stmt.executeQuery(checkQuery);
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;
@@ -270,7 +264,6 @@ public class CreateXmls {
 	
 		if(rowCount!=0) {
 			
-			
 			rs.beforeFirst();
 			while(rs.next()) {
 				
@@ -278,7 +271,6 @@ public class CreateXmls {
 				Element bookInfo = doc.createElement("bookInfo");
 				rootElement.appendChild(bookInfo);
 				
-				//listing_id, room_id, tenant_id, date_from, date_to
 				// cost per day elements
 				Element listingId = doc.createElement("listing_id");
 				listingId.appendChild(doc.createTextNode(rs.getString("listing_id")));
@@ -322,16 +314,13 @@ public class CreateXmls {
 	}
 	
 	public String criticsAptXML() throws SQLException, ClassNotFoundException, TransformerException {
-		System.out.println("INSIDE XML BOOKING");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 
-		//check for same username before insert
 		String checkQuery = "SELECT DISTINCT tenant_id, username, room_id ,street, address_number, neighborhood, date, critic  FROM CriticsApt" + 
 				" NATURAL JOIN Apartment" + 
 				" NATURAL JOIN User" + 
 				" NATURAL JOIN Location";
 		
-		System.out.println(checkQuery);
 
 		ResultSet rs = stmt.executeQuery(checkQuery);
 		rs.beforeFirst();
@@ -427,15 +416,11 @@ public class CreateXmls {
 	}
 	
 	public String criticsHostXML() throws SQLException, ClassNotFoundException, TransformerException {
-		System.out.println("INSIDE XML BOOKING");
 		Statement stmt = ConnectionManager.getConnection().createStatement();
 
-		//check for same username before insert
 		String checkQuery = "SELECT DISTINCT t1.user_id AS tenant_id,t1.username AS tenant_username, t2.user_id AS host_id, t2.username AS host_username, date, critic FROM CriticsHost,User AS t1, User AS t2" + 
 				" WHERE criticshost.host_id = t2.user_id AND criticshost.tenant_id = t1.user_id;";
 		
-		System.out.println(checkQuery);
-
 		ResultSet rs = stmt.executeQuery(checkQuery);
 		rs.beforeFirst();
 		int rowCount = rs.last() ? rs.getRow() : 0;

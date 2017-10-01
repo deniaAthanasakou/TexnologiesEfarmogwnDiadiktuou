@@ -16,7 +16,6 @@ public class GetAptsFromWelcomeSearchSQL {
 	public  String ExecuteQuery(String neighborhood, String from, String to, String tenants) {
 		try {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
-			//String query = "SELECT * FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN Rule NATURAL JOIN FreeDates WHERE";
 			String query = "SELECT room_id , room_photo, cost_per_day, type, number_beds, number_critics, average_critic FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN FreeDates WHERE";
 			if (!neighborhood.equals(""))
 				query+="  neighborhood = '" + neighborhood + "' ";
@@ -34,8 +33,6 @@ public class GetAptsFromWelcomeSearchSQL {
 			query+= " AND max_tenants >="  + tenants ;
 			query+= " ORDER BY min_cost_booking";
 			
-
-			System.out.println("My query is "+ query);
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -59,17 +56,14 @@ public class GetAptsFromWelcomeSearchSQL {
 				HashMap <String,String> apt = new HashMap <String,String>();    	  
 				String id = rs.getString("room_id");
 				ImgToBArray image = new ImgToBArray();//getRoomPhotoAsString
-				//String imgPath = image.convertBArrayToImage(rs.getBytes("room_photo"));
 				String costPerDay = rs.getString("cost_per_day");
 				String type = rs.getString("type");
 				String beds = rs.getString("number_beds");
 				String critics = rs.getString("number_critics");
 				String avgCritic = rs.getString("average_critic");
-				System.out.println("results " +id +" "+type +" "+beds +" "+critics +" "+avgCritic );
 
 				//insert data into inner HashMap
 				apt.put("room_id",id);
-				//apt.put("image",imgPath);				//photo
 				apt.put("costPerDay",costPerDay);
 				apt.put("type",type);
 				apt.put("beds",beds);
@@ -84,8 +78,6 @@ public class GetAptsFromWelcomeSearchSQL {
 			
 			JSONObject allAptsJSON = new JSONObject();
 			allAptsJSON.put("apts", aptArray);
-
-			System.out.println("JSONNNN:" + allAptsJSON.toString());
 
 			stmt.close();
 			return allAptsJSON.toString();

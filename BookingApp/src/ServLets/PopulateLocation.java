@@ -33,12 +33,10 @@ public class PopulateLocation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("INSIDE POPULATE LOCATION");
 		PopulateLocationDropDown dropdown = new PopulateLocationDropDown();
 		String results = null;
 		try {
 			results = dropdown.populateDropdown();
-			System.out.println(results);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

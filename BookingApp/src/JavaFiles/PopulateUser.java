@@ -22,7 +22,6 @@ public class PopulateUser {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 			//check for same username before insert
 			String checkQuery = "SELECT * FROM User WHERE username=" + "'" + username + "'";
-			System.out.println(checkQuery);
 
 			ResultSet rs = stmt.executeQuery(checkQuery);
 			rs.beforeFirst();
@@ -30,7 +29,6 @@ public class PopulateUser {
 		
 			if(rowCount==1) {
 				
-				System.out.println("EXISTS");
 				HashMap<String,String> profileInfo = new HashMap<String,String>();
 				//return resultset for populate
 				ResultSet profileRs = stmt.executeQuery(checkQuery);
@@ -137,7 +135,6 @@ public class PopulateUser {
 				return profileInfo;
 			}
 			else {
-				System.out.println("User does not exist.");
 				return null;
 			}
 		}
@@ -156,7 +153,6 @@ public class PopulateUser {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 			//check for same username before insert
 			String checkQuery = "SELECT * FROM User WHERE username='Admin'";
-			System.out.println(checkQuery);
 
 			ResultSet rs = stmt.executeQuery(checkQuery);
 			rs.beforeFirst();
@@ -164,7 +160,6 @@ public class PopulateUser {
 		
 			if(rowCount==1) {
 				
-				System.out.println("EXISTS");
 				HashMap<String,String> profileInfo = new HashMap<String,String>();
 				//return resultset for populate
 				ResultSet profileRs = stmt.executeQuery(checkQuery);
@@ -293,7 +288,6 @@ public class PopulateUser {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 			//check for same username before insert
 			String checkQuery = "SELECT * FROM User WHERE username=" + "'" + username + "'";
-			System.out.println(checkQuery);
 
 			ResultSet rs = stmt.executeQuery(checkQuery);
 			rs.beforeFirst();
@@ -301,7 +295,6 @@ public class PopulateUser {
 		
 			if(rowCount==1) {
 				
-				System.out.println("EXISTS");
 				HashMap<String,String> profileInfo = new HashMap<String,String>();
 				//return resultset for populate
 				ResultSet profileRs = stmt.executeQuery(checkQuery);

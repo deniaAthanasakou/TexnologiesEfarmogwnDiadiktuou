@@ -56,7 +56,6 @@ public class AptWithChangePopulate extends HttpServlet {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("JSON: " + aptInfo.toString());
 
 	}
 }

@@ -14,10 +14,7 @@ public class ApartmentWithDetailsSql {
 		
 		try {
 			Statement stmt = ConnectionManager.getConnection().createStatement();
-			//String query = "SELECT * FROM Location NATURAL JOIN Apartment NATURAL JOIN Facilities NATURAL JOIN Rule NATURAL JOIN FreeDates WHERE";
-			String query = "SELECT * from apartment natural join Location natural join facilities natural join rule natural join freedates where room_id="+room_id;
-			System.out.println("query is "+query);
-		
+			String query = "SELECT * from apartment natural join Location natural join facilities natural join rule natural join freedates where room_id="+room_id;		
 			ResultSet rs = stmt.executeQuery(query);
 
 			if (rs.next() == false) { 
@@ -26,7 +23,6 @@ public class ApartmentWithDetailsSql {
 			else if (rs.next() == true) {
 				System.out.println("ResultSet is NOT empty"); 
 			}
-
 			
 			String fromTenant="";
 			String toTenant="";
@@ -36,30 +32,25 @@ public class ApartmentWithDetailsSql {
 				Date fromDate = sdf.parse(from_dateTenant.replaceAll("/", "-"));
 				Date toDate = sdf.parse(to_dateTenant.replaceAll("/", "-"));
 				SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-				System.out.println("to + from:c" + sdf2.format(fromDate) +" " +sdf2.format(toDate));
 				fromTenant = sdf2.format(fromDate);
 				toTenant = sdf2.format(toDate);
 
 			}
 			
 			
-
 			HashMap <String,String> apt = new HashMap <String,String>();   
 
 			rs.beforeFirst();
 			int i=0;
 			JSONArray aptArray = new JSONArray();
 			while (rs.next()) {
-				System.out.println("inside while");
 				i++;
 				 	
 				//get all fields
 				ImgToBArray image = new ImgToBArray();//getRoomPhotoAsString
 				//String imgPath = image.convertBArrayToImage(rs.getBytes("room_photo"));
-				
 				String costPerDay = rs.getString("cost_per_day");
 				String type = rs.getString("type");
-				System.out.println("type = " + type);
 				String number_rooms = rs.getString("number_rooms");
 				String critics = rs.getString("number_critics");
 				String avgCritic = rs.getString("average_critic");
@@ -68,7 +59,6 @@ public class ApartmentWithDetailsSql {
 				String bedrooms = rs.getString("number_bedrooms");
 				
 				String capacity = rs.getString("capacity");
-				
 				
 				String description = rs.getString("description");
 				if(description==null)
@@ -95,8 +85,6 @@ public class ApartmentWithDetailsSql {
 				String to_date = rs.getString("to_date");
 				String fullAddress = street + " " + address_number + ", " + neighborhood + " "+postal_code+ ", " + city +", " + country;
 				String fullDates = from_date + "  μέχρι  " + to_date;
-				
-				
 				
 				String livingroom ="Όχι";
 				if(rs.getString("livingroom").equals("1"))
@@ -131,7 +119,6 @@ public class ApartmentWithDetailsSql {
 				String events ="Όχι";
 				if(rs.getString("events").equals("1"))
 					events="Ναι";
-				
 
 				//insert data into inner HashMap
 				apt.put("room_id",room_id);
@@ -181,18 +168,9 @@ public class ApartmentWithDetailsSql {
 				apt.put("city",city);
 				apt.put("country",country);
 				apt.put("neighborhood",neighborhood);
-				
-
 			}
 			
-			
-			
-			
-			
-			
 			JSONObject aptJSON = new JSONObject(apt);
-
-			System.out.println("JSON:" + aptJSON.toString());
 
 			stmt.close();
 			return aptJSON.toString();

@@ -40,7 +40,6 @@ public class GetAptsFromWelcomeSearch extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("POPULATE FROM WELCOME");
 		Cookie[] cookies = null;
 		// Get an array of Cookies associated with this domain
 		String neighborhood="";
@@ -50,19 +49,15 @@ public class GetAptsFromWelcomeSearch extends HttpServlet {
 		cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("neighborhood")) {
-				//do something
 				neighborhood = cookie.getValue();
 			}
 			if (cookie.getName().equals("from")) {
-				//do something
 				fromDate = cookie.getValue();
 			}
 			if (cookie.getName().equals("to")) {
-				//do something
 				toDate = cookie.getValue();
 			}
 			if (cookie.getName().equals("people")) {
-				//do something
 				tenants = cookie.getValue();
 			}
 		}
@@ -81,7 +76,6 @@ public class GetAptsFromWelcomeSearch extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("JSON: " + aptsInfo.toString());
 		
 	}
 

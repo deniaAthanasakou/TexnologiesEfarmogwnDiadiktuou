@@ -31,31 +31,21 @@ import JavaFiles.ImgToBArray;
 public class InputAptSql {
 	public void inputApt(Apartment apt, Location loc, Rule rules, Facility facilities, Freedate fd)
 	{
-		System.out.println("INSIDE inputApt");
-
 	    try
 	    {
-	        System.out.println("INSIDE TRYYYY");
-
 
 	      Statement stmt = ConnectionManager.getConnection().createStatement();
-	      
-	      System.out.println(" string " +apt.getImagePath());
-	      
-	      
+	     	  	      
 	      ArrayList<String> photoListString = new ArrayList<String>(Arrays.asList(apt.getImagePath().split(",")));
-	      System.out.println(" string list " +photoListString);
 	      ArrayList <byte[]> photoListBytes = new ArrayList <byte[]>();
 	      
 	      ImgToBArray imgToArray = new ImgToBArray();
 	      
 	      for(int i=0; i<photoListString.size(); i++) {
 	    	  byte[] element= imgToArray.convertImageToBArray(photoListString.get(i).trim());
-	    	  System.out.println("element " +element);
 	    	  photoListBytes.add(element);
 	      }
 	      
-	      System.out.println(" bytes " +photoListBytes);
 	      
 	      
 	    //insert into table Apartment
@@ -72,9 +62,7 @@ public class InputAptSql {
 	      queryPart2+=")";
 	      
 	      String finalQuery = query + queryPart2;
-	      
-	      System.out.println("query is "+ finalQuery);
-	   
+	      	   
 	      
 	      stmt.executeUpdate(finalQuery,Statement.RETURN_GENERATED_KEYS);
 	      ResultSet rs_id = stmt.getGeneratedKeys();
@@ -82,7 +70,6 @@ public class InputAptSql {
 	      if ( rs_id.next() ) {
 	    	    // Retrieve the auto generated key(s).
 	    	  	room_id = rs_id.getInt(1);
-	    	    System.out.println("id "+ room_id);
 	    	}
 	      else {
 	    	  System.out.println("id_not_found");
@@ -100,13 +87,11 @@ public class InputAptSql {
 	          idSelect = rsSelect.getString("room_id");
 	      }  
 	        // print the results
-	        System.out.println("room id = "+ idSelect);
 	      
         if(photoListBytes.size()>1) {
 	    	  System.out.println("photos");
 	    	  for(int i=1;i<photoListBytes.size();i++) {
 	    		  finalQuery = "INSERT INTO MorePhotos (room_id,image) VALUES ("+room_id +","+ "'" +photoListBytes.get(i) + "'"+ ")";
-	    	      System.out.println("query is "+ finalQuery);
 	    	      stmt.executeUpdate(finalQuery);
 	    	  }	
 	      }
@@ -117,7 +102,6 @@ public class InputAptSql {
 	      queryPart2 =" VALUES ("+room_id +","+rules.getSmokingAllowed() + ","+rules.getPetsAllowed() + "," +rules.getEvents()+ "," + rules.getMinDaysBooking()+")";
 	      finalQuery = query + queryPart2;
 	      
-	      System.out.println("query is "+ finalQuery);
 	      stmt.executeUpdate(finalQuery);
 	      
 	      
@@ -126,7 +110,6 @@ public class InputAptSql {
 	      queryPart2 =" VALUES ("+room_id +","+facilities.getWifi() + ","+facilities.getAircondition() + "," +facilities.getHeating()+ "," + facilities.getKitchen()+"," + facilities.getTv()+"," + facilities.getParking()+"," + facilities.getElevator()+")";
 	      finalQuery = query + queryPart2;
 	      
-	      System.out.println("query is "+ finalQuery);
 	      stmt.executeUpdate(finalQuery);
 	      
 	      	      
@@ -135,7 +118,6 @@ public class InputAptSql {
 	      
 	      	      
 	      if(!loc.getTransportation().equals("")) {	
-	    	  System.out.println("transportation");
 	    	  query+=",transportation";
 	    	  queryPart2+=","+ "'" +loc.getTransportation() +"'" ;
 	      }
@@ -145,7 +127,6 @@ public class InputAptSql {
 	      
 	      finalQuery = query + queryPart2;
 	      
-	      System.out.println("query is "+ finalQuery);
 	      stmt.executeUpdate(finalQuery);
 	      
 	      
@@ -161,7 +142,6 @@ public class InputAptSql {
 		     
 		  finalQuery = query + queryPart2;
 	      
-	      System.out.println("query is "+ finalQuery);
 	      stmt.executeUpdate(finalQuery);
 	      
 	      

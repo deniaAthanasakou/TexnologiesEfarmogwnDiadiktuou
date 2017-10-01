@@ -30,11 +30,9 @@ public class PopulateHost extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Populate host");
 		String host_id = "2";
 		PopulateHostInfo sendInfo = new PopulateHostInfo();
 		String info = sendInfo.populateHostInfo(host_id);
-		System.out.println(info);
 		response.setContentType("application/json; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(info);

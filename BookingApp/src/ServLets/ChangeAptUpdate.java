@@ -58,10 +58,6 @@ public class ChangeAptUpdate extends HttpServlet {
 		
 		String transport = request.getParameter("transport");
 		
-		//Dates		
-		
-		//ArrayList<Date> from = new ArrayList<Date>();
-		//ArrayList<Date> to = new ArrayList<Date>();
 		Date from = new Date();
 		Date to = new Date();
 		
@@ -87,7 +83,6 @@ public class ChangeAptUpdate extends HttpServlet {
 		int rooms = Integer.parseInt(request.getParameter("rooms"));
 		int bedrooms = Integer.parseInt(request.getParameter("bedrooms"));
 		String type = request.getParameter("roomtype");	
-		System.out.println("type is " +type);
 		int space = Integer.parseInt(request.getParameter("space"));
 		int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
 		int minValue = Integer.parseInt(request.getParameter("minValue"));
@@ -202,17 +197,11 @@ public class ChangeAptUpdate extends HttpServlet {
 		ChangeAptUpdateSql myClass = new ChangeAptUpdateSql();
 
         if (request.getParameter("submit") != null) {
-        	System.out.println("MAGKAS BEFORE");
 
         	myClass.updateApt(room_id,apt,loc,rule,fac,fd);
         	response.sendRedirect("./html files/aptChangeDone.html");
-        	System.out.println("Submit was successfull!!");
-			
-            
-            System.out.println("MAGKAS AFTER");
-        } else {
-        	System.out.println("GUFTOS");
-        }
+  
+        } 
 		
 		
 

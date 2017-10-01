@@ -27,7 +27,6 @@ public class SendRoomIdToAptDetails extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("senddd iddd");
 
 		String roomId = request.getParameter("room_id");				
 	    Cookie roomIdCookie = new Cookie("room_id", roomId);

@@ -33,7 +33,6 @@ public class ApproveHost extends HttpServlet {
 	    // Get an array of Cookies associated with this domain
 	    cookies = request.getCookies();
 	    String username = cookies[0].getValue();
-		System.out.println("Approve host: " + cookies[0].getValue());
 		ApproveHostUpdate approve = new ApproveHostUpdate();
 		try {
 			if(approve.approveHost(username)) {

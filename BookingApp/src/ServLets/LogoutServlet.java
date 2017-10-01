@@ -30,10 +30,8 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//System.out.println("INSIDE LOGOUT");
 		HttpSession session=request.getSession();  
         session.invalidate();
-		//System.out.println("LOGOUT COMPLETE");
         response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();

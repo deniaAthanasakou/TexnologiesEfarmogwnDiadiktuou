@@ -11,7 +11,6 @@ public class ImportUsersAdmin {
 		{
 			Statement stmt = ConnectionManager.getConnection().createStatement();
 
-			//check for same username before insert
 			String results = "SELECT DISTINCT username,name,surname,role_host,role_tenant,role_admin,User.approved,processapproval.approved as processed FROM User,processapproval";
 			ResultSet rs = stmt.executeQuery(results);
 			rs.beforeFirst();

@@ -36,7 +36,6 @@ public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("INSIDE GetAptsFromWelcomeFilterSearch SERVLET");
 		
 		//get fields
 		String roomType = request.getParameter("roomType");
@@ -86,26 +85,20 @@ public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
 		cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("neighborhood")) {
-				//do something
 				neighborhood = cookie.getValue();
 			}
 			if (cookie.getName().equals("from")) {
-				//do something
 				from = cookie.getValue();
 			}
 			if (cookie.getName().equals("to")) {
-				//do something
 				to = cookie.getValue();
 			}
 			if (cookie.getName().equals("people")) {
-				//do something
 				tenants = cookie.getValue();
 			}
 		}
 		
-		//somehow get neighborhood
 		
-		System.out.println("roomType" + roomType +"!"+ wifi + "!"+  aircondition);
 		SearchFilters filters = new SearchFilters(roomType,maxCost,wifi,aircondition,heating,kitchen,tv,parking,elevator,neighborhood, from, to, tenants);
 				
 		GetAptsFromWelcomeSearchFilterSQL search = new GetAptsFromWelcomeSearchFilterSQL();
@@ -122,7 +115,6 @@ public class GetAptsFromWelcomeFilterSearch extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("JSON: " + aptsInfo.toString());
 	}
 
 	/**

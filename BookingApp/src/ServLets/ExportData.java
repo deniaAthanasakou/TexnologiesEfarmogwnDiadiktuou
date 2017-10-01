@@ -51,10 +51,8 @@ public class ExportData extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("INSIDE EXPORT");
 		CreateXmls xml = new CreateXmls();
 		if(request.getParameter("areaHosting") != null) {
-			System.out.println("XML AREA");
 			try {
 				String source = xml.areaHostingXML();
 				response.setContentType("text/xml");
@@ -68,7 +66,6 @@ public class ExportData extends HttpServlet {
 			}
 		}
 		if(request.getParameter("booking") != null) {
-			System.out.println("XML booking");
 			String source = null;
 			try {
 				source = xml.bookingXML();
@@ -90,7 +87,6 @@ public class ExportData extends HttpServlet {
 	        outputStream.close();
 		}
 		if(request.getParameter("criticsApt") != null) {
-			System.out.println("XML criticsApt");
 			String source = null;
 			try {
 				source = xml.criticsAptXML();
@@ -112,7 +108,6 @@ public class ExportData extends HttpServlet {
 	        outputStream.close();
 		}
 		if(request.getParameter("criticsHost") != null) {
-			System.out.println("XML criticsHost");
 			String source = null;
 			try {
 				source = xml.criticsHostXML();

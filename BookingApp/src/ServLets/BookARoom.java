@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,21 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Entities.Criticshost;
-import Entities.CriticshostPK;
-import JavaFiles.SubmitHost;
+import JavaFiles.BookingRoom;
 
 /**
- * Servlet implementation class SubmitCritic
+ * Servlet implementation class BookARoom
  */
-@WebServlet("/SubmitCritic")
-public class SubmitCritic extends HttpServlet {
+@WebServlet("/BookARoom")
+public class BookARoom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmitCritic() {
+    public BookARoom() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,25 +34,24 @@ public class SubmitCritic extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String from = request.getParameter("fromDateTxt");
+		String to = request.getParameter("toDateTxt");
 		Cookie[] cookies = null;
-		String hostId = "";			//get them
-		
 		cookies = request.getCookies();
+		String room_id= "";
 		for (Cookie cookie : cookies) {
 			
-			if (cookie.getName().equals("host_id")) {
-				//do something
-				hostId = cookie.getValue();
+			if (cookie.getName().equals("room_id")) {
+				room_id = cookie.getValue();
 			}
-				
 			
 		}
 		
@@ -72,7 +66,7 @@ public class SubmitCritic extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script type=text/javascript>");
-				out.println("alert('Δεν είστε συνδεδεμένος για να υποβάλλετε κριτική.');");
+				out.println("alert('Δεν είστε συνδεδεμένος για να ενοικιάσετε το διαμέρισμα.');");
 				out.println("window.history.back();");
 				out.println("</script>");
 				out.close();
@@ -84,29 +78,15 @@ public class SubmitCritic extends HttpServlet {
 		}
 		
 		
-		String criticStr = request.getParameter("critic_host");
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = new Date();
-		SubmitHost critic = new SubmitHost();
-		CriticshostPK id = new CriticshostPK(date,Integer.parseInt(hostId),0);
-		Criticshost info = new Criticshost(id,Integer.parseInt(criticStr));
+		
+		BookingRoom book = new BookingRoom();
 		try {
-			boolean submission = critic.submitCritic(info, username);
-			if(submission) {
+			if(book.bookARoom(from,to,room_id,username)) {
 				response.setContentType("text/html ; charset=\"UTF-8\""); 
 				response.setCharacterEncoding("UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script type=text/javascript>");
-				out.println("alert('Η κριτική προστέθηκε επιτυχώς.');");
-				out.println("window.history.back();");
-				out.println("</script>");
-				out.close();
-			}else {
-				response.setContentType("text/html ; charset=\"UTF-8\""); 
-				response.setCharacterEncoding("UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script type=text/javascript>");
-				out.println("alert('Η κριτική υπάρχει ήδη.');");
+				out.println("alert('Η ενοικίαση έγινε με επιτυχία!');");
 				out.println("window.history.back();");
 				out.println("</script>");
 				out.close();

@@ -41,16 +41,12 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//System.out.println("INSIDE POST LOGIN");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
 		UserLogin checkLogin = new UserLogin();
 		if(checkLogin.loginUser(username, password)) {
-			System.out.println("USER EXISTS");
-			//System.out.println("before session");
 	        HttpSession session = request.getSession();  
-			//System.out.println("after session");
 	        session.setAttribute("username", username);
 	        response.setContentType("text/html; charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
@@ -61,7 +57,6 @@ public class LoginServlet extends HttpServlet {
 			out.close();
 			
 		}else {
-			System.out.println("USER DOES NOT EXIST");
 			response.setContentType("text/html; charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();

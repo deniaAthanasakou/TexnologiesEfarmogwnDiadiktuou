@@ -9,6 +9,7 @@
 		<class>Entities.Rule</class>
 		<class>Entities.Criticshost</class>
 		<class>Entities.CriticshostPK</class>
+		<class>Entities.Booking</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

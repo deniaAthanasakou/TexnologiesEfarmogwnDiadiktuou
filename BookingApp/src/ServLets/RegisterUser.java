@@ -109,7 +109,6 @@ public class RegisterUser extends HttpServlet {
 
 		if (request.getParameter("submit") != null) {
 			if((handleUser.insertUser(newUser))==0) {
-				System.out.println("Submit was successfull!!");
 				response.sendRedirect("./html files/register_done.html");
 			}else {
 				response.setContentType("text/html; charset=UTF-8");

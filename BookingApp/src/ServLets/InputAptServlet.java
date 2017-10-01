@@ -56,7 +56,6 @@ public class InputAptServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			System.out.println("INSIDE SERVLETt");
 			 
 			//get fields
 			String street = request.getParameter("street");
@@ -69,12 +68,6 @@ public class InputAptServlet extends HttpServlet {
 			String transport = request.getParameter("transport");
 			
 		   
-		    
-			
-			//Dates		
-			
-			//ArrayList<Date> from = new ArrayList<Date>();
-			//ArrayList<Date> to = new ArrayList<Date>();
 			Date from = new Date();
 			Date to = new Date();
 			
@@ -210,7 +203,6 @@ public class InputAptServlet extends HttpServlet {
 			InputAptSql myClass = new InputAptSql();
 
 	        if (request.getParameter("submit") != null) {
-	        	System.out.println("MAGKAS BEFORE");
 	        	if(imagePath.length()>0) {
 	        		myClass.inputApt(apt,loc,rule,fac,fd);
 					System.out.println("Submit was successfull!!");
@@ -227,13 +219,7 @@ public class InputAptServlet extends HttpServlet {
 				}
 				
 	            
-	            System.out.println("MAGKAS AFTER");
-	        } else {
-	        	System.out.println("GUFTOS");
-	        }
-
-	        //request.getRequestDispatcher("/WEB-INF/some-result.jsp").forward(request, response);
-		//doGet(request, response);
+	        } 
 	}
 	
 	

@@ -16,11 +16,11 @@ public class UserLogin {
 			String checkQuery = "SELECT username,password FROM User WHERE username=" + "'" + username + "'"
 							+ " AND password=" + "'" + password + "'";
 			
-			//System.out.println("QUERY: " + checkQuery);
 			ResultSet rs = stmt.executeQuery(checkQuery);
 			rs.beforeFirst();
 			int rowCount = rs.last() ? rs.getRow() : 0;
 		
+			stmt.close();
 			if(rowCount==0) {
 				return false;
 			}else {

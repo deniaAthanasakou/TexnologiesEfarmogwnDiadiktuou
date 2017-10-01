@@ -30,7 +30,6 @@ public class CheckLoggedUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
          
-		//System.out.println("INSIDE CHECK LOGGED");
 		try {
 			
 			HttpSession session = request.getSession(false); 

@@ -41,18 +41,13 @@ public class PopulateChangeProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("INSIDE CHANGE POPULATE PROFILE: PSS AXXXXXXXXX");
 		try {
-			System.out.println("INSIDE POPULATE PROFILE: ");
 			HttpSession session = request.getSession(false); 
 			if (session != null) {
 				String username = (String) session.getAttribute("username");
-				System.out.println("Populate PROFILE Servlet: " + username);
 				PopulateUser populateProf = new PopulateUser();
 				HashMap<String,String> populateInfo = new HashMap<String,String>(populateProf.populateChangeProf(username));
 				JSONObject userInfo = new JSONObject(populateInfo);
-				System.out.println("RESULT SET PROFILE: " + populateInfo.get("username"));
-				System.out.println("JSON: " + userInfo.toString());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(userInfo.toString());

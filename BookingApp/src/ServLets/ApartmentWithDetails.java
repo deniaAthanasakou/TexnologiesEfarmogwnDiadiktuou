@@ -53,29 +53,29 @@ public class ApartmentWithDetails extends HttpServlet {
 		for (Cookie cookie : cookies) {
 			
 			if (cookie.getName().equals("from")) {
-				//do something
 				date_fromTenant = cookie.getValue();
 			}
 			if (cookie.getName().equals("to")) {
-				//do something
 				date_toTenant = cookie.getValue();
 			}
 			
 			if (cookie.getName().equals("room_id")) {
-				//do something
 				room_id = cookie.getValue();
 			}
 			
 		}
 		
-		System.out.println("COOOOKIEEEE:  " + room_id );
 		
 		ApartmentWithDetailsSql myClass = new ApartmentWithDetailsSql();
 		
 		String apt = myClass.getApt(room_id,date_fromTenant , date_toTenant);
     	JSONObject aptInfo=null;
+    	
 		try {
 			aptInfo = new JSONObject(apt);
+			Cookie host_id = new Cookie("host_id",aptInfo.getString("host_id"));
+			host_id.setMaxAge(60*60*24);
+			response.addCookie(host_id);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(aptInfo.toString());
@@ -84,7 +84,6 @@ public class ApartmentWithDetails extends HttpServlet {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("JSON: " + aptInfo.toString());
 
 	}
 }
