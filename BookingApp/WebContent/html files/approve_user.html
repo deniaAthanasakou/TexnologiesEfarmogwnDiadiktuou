@@ -118,9 +118,9 @@
 	            }
 	            
 	            //post method
+	            
 	            xmlhttp.open("POST", "../PopulateUserApprServlet", false);
 	            xmlhttp.send();
-	            
 	            var jsonResponse = JSON.parse(xmlhttp.responseText);
 	            document.getElementById("username").innerHTML = jsonResponse.username;
 	            document.getElementById("name").innerHTML = jsonResponse.name;
@@ -167,7 +167,7 @@
 	            }else{
 	            	document.getElementById("no_messages").innerHTML = jsonResponse.no_messages;
 	            }
-
+	            
 	        });
         </script>
         

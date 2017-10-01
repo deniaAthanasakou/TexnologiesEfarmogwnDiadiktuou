@@ -57,6 +57,54 @@
 	            
 	        });
         </script>
+        
+        <script>
+            $(document).ready(function() { 
+            	
+            	
+            	var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	
+	            xmlhttp.open("GET", "../PopulateHost", false);
+	            xmlhttp.send();
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+	            document.getElementById("full_name").innerHTML = jsonResponse.name + " " + jsonResponse.surname;
+	            document.getElementById("email").innerHTML = jsonResponse.email;
+	            $( "#tel_td" )
+	            .mouseover(function() {
+	            	document.getElementById("tel").innerHTML = jsonResponse.tel;
+	    			document.getElementById("tel").style.display = "block";
+	            })
+	            .mouseout(function() {
+	              document.getElementById("tel").style.display = "none";
+	            });
+	            
+	            
+	            
+	            var length = jsonResponse.critics.length;
+	            
+	            var i=0;
+            	var select = document.getElementById("critics");
+
+				for(i=0;i<length;i++){
+ 
+					var critic = jsonResponse.critics[i].username +"  -  " + jsonResponse.critics[i].critic;
+					var option = new Option(critic, critic); 
+	            	$('#critics').append($(option));
+				}
+				
+	        });
+        </script>
+        
+       
+        
+        		
+
 		 
 		<title>Host Details</title>
 	</head>
@@ -98,30 +146,39 @@
 						<table class="table table-hover">
 					         <tr>
 					           <td>Ονοματεπώνυμο</td>
-					           <td>Χρήστος Μπέζεκος</td>
+					           <td id="full_name"></td>
 					         </tr>
 					         <tr>
-					           <td>email</td>
-					           <td>chrbez@gmail.com</td>
+					           <td>Email</td>
+					           <td id="email"></td>
 					         </tr>
 					         <tr>
-					           <td> <a href="#">Κριτικές για τον Οικοδεσπότη</a> </td>
+					           <td>Κριτικές για τον Οικοδεσπότη</td>
+					           <td>
+						          <select class="form-control" id="critics">
+						          </select>
+					           </td>
+					         </tr>
+					         <tr>
+					           <td><a href="listOfApartments.html">Δείτε τα διαμερίσματα που ενοικιάζει</a></td>
 					           <td></td>
 					         </tr>
 					         <tr>
-					           <td><a href="#">Δείτε τα διαμερίσματα που ενοικιάζει</a></td>
-					           <td></td>
-					         </tr>
-					         <tr>
-					           <td><a href="#">Επικοινωνήστε με τον Οικοδεσπότη</a></td>
-					           <td></td>
+					           <td id="tel_td">Επικοινωνήστε με τον Οικοδεσπότη</td>
+					           <td style="display:none;" id="tel"></td>
 					         </tr>
 					        </table>
 					     
-							  <form>
+							  <form action="../SubmitCritic" method="post">
 							    <div class="form-group">
 							      <label for="comment">Γράψτε μια κριτική για τον οικοδεσπότη:</label>
-							      <textarea class="form-control" rows="6" id="commentHost"></textarea>
+							      <select class="form-control" id="commentHost" name="critic_host">
+							      	<option>1</option>
+							      	<option>2</option>
+							      	<option>3</option>
+							      	<option>4</option>
+							      	<option>5</option>
+							      </select>
 							    </div>
 							    <div class="form-group" style="text-align:center; "> <!-- Submit button -->
 						      	<button class="btn btn-primary" name="submit" type="submit"><i class="glyphicon glyphicon-upload"></i> Ανέβασμα</button> 
