@@ -97,7 +97,7 @@ public class PopulateUser {
 				profileInfo.put("postal_code",profileRs.getString("postal_code"));
 				
 				//get critics
-				String criticsQuery = "SELECT tenant_id, max(critic), min(critic), avg(critic), COUNT(*) FROM critics WHERE tenant_id=" + user_id;
+				String criticsQuery = "SELECT tenant_id, max(critic), min(critic), avg(critic), COUNT(*) FROM criticsapt WHERE tenant_id=" + user_id;
 				ResultSet critics = stmt.executeQuery(criticsQuery);
 				
 				if(tenant==1) {
