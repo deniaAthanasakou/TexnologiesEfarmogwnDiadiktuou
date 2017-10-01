@@ -44,7 +44,6 @@ public class GetAptsFromWelcomeSearch extends HttpServlet {
 		Cookie[] cookies = null;
 		// Get an array of Cookies associated with this domain
 		String neighborhood="";
-
 		String fromDate = "";
 		String toDate = "";
 		String tenants = "";

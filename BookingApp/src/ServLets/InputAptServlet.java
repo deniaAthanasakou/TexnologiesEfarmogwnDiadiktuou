@@ -99,7 +99,7 @@ public class InputAptServlet extends HttpServlet {
 			int bathrooms = Integer.parseInt(request.getParameter("bathrooms"));
 			int rooms = Integer.parseInt(request.getParameter("rooms"));
 			int bedrooms = Integer.parseInt(request.getParameter("bedrooms"));
-			String type = request.getParameter("type");	
+			String type = request.getParameter("roomtype");	
 			int space = Integer.parseInt(request.getParameter("space"));
 			int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
 			int minValue = Integer.parseInt(request.getParameter("minValue"));
@@ -194,29 +194,17 @@ public class InputAptServlet extends HttpServlet {
 			else 
 				elevator=false;
 			
-			
-	
-			
-			
-			//null
-			int critics =0;
+			int critics = 0;
 			float averageCritic= 0;
-			int host_id=3;
-			//ArrayList<String> photos = null;
 			
-
+			//get host_id
+			int host_id=3;
 			
 			Apartment apt = new Apartment(averageCritic, space, costPerDay, costperpers, description, host_id, livingroom,maxPeople,minValue,bathrooms,bedrooms,beds,critics,rooms,imagePath,type);
 			Facility fac = new Facility(aircondition,elevator,heating,kitchen,parking,tv,wifi);
 			Rule rule = new Rule (events,minDays,pets, smoking );
 			Freedate fd = new Freedate(from, to);
 			Location loc = new Location(address_num,city,country,myMap,neighborhood,postal,street,transport);
-			
-			
-
-			
-		//	Apartments apt = new Apartments(imagePath,costPerDay,type,rooms, critics,average_critic,beds,bathrooms,bedrooms,livingroom,space,description,maxPeople,minValue,costperpers,photos,host_id,smoking,pets,events,minDays,myMap,address_num,street,postal,city,country,neighborhood,transport,wifi,aircondition,heating,kitchen,tv,parking,elevator,from,to);
-
 	
 	    	
 			InputAptSql myClass = new InputAptSql();
@@ -249,24 +237,7 @@ public class InputAptServlet extends HttpServlet {
 	}
 	
 	
-	private static byte[] convertImageToBArray(String ImageName) throws IOException {
 
-		System.out.println("first line");
-		// open image
-		File imgPath = new File(ImageName);
-		System.out.println("2 line"+ImageName);
-		
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-		System.out.println("3 line");
-
-		// get DataBufferBytes from Raster
-		WritableRaster raster = bufferedImage .getRaster();
-		System.out.println("4 line");
-		DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-		System.out.println("5 line");
-
-		return ( data.getData() );
-	}
 
 
 }
