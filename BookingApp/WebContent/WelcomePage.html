@@ -60,18 +60,11 @@
 				var inValid = new RegExp("[\\s]");		//whitespace
 				var numbersSymbols = new RegExp("[^A-Za-z]");
 				var onlyNumbers = new RegExp("[/^\d+$/]");
-				var location = document.getElementById("location").value;
 				var people = document.getElementById("people").value;
 				var from = document.getElementById("from").value;
 				var to = document.getElementById("to").value;
 				
-				//check for location
-				if (numbersSymbols.test(location)){
-					alert("Η Τοποθεσία περιέχει αριθμούς ή σύμβολα.");
-					return false;
-				}
-				
-				
+
 				//check for people
 				if (inValid.test(people)){
 					alert("Ο αριθμός ατόμων περιέχει κενά.");
@@ -108,6 +101,30 @@
 	            	document.getElementById("user_logged").style.display="none"; 
 	            	document.getElementById("register_login").style.display="block"; 
 	            }
+	            
+	        });
+        </script>
+        
+        
+        <script>
+            $(document).ready(function() { 
+            	var xmlhttp;
+	
+	            if (window.XMLHttpRequest){  
+	              xmlhttp=new XMLHttpRequest();
+	            } else {
+	              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	
+	            xmlhttp.open("GET", "./PopulateLocation", false);
+	            xmlhttp.send();
+	            var jsonResponse = JSON.parse(xmlhttp.responseText);
+	            var items = jsonResponse.results;
+	            for ( var i = 0; i < items.length; i++) {
+	            	var option = new Option(items[i], items[i]); 
+	            	$('#location').append($(option));
+	            }
+	           
 	            
 	        });
         </script>
@@ -151,10 +168,15 @@
 			
 				<div  id="input-search" class="container-fluid">
 					<!-- input form -->	
-					<form action="MyServlet" method="post" onsubmit="return checkValiditySearchPopup();">
-					    <div class="form-group" >
-					    	<label for="location">Τοποθεσία*:</label>
-  							<input type="text" class="form-control" id="location" name="location" placeholder="Εισαγωγή Τοποθεσίας" data-placement="top" data-toggle="popover" data-content="Δεν επιτρέπονται αριθμοί ή σύμβολα." data-trigger="focus" size="45" maxlength="45" />
+					<form action="./WelcomePageServlet" method="post" onsubmit="return checkValiditySearchPopup();">
+					    <div class="form-group" style="margin-bottom:20px;">
+					    	<div class="row">
+					    		<div class="col-md-12"><label for="location">Τοποθεσία*:</label></div>
+					    	</div>
+					    	<div class="row">
+					    		<div class="col-md-12"><select id="location" name="location"></select></div>
+					    	</div>
+					    	
 					    </div>
 					    
 					   <div class="container-fluid">
@@ -163,7 +185,7 @@
 	        						<div class="form-group">
 	        							<label for="from">Από*:</label>
 	            						<div class='input-group date' id='from'>
-	                						<input type='text' class="form-control" />
+	                						<input type='text' name="from" class="form-control" required />
 	                						<span class="input-group-addon">
 	                    						<span class="glyphicon glyphicon-calendar"></span>
 	                						</span>
@@ -174,7 +196,7 @@
 	        						<div class="form-group">
 	        							<label for="to">Μέχρι:</label>
 	            						<div class='input-group date' id='to'>
-	                						<input type='text' class="form-control" />
+	                						<input type='text' name="to" class="form-control" required/>
 	                						<span class="input-group-addon">
 	                    						<span class="glyphicon glyphicon-calendar"></span>
 	                						</span>
@@ -187,7 +209,7 @@
 					      
 					      <div class="form-group">
 					       		<label class="control-label" for="people">Άτομα*:</label>
-					      		<input class="form-control" type="number" min="1" max="100" value="1" id="people" name="people">
+					      		<input class="form-control" type="number" min="1" max="100" value="1" id="people" name="people" required>
 						  </div>		      
 					      
 					      
