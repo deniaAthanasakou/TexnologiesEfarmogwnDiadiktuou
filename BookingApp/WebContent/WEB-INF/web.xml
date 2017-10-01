@@ -206,4 +206,13 @@
     <url-pattern>/WelcomePageServlet/</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>SubmitCritic</servlet-name>
+    <servlet-class>ServLets.SubmitCritic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitCritic</servlet-name>
+    <url-pattern>/SubmitCritic/</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
