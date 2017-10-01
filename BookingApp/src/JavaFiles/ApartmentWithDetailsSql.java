@@ -27,22 +27,22 @@ public class ApartmentWithDetailsSql {
 				System.out.println("ResultSet is NOT empty"); 
 			}
 
-			if (rs.next())
-			{
-				System.out.println("NOT NULL"); 
-			}
-			else {
-				System.out.println(" NULL"); 
-			}
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-			Date fromDate = sdf.parse(from_dateTenant.replaceAll("/", "-"));
-			Date toDate = sdf.parse(to_dateTenant.replaceAll("/", "-"));
-			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+			String fromTenant="";
+			String toTenant="";
 			
-			String fromTenant = sdf2.format(fromDate);
-			String toTenant = sdf2.format(toDate);
+			if(!from_dateTenant.equals("")) {			//if from_dateTenant == "" then to_dateTenant == ""
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				Date fromDate = sdf.parse(from_dateTenant.replaceAll("/", "-"));
+				Date toDate = sdf.parse(to_dateTenant.replaceAll("/", "-"));
+				SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+				System.out.println("to + from:c" + sdf2.format(fromDate) +" " +sdf2.format(toDate));
+				fromTenant = sdf2.format(fromDate);
+				toTenant = sdf2.format(toDate);
 
+			}
+			
+			
 
 			HashMap <String,String> apt = new HashMap <String,String>();   
 
@@ -59,6 +59,7 @@ public class ApartmentWithDetailsSql {
 				
 				String costPerDay = rs.getString("cost_per_day");
 				String type = rs.getString("type");
+				System.out.println("type = " + type);
 				String number_rooms = rs.getString("number_rooms");
 				String critics = rs.getString("number_critics");
 				String avgCritic = rs.getString("average_critic");
@@ -165,9 +166,21 @@ public class ApartmentWithDetailsSql {
 				apt.put("pets",pets);
 				apt.put("events",events);
 				apt.put("min_days_booking",min_days_booking);
+				
 				apt.put("from_date",fromTenant);
 				apt.put("to_date",toTenant);
+				
+				apt.put("from_dateApt",from_date);
+				apt.put("to_dateApt",to_date);
 				apt.put("fullDates",fullDates);
+				
+				
+				apt.put("address_number",address_number);
+				apt.put("street",street);
+				apt.put("postal_code",postal_code);
+				apt.put("city",city);
+				apt.put("country",country);
+				apt.put("neighborhood",neighborhood);
 				
 
 			}

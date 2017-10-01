@@ -53,8 +53,8 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 			Date toDate = sdf.parse(filters.getTo().replaceAll("/", "-"));
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 
-			query+= " AND from_date >= " + "'" + sdf2.format(fromDate) + "'";
-			query+= " AND to_date <= " + "'" +  sdf2.format(toDate) + "'";
+			query+= " AND from_date <= " + "'" + sdf2.format(fromDate) + "'";
+			query+= " AND to_date >= " + "'" +  sdf2.format(toDate) + "'";
 			query+= " AND max_tenants >=" + filters.getTenants();
 			
 			query+= " ORDER BY min_cost_booking";
@@ -71,13 +71,6 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 				System.out.println("ResultSet is NOT empty"); 
 			}
 
-			if (rs.next())
-			{
-				System.out.println("NOT NULL"); 
-			}
-			else {
-				System.out.println(" NULL"); 
-			}
 
 			ArrayList<String> ids= new ArrayList<String>();
 
@@ -127,8 +120,6 @@ public class GetAptsFromWelcomeSearchFilterSQL {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Got an SQL exception! ");
-			System.err.println(e.getMessage());
 			e.printStackTrace();
 			return null;
 		}

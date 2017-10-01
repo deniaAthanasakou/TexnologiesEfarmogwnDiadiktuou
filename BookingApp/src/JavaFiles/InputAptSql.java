@@ -29,7 +29,7 @@ import Entities.Rule;
 import JavaFiles.ImgToBArray;
 
 public class InputAptSql {
-	public static void inputApt(Apartment apt, Location loc, Rule rules, Facility facilities, Freedate fd)
+	public void inputApt(Apartment apt, Location loc, Rule rules, Facility facilities, Freedate fd)
 	{
 		System.out.println("INSIDE inputApt");
 
@@ -165,33 +165,12 @@ public class InputAptSql {
 	      stmt.executeUpdate(finalQuery);
 	      
 	      
-	      
-	      
-	 /*     String query1 = "SELECT * FROM Apartment";
-
-	      
-	      // execute the query, and get a java resultset
-	       ResultSet rs = stmt.executeQuery(query1);
-	      
-	      // iterate through the java resultset
-	      
-	      rs.beforeFirst();
-	      while (rs.next())
-	      {
-	          System.out.println("STMT ");
-
-	          String id = rs.getString("room_id");
-	        
-	        // print the results
-	        System.out.println("room id = "+ id);
-	      }*/
 	      stmt.close();
 	    }
 	    catch (Exception e)
-	    {
-	      System.err.println("Got an SQL exception! ");
-	      System.err.println(e.getMessage());
-	    }
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -29,13 +29,6 @@ public class GetAptsOfHostSql {
 				System.out.println("ResultSet is NOT empty"); 
 			}
 
-			if (rs.next())
-			{
-				System.out.println("NOT NULL"); 
-			}
-			else {
-				System.out.println(" NULL"); 
-			}
 
 			rs.beforeFirst();
 			int i=0;

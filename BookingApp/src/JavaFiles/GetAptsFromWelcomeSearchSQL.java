@@ -29,9 +29,9 @@ public class GetAptsFromWelcomeSearchSQL {
 			Date toDate = sdf.parse(to.replaceAll("/", "-"));
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 
-			query+= " AND from_date >= " + "'" + sdf2.format(fromDate) + "'";
-			query+= " AND to_date <= " + "'" +  sdf2.format(toDate) + "'";
-			query+= " AND max_tenants >=" + "'" + tenants + "'";
+			query+= " AND from_date <= " + "'" + sdf2.format(fromDate) + "'";
+			query+= " AND to_date >= " + "'" +  sdf2.format(toDate) + "'";
+			query+= " AND max_tenants >="  + tenants ;
 			query+= " ORDER BY min_cost_booking";
 			
 
@@ -45,14 +45,6 @@ public class GetAptsFromWelcomeSearchSQL {
 			}
 			else if (rs.next() == true) {
 				System.out.println("ResultSet is NOT empty"); 
-			}
-
-			if (rs.next())
-			{
-				System.out.println("NOT NULL"); 
-			}
-			else {
-				System.out.println(" NULL"); 
 			}
 
 			HashMap<Integer, HashMap<String, String>> allApts = new HashMap<Integer, HashMap<String,String>>();
